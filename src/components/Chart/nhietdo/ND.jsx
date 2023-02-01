@@ -32,7 +32,7 @@ const ND = () => {
             </div>
             <div className="bottom">
                 <div className='nhietdoChart'>
-                <CircularProgressbar styles={({path: {stroke: `rgba(255,69,0)`},text: {fill: '#FF4500'}})} value={nhietdo} maxValue={100} text={nhietdo+'%'} strokeWidth={10}/>
+                <CircularProgressbar  styles={({path: {stroke: `rgba(255,69,0)`},text: {fill: '#FF4500'}})} value={nhietdo} maxValue={100} text={nhietdo+'%'} strokeWidth={10}/>
                 </div>
 
             </div>

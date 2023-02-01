@@ -1,3 +1,4 @@
+import './home.scss'
 import React, { useEffect, useState } from "react";
 import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "./../../firebase.config";
@@ -62,14 +63,21 @@ const Home = () => {
   return (
     
     <div>
-      <SideMenu/>
-      <div className="bangnhiet" style={{display:"flex"}}>
-        <ND/>
-        <DOAM/>
-        <Doamdat/>
-        <WT/>
+      <div className='home'>
+        <SideMenu/>
+          <div className='homeContainer'>
+            <div className="bangnhiet">
+              <ND/>
+              <DOAM/>
+              <Doamdat/>
+            </div>
+            <div className='wt'>
+              <WT/>
+            </div>
+          </div>
       </div>
-      <div className="flex text-center container mx-auto">
+      
+      {/* <div className="flex text-center container mx-auto">
         <button onClick={Logout} className="btn btn-primary m-2">
           Logout
         </button>
@@ -83,7 +91,7 @@ const Home = () => {
         <Route path="/home" element={<BieuDoPage/>}></Route>
         <Route path="/home" element={<BieuDoPage/>}></Route>
         <Route path="/home" element={<UserPage/>}></Route>
-      </Routes>
+      </Routes> */}
     </div>
   );
 };

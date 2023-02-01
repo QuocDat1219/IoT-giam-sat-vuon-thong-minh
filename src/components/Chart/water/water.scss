@@ -3,9 +3,8 @@
     box-shadow: 2px 4px 10px 1px rgba(201,201,201,0.70);
     padding: 10px;
     margin-right: 100px;
-    height: 250px;
-    width: 350px;
-    flex: 5;
+    height: 300px;
+    width: 97%;
     .top {
         display: flex;
         align-items: center;
@@ -26,7 +25,7 @@
         justify-content: center;
         
         .waterChart{
-            width: 120px;
+            width: 150px;
             height: 100px;
         }
     }
