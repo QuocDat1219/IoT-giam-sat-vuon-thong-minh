@@ -5,8 +5,13 @@ import { useNavigate,Routes, Route } from "react-router-dom";
 import { getDatabase, ref, child, get } from "firebase/database";
 import SideMenu from "../SideMenu/SideMenu";
 import BieuDoPage from "../Chart/BieuDo";
+import nhietdo from "../Chart/nhietdo/ND";
+import DOAM from "../Chart/doam/DA";
+import Doamdat from "../Chart/doamdat/doamdat";
+import WT from "../Chart/water/water";
 import UserPage from "../User/User";
 import DataTablePage from "../BangData/DataTable";
+import ND from "../Chart/nhietdo/ND";
 const Home = () => {
   const dbRef = ref(getDatabase());
   const [doam, setDoam] = useState([]);
@@ -58,6 +63,12 @@ const Home = () => {
     
     <div>
       <SideMenu/>
+      <div className="bangnhiet" style={{display:"flex"}}>
+        <ND/>
+        <DOAM/>
+        <Doamdat/>
+        <WT/>
+      </div>
       <div className="flex text-center container mx-auto">
         <button onClick={Logout} className="btn btn-primary m-2">
           Logout
