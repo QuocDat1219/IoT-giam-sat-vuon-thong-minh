@@ -1,0 +1,19 @@
+.nb {
+    height: 75px;
+    border-bottom: 0.5px solid rgb(230, 227, 227);
+    .wrapper {
+        align-items: center;
+        width: 100%;
+        padding: 20px;
+        justify-content: space-between;
+        .item{
+            align-items: center;
+            text-align: right;
+            margin-right: 40px;
+            position: relative;
+        }
+        .icon{
+            font-size: 30px;
+        }
+    }
+}
