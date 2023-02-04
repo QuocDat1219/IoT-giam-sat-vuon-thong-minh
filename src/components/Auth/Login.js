@@ -8,14 +8,6 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-
- 
-
- 
-
-
-
-
   const signIn = async (e) => {
     e.preventDefault();
     try {
@@ -35,6 +27,7 @@ const Login = () => {
   };
 
   return (
+    
     <div
       className="flex h-screen w-full items-center justify-center bg-gray-900 bg-cover bg-no-repeat"
       style={{

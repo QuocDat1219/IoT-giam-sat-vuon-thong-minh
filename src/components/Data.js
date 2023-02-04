@@ -5,43 +5,44 @@ import {
   RolesIcon,
   PagesIcon,
   ModalIcon,
+  CalendarIcon,
 } from "./Icons";
 
 export const SIDEBAR_DATA = [
   {
     id: 1,
     name: "Home",
-    path: "./",
+    path: "/home",
     icon: <HomeIcon />,
   },
   {
     id: 2,
     name: "Biểu đồ",
-    path: "chart",
+    path: "/bieudo",
     icon: <LayoutIcon />,
   },
   {
     id: 3,
-    name: "User",
-    path: "users",
-    icon: <UserIcon />,
+    name: "Bảng dữ liệu",
+    path: "/bangdulieu",
+    icon: <CalendarIcon />,
   },
   {
     id: 4,
     name: "Điều khiển thiết bị",
-    path: "control",
+    path: "/control",
     icon: <RolesIcon />,
   },
   {
     id: 5,
     name: "Quản lý thiết bị",
-    path: "sensor",
+    path: "/sensor",
     icon: <PagesIcon />,
   },
   {
     id: 6,
     name: "Logout",
-    path: "/",
+    path: "/login",
     icon: <ModalIcon />,
   },
 ];

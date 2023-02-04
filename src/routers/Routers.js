@@ -9,6 +9,8 @@ import { useEffect, useState } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../firebase.config";
 import { async } from "@firebase/util";
+import BieuDo from "../components/BieuDo/BieuDo";
+import DataTable from "../components/BangData/DataTable";
 
 const Routers = () => {
   const ProtectedRoute = ({ children }) => {
@@ -36,13 +38,44 @@ const Routers = () => {
   };
   return (
     <Routes>
-      <Route path="/" element={<Login />} />
+      <Route 
+        path="/"
+        element={
+          <ProtectedRoute>
+            <Home />
+          </ProtectedRoute>
+        }
+      />
       <Route path="/login" element={<Login />} />
-      <Route
+      <Route 
         path="/home"
         element={
           <ProtectedRoute>
             <Home />
+          </ProtectedRoute>
+        }
+      />
+      <Route 
+        path="/bieudo"
+        element={
+          <ProtectedRoute>
+            <BieuDo />
+          </ProtectedRoute>
+        }
+      />
+      <Route 
+        path="/bangdulieu"
+        element={
+          <ProtectedRoute>
+            <DataTable />
+          </ProtectedRoute>
+        }
+      />
+      <Route 
+        path="/bieudo"
+        element={
+          <ProtectedRoute>
+            <BieuDo />
           </ProtectedRoute>
         }
       />

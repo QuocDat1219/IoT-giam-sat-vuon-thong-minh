@@ -1,14 +1,15 @@
-import { Sidebar } from "..";
+import Sidebar from "../Sidebar";
 import Navb from "../navbar/Navb";
 
-const DataTable = () => {
+const BieuDo = () => {
     return(
         <div className="home">
         <Sidebar>
 
           <div className="homeContainer">
             <Navb />
-            <h1>Đây là data table</h1>
+            
+            <h1>Đây là trang biểu đồ</h1>
             
           </div>
         </Sidebar>
@@ -16,4 +17,4 @@ const DataTable = () => {
         
     )
 }
-export default DataTable;
+export default BieuDo;
