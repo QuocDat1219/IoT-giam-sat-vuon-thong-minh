@@ -24,7 +24,7 @@ export default function UserDetails() {
           setAdmin(true);
           console.log(admin);
         }
-
+        window.localStorage.setItem('Emaildetails',data.data.email);
         setUserData(data.data);
     
         if (data.data == "token expired") {

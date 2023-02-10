@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate,Routes,Route } from "react-router-dom";  
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const Login = () => {
   const Navigate = useNavigate();
   const [email, setEmail] = useState("");
@@ -8,7 +9,12 @@ const Login = () => {
 
   function handleSubmit(e) {
     e.preventDefault();
+    
       console.log(email,password);
+      if(email==""||password==""){
+        toast.warning("Vui lòng nhập đủ thông tin");
+      }else{
+        toast("Đang xử lý");
       fetch("https://api-vuon-thong-minh.onrender.com/users/login-user",{
         method: "POST",
         headers:{
@@ -25,16 +31,17 @@ const Login = () => {
     .then((data) => {
       console.log(data, "userRegister");
       if (data.status == "ok") {
-        alert("Đăng nhập thành công");
+        toast.success("Đăng nhập thành công");
         window.localStorage.setItem("token", data.data);
         window.localStorage.setItem("loggedIn", true);
 
         window.location.href = "./userDetails";
       }else{
-        alert("Sai tên thông tin tài khoản !");
+        toast.error("Sai email hoặc mật khẩu! ");
       }
     });
   }
+}
   return (
     
     <div
@@ -44,16 +51,17 @@ const Login = () => {
           "url('https://images.unsplash.com/photo-1499123785106-343e69e68db1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1748&q=80')",
       }}
     >
+      <ToastContainer />
       <div className="rounded-xl bg-gray-800 bg-opacity-50 px-16 py-10 shadow-lg backdrop-blur-md max-sm:px-8">
         <div className="text-white">
           <div className="mb-8 flex flex-col items-center">
             <img
-              src="https://www.logo.wine/a/logo/Instagram/Instagram-Glyph-Color-Logo.wine.svg"
+            //  src="https://www.logo.wine/a/logo/Instagram/Instagram-Glyph-Color-Logo.wine.svg"
               width="150"
               alt=""
               srcset=""
             />
-            <h1 className="mb-2 text-2xl">Instagram</h1>
+            <h1 className="mb-2 text-2xl">LOGIN</h1>
             <span className="text-gray-300">Enter Login Details</span>
           </div>
           <form>
@@ -86,7 +94,7 @@ const Login = () => {
                 Login
               </button>
             </div>
-            <Link to={"/register"}>
+            <Link to={""}>
               {" "}
               <span className="flex justify-center items-center mt-3">
                 Đăng ký tài khoản ?

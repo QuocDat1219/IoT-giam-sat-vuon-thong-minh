@@ -20,31 +20,29 @@ const Home = (userData) => {
 
   const rootElement = document.getElementById("bottlewater");
   const userName = userData.userData.fname+" "+userData.userData.lname;
-  const userEmail = userData.userData.email;
+  const userEmail = window.localStorage.getItem('Emaildetails');
  
   let urls = "https://api-vuon-thong-minh.onrender.com/datas/datadetail/"+userEmail;
-  console.log(urls)
 
-  // setInterval(() => {
-  //   axios.get(urls) 
-  //     .then((data) => {
-  //       setNhietdo(data.data.data.nhietdo); 
-  //       setDoam(data.data.data.doam);  
-  //       setMhsensor(data.data.data.mhsensor);   
-  //       setUltrasonic(data.data.data.ultrasonic);
-  //       setConn(data.data.data.connect);
-  //     }).catch((e) => {
-  //       console.log(e);
-  //     });
-  //     // setTimeout(() => {
-  //     //   checkconnect();
-  //     // }, 10000);
-  // }, 5000);
-  // const checkconnect = () => {
-  //   if(conn != "connect"){
-  //     toast("Mất kết nối thiết bị"); 
-  //   }
-  // }
+  const fectchdata = () =>{
+    axios.get(urls) 
+    .then((data) => {
+      setNhietdo(data.data.data.nhietdo); 
+      setDoam(data.data.data.doam);  
+      setMhsensor(data.data.data.mhsensor);   
+      setUltrasonic(data.data.data.ultrasonic);
+      setConn(data.data.data.connect);
+    }).catch((e) => {
+      console.log(e);
+    });
+  } 
+  fectchdata();
+  useEffect(() =>{
+    setInterval(() => {
+     fectchdata();
+    }, 10000);
+  })
+
  
   return (
     <>
