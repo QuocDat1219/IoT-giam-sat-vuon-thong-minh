@@ -25,26 +25,26 @@ const Home = (userData) => {
   let urls = "https://api-vuon-thong-minh.onrender.com/datas/datadetail/"+userEmail;
   console.log(urls)
 
-  setInterval(() => {
-    axios.get(urls) 
-      .then((data) => {
-        setNhietdo(data.data.data.nhietdo); 
-        setDoam(data.data.data.doam);  
-        setMhsensor(data.data.data.mhsensor);   
-        setUltrasonic(data.data.data.ultrasonic);
-        setConn(data.data.data.connect);
-      }).catch((e) => {
-        console.log(e);
-      });
-      // setTimeout(() => {
-      //   checkconnect();
-      // }, 10000);
-  }, 5000);
-  const checkconnect = () => {
-    if(conn != "connect"){
-      toast("Mất kết nối thiết bị"); 
-    }
-  }
+  // setInterval(() => {
+  //   axios.get(urls) 
+  //     .then((data) => {
+  //       setNhietdo(data.data.data.nhietdo); 
+  //       setDoam(data.data.data.doam);  
+  //       setMhsensor(data.data.data.mhsensor);   
+  //       setUltrasonic(data.data.data.ultrasonic);
+  //       setConn(data.data.data.connect);
+  //     }).catch((e) => {
+  //       console.log(e);
+  //     });
+  //     // setTimeout(() => {
+  //     //   checkconnect();
+  //     // }, 10000);
+  // }, 5000);
+  // const checkconnect = () => {
+  //   if(conn != "connect"){
+  //     toast("Mất kết nối thiết bị"); 
+  //   }
+  // }
  
   return (
     <>

@@ -1,39 +1,35 @@
-import { DataTable } from "primereact/datatable"
-import { Column } from "primereact/column"
+import Table from "./Table"
 import { Sidebar } from ".."
-import Table from "../../components/ta"
+import { useState, useEffect } from "react"
 import Navb from "../navbar/Navb"
+import axios from "axios"
 const SensorManager = () => {
-    const data = [
-        {
-          sensorName : "Cảm biến nhiệt độ",
-          times : "12:00:00",
-          sensorStatus : "Hoạt động",
-          manager : "...",
-        },
-        {
-          sensorName : "Cảm biến độ ẩm đất",
-          times : "12:00:00",
-          sensorStatus : "Không hoạt động",
-          manager : "...",
-        },
-        {
-          sensorName : "Cảm biến siêu âm",
-          times : "12:00:00",
-          sensorStatus : "Hoạt động",
-          manager : "...",
-        },
-    
-      ]
+  const [sensor, setSensor] = useState([]);
+  useEffect(() => {
+    axios('https://jsonplaceholder.typicode.com/users')
+    .then(res => setSensor(res.data))
+
+    .catch(err => console.log(err))
+  },[])
+  const column = [
+  { heading: 'Tên thiết bị', value:'name'},
+  {
+    heading: 'Thời gian', value:'email'
+  },
+  {
+    heading: 'Trạng thái', value:'phone'
+  },
+  {
+    heading: 'Quản lý', value:'...'
+  }
+]
       return(
             <div className="home">
                 <Sidebar>
                     <div className="homeContainer">
                         <Navb/>
-                        <h1>Các thiết bị sử dụng</h1>
-                        <DataTable value={data}>
-                            <Column field="sensorName" header="Tên thiết bị"/>
-                        </DataTable>
+                        <h1 style={{textAlign:"center", fontSize:"26px", fontWeight:"bold"}}>Các thiết bị sử dụng</h1>
+                        <Table newdata={sensor} column={column}/>
                     </div>
                 </Sidebar>
             </div>
