@@ -1,0 +1,49 @@
+.nb {
+    height: 75px;
+    border-bottom: 0.5px solid rgb(230, 227, 227);
+    .wrapper {
+        align-items: center;
+        width: 100%;
+        padding-top: 15px;
+        justify-content: space-between;
+        .items{
+            display: flex;
+            align-items: center;
+            float:right;
+            .icon {
+                font-size: 30px;
+            }
+            .item{
+                display: flex;
+                align-items: center;
+                position: relative;
+                padding-left: 40px;
+            }
+            .counter {
+                width: 19px;
+                height: 18px;
+                background-color: red;
+                border-radius: 50%;
+                color: white;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 15px;
+                font-weight: bold;
+                position: absolute;
+                top: -5px;
+                right: -5px;
+            }
+            .avatar {
+                margin-left: 10px;
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+            }
+            .username{
+                font-size: 18px;
+                font-weight: bolder;
+            }
+        }
+    }
+}
