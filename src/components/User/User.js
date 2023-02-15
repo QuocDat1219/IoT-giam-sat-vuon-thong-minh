@@ -1,31 +1,61 @@
 import Sidebar from "../Sidebar";
 import Navb from "../navbar/Navb";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState, useReducer } from "react";
 import "./ProfileCard.css";
 import avatar from "../images/profile.png";
-import Form from "react-bootstrap/Form";
-import InputGroup from "react-bootstrap/InputGroup";
-import { async } from "@firebase/util";
-import { IconButton } from "@material-tailwind/react";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
-import { Button } from "@material-tailwind/react";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+var checkPassword =
+  /^(?=.*[a-z])(?=.*[0-9])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+const initialState = {
+  _id: 0,
+  fname: '',
+  lname: '',
+  email: '',
+  password: '',
+  userType: '',
+  __v: '',
+};
+function reducer(state, action) {
+  switch (action.type) {
+    case 'increment':
+      return { ...state, count: state.count + 1 };
+    case 'decrement':
+      return { ...state, count: state.count - 1 };
+    case 'setText':
+      return { ...state, text: action.payload };
+    default:
+      throw new Error();
+  }
+}
+
 const UserPro = (props) => {
+
+  const [DataState, setDataState] = useState(() => {
+    const dataUSer = window.localStorage.getItem("dtUser");
+    return dataUSer ? JSON.parse(dataUSer) : initialState;
+  });
+
+
+  const [dt, dtControl] = useReducer(reducer, DataState);
+  // useEffect(() => {
+  //   localStorage.setItem('dtUser', JSON.stringify(dt));
+  // }, [dt]);
+
   useEffect(() => {
     const getDt = async () => {
-      const dataUSer = window.localStorage.getItem("dtUser");
       const tokenid = window.localStorage.getItem("token");
-      await setDt(JSON.parse(dataUSer));
       await setToken(tokenid);
     };
     getDt();
   }, []);
 
-  const [dt, setDt] = useState([]);
   const [token, setToken] = useState("");
+  const [fnamee, setFName] = useState(dt.fname);
+  const [lnamee, setLName] = useState(dt.lname);
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [newPasswordPL, setNewPasswordPL] = useState("");
@@ -33,8 +63,12 @@ const UserPro = (props) => {
 
   const handleChangePassword = async (e) => {
     e.preventDefault();
-
-    if (newPassword != newPasswordPL) {
+    if (newPassword === "" || oldPassword === "" || newPasswordPL === "") {
+      toast("Vui lòng nhập đầy đủ thông tin!");
+    } else if (!checkPassword.test(newPassword) || newPassword.length === "") {
+      toast.error("Mật khẩu phải có chữ hoa, số và kí tự đặc biệt!");
+    }
+    else if (newPassword != newPasswordPL) {
       toast.error("Nhập lại mật khẩu không trùng khớp");
     } else {
       toast("Đang xử lý...");
@@ -45,8 +79,13 @@ const UserPro = (props) => {
           oldpassword: oldPassword
         })
         .then(function (response) {
-          console.log(response);
-          toast.success("Đổi mật khẩu thành công");
+          // console.log(response);
+          if (response.data.error === "Passwords don't match") {
+            toast.error("Mật khẩu cũ không đúng");
+          }
+          else if (response.data.status === "verified") {
+            toast.success("Đổi mật khẩu thành công");
+          }
         })
         .catch(function (error) {
           console.log(error);
@@ -116,6 +155,87 @@ const UserPro = (props) => {
                     </button>
                   </h2>
                 </div>
+              </div>
+            </div>
+            <div style={{ width: "100%", display: "flex", paddingTop: "30px" }}>
+              <div
+                style={{
+                  border: "0px black solid",
+                  height: "auto",
+                  width: "500px",
+                  borderRadius: "10px",
+                  marginTop: "30px",
+                  boxShadow: "0px 0px 15px hsl(88, 37%, 62%)",
+                  margin: "auto",
+                  paddingBottom: "30px",
+                }}
+              >
+                <label
+                  className="text-center"
+                  style={{
+                    textAlign: "center",
+                    fontSize: "30px",
+                    paddingLeft: "150px",
+                    paddingTop: "10px",
+                    color: "#a0c279",
+                  }}
+                >
+                  Sửa thông tin
+                </label>
+                <br></br>
+                <br></br>
+                <input
+                  className="text-center"
+                  value={fnamee}
+                  placeholder={"First name..."}
+                  style={{
+                    border: "1px solid #d9d6d6",
+                    borderRadius: "15px",
+                    height: "45px",
+                    width: "400px",
+                    marginLeft: "45px",
+                    boxShadow: "rgb(187 203 205) 0px 2px 18px",
+                  }}
+                  onChange={(e) => setFName(e.target.value)}
+                />
+                <br></br>
+                <br></br>
+                <input
+                  className="text-center"
+                  value={lnamee}
+                  placeholder={"Last name..."}
+                  style={{
+                    border: "1px solid #d9d6d6",
+                    borderRadius: "15px",
+                    height: "45px",
+                    width: "400px",
+                    marginLeft: "45px",
+                    boxShadow: "rgb(187 203 205) 0px 2px 18px",
+                  }}
+                  onChange={(e) => setLName(e.target.value)}
+                />
+                <br></br>
+                <br></br>
+
+                <button
+                  //  onClick={handleClickSave}
+                  style={{
+                    width: "100px",
+                    height: "50px",
+                    backgroundColor: "#a0c279",
+                    marginLeft: "202px",
+                    marginTop: " 20px",
+                    borderRadius: "10px",
+                    fontSize: "20px",
+                    boxShadow: "15px",
+                    height: "45px",
+                    width: "400px",
+                    marginLeft: "45px",
+                    boxShadow: "rgb(187 203 205) 0px 2px 18px",
+                  }}
+                >
+                  Save
+                </button>
               </div>
             </div>
             {showModal ? (
