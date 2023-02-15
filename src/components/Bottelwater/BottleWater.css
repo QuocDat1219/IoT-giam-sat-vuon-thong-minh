@@ -1,0 +1,25 @@
+.Bottlewater{
+    font-family: sans-serif;
+  text-align: center;
+  -webkit-box-shadow: 2px 4px 10px 1px rgba(0,0,0,0.47);
+  box-shadow: 2px 4px 10px 1px rgba(201,201,201,0.70);
+  padding: 30px;
+  margin-right: 200px;
+  height: 450px;
+  width: 98.7%;
+}
+.position-relative{
+    padding-top: 60px;
+    
+}
+.title{
+    text-align: left;
+    font-size: 25px;
+    font-weight: 500;
+}
+.top{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        color: gray;
+}
