@@ -33,7 +33,7 @@ const Routers = () => {
       />
       <Route
         exact
-        path="/home"
+        path="home"
         element={
           isLoggedIn == "true" && isAdminIn == "false" ?
             <Home /> :
