@@ -8,8 +8,6 @@ import Sidebar from "../Sidebar";
 import Navb from "../navbar/Navb";
 import axios from "axios";
 import "react-toastify/dist/ReactToastify.css";
-import { ToastContainer, toast } from "react-toastify";
-import { display } from "@mui/system";
 
 const Home = () => {
   const [doam, setDoam] = useState("");
@@ -43,7 +41,7 @@ const Home = () => {
   return (
     <>
       <div className="home">
-        <ToastContainer />
+      
         <Sidebar>
           <div className="homeContainer">
             <Navb />

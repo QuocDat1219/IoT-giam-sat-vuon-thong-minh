@@ -10,56 +10,32 @@ import "react-toastify/dist/ReactToastify.css";
 
 var checkPassword =
   /^(?=.*[a-z])(?=.*[0-9])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-const initialState = {
-  _id: 0,
-  fname: '',
-  lname: '',
-  email: '',
-  password: '',
-  userType: '',
-  __v: '',
-};
-function reducer(state, action) {
-  switch (action.type) {
-    case 'increment':
-      return { ...state, count: state.count + 1 };
-    case 'decrement':
-      return { ...state, count: state.count - 1 };
-    case 'setText':
-      return { ...state, text: action.payload };
-    default:
-      throw new Error();
-  }
-}
 
 const UserPro = (props) => {
 
-  const [DataState, setDataState] = useState(() => {
-    const dataUSer = window.localStorage.getItem("dtUser");
-    return dataUSer ? JSON.parse(dataUSer) : initialState;
-  });
-
-
-  const [dt, dtControl] = useReducer(reducer, DataState);
-  // useEffect(() => {
-  //   localStorage.setItem('dtUser', JSON.stringify(dt));
-  // }, [dt]);
-
-  useEffect(() => {
-    const getDt = async () => {
-      const tokenid = window.localStorage.getItem("token");
-      await setToken(tokenid);
-    };
-    getDt();
-  }, []);
-
-  const [token, setToken] = useState("");
-  const [fnamee, setFName] = useState(dt.fname);
-  const [lnamee, setLName] = useState(dt.lname);
+  const [data, setData] = useState("");
+  const [fnamee, setFName] = useState(data.fname);
+  const [lnamee, setLName] = useState(data.lname);
+  const [fnamees, setFNames] = useState("");
+  const [lnamees, setLNames] = useState("");
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [newPasswordPL, setNewPasswordPL] = useState("");
   const [showModal, setShowModal] = useState(false);
+
+  useEffect(() => {
+
+    axios.post('https://api-vuon-thong-minh.onrender.com/users/user-data', {
+      token: window.localStorage.getItem("token"),
+    })
+      .then((data) => {
+        console.log(data.data.data);
+        setData(data.data.data);
+      })
+
+  }, []);
+
+
 
   const handleChangePassword = async (e) => {
     e.preventDefault();
@@ -73,8 +49,8 @@ const UserPro = (props) => {
     } else {
       toast("Đang xử lý...");
       await axios
-        .post("https://test-api-j6u0.onrender.com/users/changepassword", {
-          tokenold: token,
+        .post("https://api-vuon-thong-minh.onrender.com/users/changepassword", {
+          tokenold: window.localStorage.getItem("token"),
           newpassword: newPassword,
           oldpassword: oldPassword
         })
@@ -93,6 +69,38 @@ const UserPro = (props) => {
         });
     }
   };
+
+  const handleClickSave = async (e) => {
+    e.preventDefault();
+
+    if(fnamees === data.fname && lnamees === data.lname){
+      toast.warning("Thông tin không thay đổi");
+    }
+    else if(fnamees === "" || lnamees === "" ){
+      toast.warning("Vui lòng nhập đủ thông tin");
+    }else{
+      toast("Đang xử lý...");
+      await axios
+        .post("https://api-vuon-thong-minh.onrender.com/users/edituser", {
+          token: window.localStorage.getItem("token"),
+          lname: lnamees,
+          fname: fnamees
+        })
+        .then(function (data) {
+          // console.log(data);
+          
+          setData(data.data.data)
+          toast.success("Đổi thông tin thành công");
+        })
+        .catch(function (error) {
+          console.log(error);
+          toast.error("Lỗi");
+        });
+  
+    }
+   
+  };
+
 
   return (
     <div className="home">
@@ -120,7 +128,7 @@ const UserPro = (props) => {
                 <img
                   className="imgavt"
                   src={avatar}
-                  alt={props.name}
+                  alt={data.lname}
                   style={{
                     height: "300px",
                     width: "300px",
@@ -133,14 +141,14 @@ const UserPro = (props) => {
                 <div className="followers">
                   <h1 className="smaller-text">Email</h1>
                   <h2 className="bold-text" style={{ paddingBottom: "20px" }}>
-                    {dt ? dt.email : "Loading..."}
+                    {data ? data.email : "Loading..."}
                   </h2>
                 </div>
                 <div className="likes">
                   <h1 className="smaller-text">Họ và tên</h1>
                   <h2 className="bold-text" style={{ paddingBottom: "20px" }}>
-                    {dt ? dt.fname : "Loading..."}{" "}
-                    {dt.lname ? dt.lname : "Loading"}
+                    {data ? data.fname + " " + data.lname : "Loading..."}
+
                   </h2>
                 </div>
                 <div className="likes">
@@ -157,87 +165,92 @@ const UserPro = (props) => {
                 </div>
               </div>
             </div>
-            <div style={{ width: "100%", display: "flex", paddingTop: "30px" }}>
-              <div
-                style={{
-                  border: "0px black solid",
-                  height: "auto",
-                  width: "500px",
-                  borderRadius: "10px",
-                  marginTop: "30px",
-                  boxShadow: "0px 0px 15px hsl(88, 37%, 62%)",
-                  margin: "auto",
-                  paddingBottom: "30px",
-                }}
-              >
-                <label
-                  className="text-center"
-                  style={{
-                    textAlign: "center",
-                    fontSize: "30px",
-                    paddingLeft: "150px",
-                    paddingTop: "10px",
-                    color: "#a0c279",
-                  }}
-                >
-                  Sửa thông tin
-                </label>
-                <br></br>
-                <br></br>
-                <input
-                  className="text-center"
-                  value={fnamee}
-                  placeholder={"First name..."}
-                  style={{
-                    border: "1px solid #d9d6d6",
-                    borderRadius: "15px",
-                    height: "45px",
-                    width: "400px",
-                    marginLeft: "45px",
-                    boxShadow: "rgb(187 203 205) 0px 2px 18px",
-                  }}
-                  onChange={(e) => setFName(e.target.value)}
-                />
-                <br></br>
-                <br></br>
-                <input
-                  className="text-center"
-                  value={lnamee}
-                  placeholder={"Last name..."}
-                  style={{
-                    border: "1px solid #d9d6d6",
-                    borderRadius: "15px",
-                    height: "45px",
-                    width: "400px",
-                    marginLeft: "45px",
-                    boxShadow: "rgb(187 203 205) 0px 2px 18px",
-                  }}
-                  onChange={(e) => setLName(e.target.value)}
-                />
-                <br></br>
-                <br></br>
+            <form onSubmit={handleClickSave}>
 
-                <button
-                  //  onClick={handleClickSave}
+
+              <div style={{ width: "100%", display: "flex", paddingTop: "30px" }}>
+                <div
                   style={{
-                    width: "100px",
-                    height: "50px",
-                    backgroundColor: "#a0c279",
-                    marginLeft: "202px",
-                    marginTop: " 20px",
+                    border: "0px black solid",
+                    height: "auto",
+                    width: "500px",
                     borderRadius: "10px",
-                    fontSize: "20px",
-                    boxShadow: "15px",
+                    marginTop: "30px",
+                    boxShadow: "0px 0px 15px hsl(88, 37%, 62%)",
+                    margin: "auto",
+                    paddingBottom: "30px",
+                  }}
+                >
+                  <label
+                    className="text-center"
+                    style={{
+                      textAlign: "center",
+                      fontSize: "30px",
+                      paddingLeft: "150px",
+                      paddingTop: "10px",
+                      color: "#a0c279",
+                    }}
+                  >
+                    Sửa thông tin
+                  </label>
+                  <br></br>
+                  <br></br>
+                  <input
+                    className="text-center"
+                    // value={data.fname}
+                    placeholder={data.fname}
+                  style={{
+                    border: "1px solid #d9d6d6",
+                    borderRadius: "15px",
                     height: "45px",
                     width: "400px",
                     marginLeft: "45px",
                     boxShadow: "rgb(187 203 205) 0px 2px 18px",
                   }}
-                >
-                  Save
-                </button>
+                  onChange={(e) => setFNames(e.target.value)}
+                  />
+                  <br></br>
+                  <br></br>
+                  <input
+                    className="text-center"
+                    // value={data.lname}
+                    placeholder={data.lname}
+                    style={{
+                      border: "1px solid #d9d6d6",
+                      borderRadius: "15px",
+                      height: "45px",
+                      width: "400px",
+                      marginLeft: "45px",
+                      boxShadow: "rgb(187 203 205) 0px 2px 18px",
+                    }}
+                    onChange={(e) => setLNames(e.target.value)}
+                  />
+                  <br></br>
+                  <br></br>
+
+                  <button
+                    //  onClick={handleClickSave}
+                    style={{
+                      width: "100px",
+                      height: "50px",
+                      backgroundColor: "#a0c279",
+                      marginLeft: "202px",
+                      marginTop: " 20px",
+                      borderRadius: "10px",
+                      fontSize: "20px",
+                      boxShadow: "15px",
+                      height: "45px",
+                      width: "400px",
+                      marginLeft: "45px",
+                      boxShadow: "rgb(187 203 205) 0px 2px 18px",
+                    }}
+                  >
+                    Save
+                  </button>
+                </div>
+
               </div>
-            </div>
+            </form>
             {showModal ? (
               <>
                 <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
@@ -261,7 +274,7 @@ const UserPro = (props) => {
                         <div className="relative p-6 flex-auto m-4">
                           <input
                             className="text-center"
-                            value={dt.email}
+                            value={data.email}
                             placeholder={"Email..."}
                             disabled="true"
                             style={{
