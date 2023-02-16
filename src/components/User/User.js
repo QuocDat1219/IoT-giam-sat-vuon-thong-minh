@@ -124,7 +124,7 @@ const UserPro = (props) => {
               Thông tin cá nhân
             </h1>
             <div className="card-container" style={{ textAlign: "center" }}>
-              <header>
+              <div className="headerUser">
                 <img
                   className="imgavt"
                   src={avatar}
@@ -136,7 +136,7 @@ const UserPro = (props) => {
                     marginBottom: "10px",
                   }}
                 />
-              </header>
+              </div>
               <div className="social-container">
                 <div className="followers">
                   <h1 className="smaller-text">Email</h1>

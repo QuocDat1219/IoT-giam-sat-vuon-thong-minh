@@ -6,6 +6,7 @@ import LineChart from "../components/BieuDo/LineCharts";
 import SensorManager from "../components/SensorManager/SensorManager";
 import UserPro from "../components/User/User";
 import AdminHome from "../components/Auth/AdminHome";
+import LandingPage from "../components/LandingPage/LandingPage";
 const Routers = () => {
 
   const isLoggedIn = window.localStorage.getItem("loggedIn");
@@ -17,10 +18,8 @@ const Routers = () => {
         exact
         path="/"
         element={
-          isLoggedIn == "true" && isAdminIn == "false" ?
-            <Home /> :
-            <Login />
-        }
+          <LandingPage/>
+         }
       />
       <Route
         exact
