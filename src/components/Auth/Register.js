@@ -4,6 +4,7 @@ import Background from "../images/login.jpg";
 import icon from "../images/IOTCAM.png";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import axios from "axios";
 const Register = () => {
   const [fname, setFname] = useState("");
   const [lname, setLname] = useState("");
@@ -57,13 +58,52 @@ const Register = () => {
         if (data.error == "User Exists") {
           toast.warning("Email already registered");
         } else if (data.status == "ok") {
-          toast.success("Đăng ký thành công");
+          createData();
+
         } else {
           toast.error("Đăng ký không thành công");
         }
       });
   };
+  const createData = async () => {
+  await  axios.post("https://api-vuon-thong-minh.onrender.com/datas/createdata", {
+      email: window.localStorage.getItem("Emaildetails"),
+      nhietdo: 0,
+      doam: 0,
+      mhsensor: 0,
+      ultrasonic: 0,
+      connect: "disconnect",
+      control: {},
+      sensor: [
+        {
+          name: "DHT",
+          status: "0",
+          timeword: "15:00",
+          timeout: "2:00",
+          nofi: "Email"
+        },
+        {
+          name: "Ultrasonic",
+          status: "0",
+          timeword: "15:00",
+          timeout: "2:00",
+          nofi: "Email"
+        },
+        {
+          name: "MH",
+          status: "0",
+          timeword: "15:00",
+          timeout: "2:00",
+          nofi: "Email"
+        }
+      ]
+    })
+      .then((data) => {
+        console.log(data);
+        toast.success("Đăng ký thành công");
+      })
 
+  }
   return (
     <div
       className="flex h-screen w-full items-center justify-center bg-gray-900 bg-cover bg-no-repeat"
@@ -83,7 +123,7 @@ const Register = () => {
               className="mb-2 text-2xl"
               style={{ fontSize: "30px", fontFamily: "Florence, cursive" }}
             >
-              REGISTER
+              GREEN HOUSE
             </h1>
             <span className="text-black-500">Enter Register Details</span>
           </div>

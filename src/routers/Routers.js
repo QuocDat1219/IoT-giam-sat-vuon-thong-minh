@@ -3,7 +3,7 @@ import Login from "../components/Auth/Login";
 import Register from "../components/Auth/Register";
 import Home from "../components/Home/Home";
 import LineChart from "../components/BieuDo/LineCharts";
-import SensorManager from "../components/SensorManager/SensorManager";
+import SensorManager from "../components/SensorManager/dataTable";
 import UserPro from "../components/User/User";
 import AdminHome from "../components/Auth/AdminHome";
 import LandingPage from "../components/LandingPage/LandingPage";

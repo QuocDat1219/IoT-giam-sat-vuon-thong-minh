@@ -101,7 +101,7 @@ const Login = () => {
               alt=""
               srcset=""
             />
-            <h1 className="mb-2 text-2xl" style={{ fontSize: "30px", fontFamily: "Florence, cursive" }}>LOGIN</h1>
+            <h1 className="mb-2 text-2xl" style={{ fontSize: "30px", fontFamily: "Florence, cursive" }}>GREEN HOUSE</h1>
             <span className="text-black-500">Enter Login Details</span>
           </div>
           <form>
