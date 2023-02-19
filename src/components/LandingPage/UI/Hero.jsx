@@ -16,7 +16,7 @@ const Hero = () => {
               data-aos-duration="1800"
             >
               IoT - 
-              <span className="highlights"> Green House</span>
+              <span className="highlights"> Green House IOT</span>
             </h2>
             <p data-aos="fade-up" data-aos-duration="1500">
               Giải pháp giúp bạn giải quyết việc trồng trọt trở nên dễ dàng hơn.<br />
