@@ -15,16 +15,15 @@ const Hero = () => {
               data-aos-delay="100"
               data-aos-duration="1800"
             >
-              IoT - 
-              <span className="highlights"> Green House IOT new lap thuan</span>
+              IoT -<span className="highlights">IoT Green Dat Tuan Anh</span>
             </h2>
             <p data-aos="fade-up" data-aos-duration="1500">
-              Giải pháp giúp bạn giải quyết việc trồng trọt trở nên dễ dàng hơn.<br />
-              Cùng với sự phát triển vượt bật của công nghệ.{" "}
+              Giải pháp giúp bạn giải quyết việc trồng trọt trở nên dễ dàng hơn.
               <br />
+              Cùng với sự phát triển vượt bật của công nghệ. <br />
               <strong>
                 <h1>Bắt đầu ngay!!</h1>
-                </strong>
+              </strong>
             </p>
             <div
               className="hero__btns"
@@ -42,7 +41,15 @@ const Hero = () => {
                 <div className="box-02">
                   <div className="box-03">
                     <div className="box__img">
-                      <img src={heroImg} alt="" style={{marginTop:"85px", borderRadius:"30px", boxShadow:"#07bc0c"}}/>
+                      <img
+                        src={heroImg}
+                        alt=""
+                        style={{
+                          marginTop: "85px",
+                          borderRadius: "30px",
+                          boxShadow: "#07bc0c",
+                        }}
+                      />
                     </div>
                   </div>
                 </div>
@@ -69,7 +76,8 @@ const Hero = () => {
                   <i class="ri-settings-5-fill"></i>
                 </span>
                 <h5>
-                  Điều khiển thiết bị<br /> từ xa
+                  Điều khiển thiết bị
+                  <br /> từ xa
                 </h5>
               </div>
 
@@ -78,7 +86,7 @@ const Hero = () => {
                 data-aos="fade-down"
                 data-aos-duration="1500"
               >
-                <img src={dumbleIcon} alt=""/>
+                <img src={dumbleIcon} alt="" />
               </div>
             </div>
           </div>
