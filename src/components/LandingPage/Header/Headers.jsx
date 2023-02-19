@@ -78,6 +78,9 @@ const Header = () => {
          <Link to={"/login"} >
          <button className="register__btn">Đăng nhập</button>
          </Link>
+         <Link to={"/register"} >
+         <button className="register__btn">Đăng ký</button>
+         </Link>
             <span className="mobile__menu">
               <i class="ri-menu-line"></i>
             </span>
