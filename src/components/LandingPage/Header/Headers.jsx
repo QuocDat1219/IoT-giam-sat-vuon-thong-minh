@@ -56,7 +56,7 @@ const Header = () => {
             <div className="logo__img">
               <img src={logo} alt="" />
             </div>
-            <h2>Green House</h2>
+            <h2>Green House </h2>
           </div>
 
           {/* ======= navigation menu ======= */}
@@ -79,7 +79,7 @@ const Header = () => {
          <button className="register__btn">Đăng nhập</button>
          </Link>
          <Link to={"/register"} >
-         <button className="register__btn">Đăng ký</button>
+         <button className="register__btn">Đăng ký nè nhe</button>
          </Link>
             <span className="mobile__menu">
               <i class="ri-menu-line"></i>
