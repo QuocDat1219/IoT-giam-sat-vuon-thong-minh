@@ -7,6 +7,7 @@ const AdminHome = () => {
                 <div className="homeContainer">
                     <Navb/>
                     <h1>Day la trang admin</h1>
+                    <h2>Hello</h2>
                 </div>
             </Sidebar>
         </div>    
