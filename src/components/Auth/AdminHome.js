@@ -9,6 +9,7 @@ const AdminHome = () => {
                     <h1>Day la trang admin</h1>
                     <h2>Hello admin</h2>
                     <p>Hello thuan</p>
+                    <p>Hello thuan2</p>
                 </div>
             </Sidebar>
         </div>    
