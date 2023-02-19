@@ -102,7 +102,7 @@ const Login = () => {
               srcset=""
             />
             <h1 className="mb-2 text-2xl" style={{ fontSize: "30px", fontFamily: "Florence, cursive" }}>GREEN HOUSE IOT</h1>
-            <span className="text-black-500">Enter Login Details</span>
+            <span className="text-black-500">Nhập thông tin đăng nhập</span>
           </div>
           <form>
             <div className="mb-4 text-lg">
