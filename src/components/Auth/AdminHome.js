@@ -10,6 +10,7 @@ const AdminHome = () => {
                     <h2>Hello admin</h2>
                     <p>Hello thuan</p>
                     <p>Hello thuan and tuananh</p>
+                    <p>Hello GiaBao</p>
                 </div>
             </Sidebar>
         </div>    
