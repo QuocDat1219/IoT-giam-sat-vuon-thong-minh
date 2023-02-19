@@ -73,7 +73,7 @@ const Register = () => {
       mhsensor: 0,
       ultrasonic: 0,
       connect: "disconnect",
-      control: {},
+      control: [],
       sensor: [
         {
           name: "DHT",
