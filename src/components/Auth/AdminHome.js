@@ -8,7 +8,7 @@ const AdminHome = () => {
                     <Navb/>
                     <h1>Day la trang admin</h1>
                     <h2>Hello admin</h2>
-                    <h3>Hello user</h3>
+                    <p>Hello thuan</p>
                 </div>
             </Sidebar>
         </div>    
