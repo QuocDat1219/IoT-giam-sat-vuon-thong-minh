@@ -11,6 +11,8 @@ const AdminHome = () => {
                     <p>Hello thuan</p>
                     <p>Hello thuan2</p>
                     <h1>hello test</h1>
+                    <p>Hello thuan and tuananh</p>
+                    <p>Hello GiaBao</p>
                 </div>
             </Sidebar>
         </div>    
