@@ -66,7 +66,7 @@ const Register = () => {
       });
   };
   const createData = async () => {
-  await  axios.post("https://api-vuon-thong-minh.onrender.com/datas/createdata", {
+    await axios.post("https://api-vuon-thong-minh.onrender.com/datas/createdata", {
       email: window.localStorage.getItem("Emaildetails"),
       nhietdo: 0,
       doam: 0,
@@ -96,7 +96,8 @@ const Register = () => {
           timeout: "2:00",
           nofi: "Email"
         }
-      ]
+      ],
+      limit : 0,
     })
       .then((data) => {
         console.log(data);
