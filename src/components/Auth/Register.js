@@ -65,39 +65,39 @@ const Register = () => {
       });
   };
   const createData = async () => {
-    await axios
-      .post("https://api-vuon-thong-minh.onrender.com/datas/createdata", {
-        email: window.localStorage.getItem("Emaildetails"),
-        nhietdo: 0,
-        doam: 0,
-        mhsensor: 0,
-        ultrasonic: 0,
-        connect: "disconnect",
-        control: {},
-        sensor: [
-          {
-            name: "DHT",
-            status: "0",
-            timeword: "15:00",
-            timeout: "2:00",
-            nofi: "Email",
-          },
-          {
-            name: "Ultrasonic",
-            status: "0",
-            timeword: "15:00",
-            timeout: "2:00",
-            nofi: "Email",
-          },
-          {
-            name: "MH",
-            status: "0",
-            timeword: "15:00",
-            timeout: "2:00",
-            nofi: "Email",
-          },
-        ],
-      })
+    await axios.post("https://api-vuon-thong-minh.onrender.com/datas/createdata", {
+      email: window.localStorage.getItem("Emaildetails"),
+      nhietdo: 0,
+      doam: 0,
+      mhsensor: 0,
+      ultrasonic: 0,
+      connect: "disconnect",
+      control: [],
+      sensor: [
+        {
+          name: "DHT",
+          status: "0",
+          timeword: "15:00",
+          timeout: "2:00",
+          nofi: "Email"
+        },
+        {
+          name: "Ultrasonic",
+          status: "0",
+          timeword: "15:00",
+          timeout: "2:00",
+          nofi: "Email"
+        },
+        {
+          name: "MH",
+          status: "0",
+          timeword: "15:00",
+          timeout: "2:00",
+          nofi: "Email"
+        }
+      ],
+      limit : 0,
+    })
       .then((data) => {
         console.log(data);
         toast.success("Đăng ký thành công");
