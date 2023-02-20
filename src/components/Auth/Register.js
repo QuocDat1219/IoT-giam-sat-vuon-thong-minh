@@ -79,24 +79,27 @@ const Register = () => {
           status: "0",
           timeword: "15:00",
           timeout: "2:00",
-          nofi: "Email"
+          nofi: "Email",
+          limit : 0,
         },
         {
           name: "Ultrasonic",
           status: "0",
           timeword: "15:00",
           timeout: "2:00",
-          nofi: "Email"
+          nofi: "Email",
+          limit : 0,
         },
         {
           name: "MH",
           status: "0",
           timeword: "15:00",
           timeout: "2:00",
-          nofi: "Email"
+          nofi: "Email",
+          limit : 0,
         }
       ],
-      limit : 0,
+     
     })
       .then((data) => {
         console.log(data);
