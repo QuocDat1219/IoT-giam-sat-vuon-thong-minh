@@ -18,6 +18,7 @@ const Home = () => {
 
   let urls =
     "https://api-vuon-thong-minh.onrender.com/datas/datadetail/" + userEmail;
+    
   useEffect(() => {
     const fetchData = async () => {
       await axios

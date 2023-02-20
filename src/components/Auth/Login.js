@@ -11,7 +11,7 @@ const Login = () => {
 
   function handleSubmit(e) {
     e.preventDefault();
-    document.getElementById("submit").disabled = true;
+    // document.getElementById("submit").disabled = true;
 
     console.log(email, password);
     if (email == "" || password == "") {
