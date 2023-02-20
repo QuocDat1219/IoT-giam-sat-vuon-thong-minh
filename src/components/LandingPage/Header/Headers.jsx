@@ -54,9 +54,11 @@ const Header = () => {
           {/* ======= LOGO ======= */}
           <div className="logo">
             <div className="logo__img">
-              <img src={logo} alt="" />
+              <img src={logo} alt="" width="450px" />
             </div>
-            <h2>Green House</h2>
+            <h2 style={{ color: "var(--primary-color)", paddingTop: "10px" }}>
+              Green House
+            </h2>
           </div>
 
           {/* ======= navigation menu ======= */}
@@ -72,21 +74,18 @@ const Header = () => {
               ))}
             </ul>
           </div>
-    
 
           <div className="nav__right">
-         <Link to={"/login"} >
-         <button className="register__btn">Đăng nhập</button>
-         </Link>
+            <Link to={"/login"}>
+              <button className="register__btn">Đăng nhập</button>
+            </Link>
             <span className="mobile__menu">
               <i class="ri-menu-line"></i>
             </span>
           </div>
         </div>
       </div>
-  
     </header>
-    
   );
 };
 
