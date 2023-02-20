@@ -13,11 +13,13 @@ const Footer = () => {
               <div className="logo__img">
                 <img src={logo} alt="" />
               </div>
-              <h2>Green House</h2>
+              <h2 style={{ color: "var(--primary-color)", paddingTop: "10px" }}>
+                Green House
+              </h2>
             </div>
-           <p>
+            <p style={{ marginLeft: "30px" }}>
               Chăm sóc theo dõi khu vườn của bạn
-           </p>
+            </p>
           </div>
 
           <div className="footer__box">
@@ -32,6 +34,12 @@ const Footer = () => {
               </li>
               <li>
                 <a href="#">19004204@gmail.com</a>
+              </li>
+              <li>
+                <a href="#">19004007@gmail.com</a>
+              </li>
+              <li>
+                <a href="#">19004012@gmail.com</a>
               </li>
             </ul>
           </div>
@@ -51,9 +59,7 @@ const Footer = () => {
             </ul>
           </div>
         </div>
-        <p className="copyright">
-          Copyright - {year}. All rights reserved
-        </p>
+        <p className="copyright">Copyright - {year}. All rights reserved</p>
       </div>
     </footer>
   );
