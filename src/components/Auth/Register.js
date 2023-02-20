@@ -59,51 +59,50 @@ const Register = () => {
           toast.warning("Email already registered");
         } else if (data.status == "ok") {
           createData();
-
         } else {
           toast.error("Đăng ký không thành công");
         }
       });
   };
   const createData = async () => {
-  await  axios.post("https://api-vuon-thong-minh.onrender.com/datas/createdata", {
-      email: window.localStorage.getItem("Emaildetails"),
-      nhietdo: 0,
-      doam: 0,
-      mhsensor: 0,
-      ultrasonic: 0,
-      connect: "disconnect",
-      control: [],
-      sensor: [
-        {
-          name: "DHT",
-          status: "0",
-          timeword: "15:00",
-          timeout: "2:00",
-          nofi: "Email"
-        },
-        {
-          name: "Ultrasonic",
-          status: "0",
-          timeword: "15:00",
-          timeout: "2:00",
-          nofi: "Email"
-        },
-        {
-          name: "MH",
-          status: "0",
-          timeword: "15:00",
-          timeout: "2:00",
-          nofi: "Email"
-        }
-      ]
-    })
+    await axios
+      .post("https://api-vuon-thong-minh.onrender.com/datas/createdata", {
+        email: window.localStorage.getItem("Emaildetails"),
+        nhietdo: 0,
+        doam: 0,
+        mhsensor: 0,
+        ultrasonic: 0,
+        connect: "disconnect",
+        control: {},
+        sensor: [
+          {
+            name: "DHT",
+            status: "0",
+            timeword: "15:00",
+            timeout: "2:00",
+            nofi: "Email",
+          },
+          {
+            name: "Ultrasonic",
+            status: "0",
+            timeword: "15:00",
+            timeout: "2:00",
+            nofi: "Email",
+          },
+          {
+            name: "MH",
+            status: "0",
+            timeword: "15:00",
+            timeout: "2:00",
+            nofi: "Email",
+          },
+        ],
+      })
       .then((data) => {
         console.log(data);
         toast.success("Đăng ký thành công");
-      })
-
-  }
+      });
+  };
   return (
     <div
       className="flex h-screen w-full items-center justify-center bg-gray-900 bg-cover bg-no-repeat"
@@ -112,22 +111,22 @@ const Register = () => {
       }}
     >
       <ToastContainer />
+      {/* rounded-xl bg-gray-800 bg-opacity-50 px-16 py-10 shadow-lg backdrop-blur-md max-sm:px-8 */}
       <div
-        className="rounded-xl bg-gray-800 bg-opacity-50 px-16 py-10 shadow-lg backdrop-blur-md max-sm:px-8"
+        className="rounded-xl bg-gray-800 bg-opacity-50 px-16 py-3 shadow-lg backdrop-blur-md max-sm:px-8"
         style={{ backdropFilter: " blur(0px)" }}
       >
         <div className="text-white">
-          <div className="mb-8 flex flex-col items-center">
+          <div className="mb-4 flex flex-col items-center">
             <img src={icon} width="100" alt="" />
             <h1
               className="mb-2 text-2xl"
-              style={{ fontSize: "30px", fontFamily: "Florence, cursive" }}
+              style={{ fontSize: "30px", fontFamily: "'Saira', sans-serif" }}
             >
               GREEN HOUSE
             </h1>
             <span className="text-black-500">Enter Register Details</span>
           </div>
-
           <form onSubmit={handleSubmit}>
             <div className="mb-4 text-lg">
               <input
