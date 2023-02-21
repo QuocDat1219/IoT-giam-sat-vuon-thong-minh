@@ -15,6 +15,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { Sidebar } from "..";
 import Navb from "../navbar/Navb";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
+import Footer from "../LandingPage/UI/Footer";
 let dataItem = null;
 const List = () => {
   const [showModal, setShowModal] = useState(false);
@@ -107,7 +108,7 @@ const List = () => {
                 <Table sx={{ minWidth: 650 }} aria-label="simple table">
                   <TableHead>
                     <TableRow>
-                      <TableCell className="tableCell">Stt</TableCell>
+                      <TableCell className="tableCell">STT</TableCell>
                       <TableCell className="tableCell">Thiết bi</TableCell>
                       <TableCell className="tableCell">Trạng thái</TableCell>
                       <TableCell className="tableCell">Hành động</TableCell>
@@ -245,6 +246,9 @@ const List = () => {
               <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
             </div>
           ) : null}
+          <div style={{paddingTop:"10px"}}>
+            <Footer />
+          </div>
         </div>
       </Sidebar>
     </div>
