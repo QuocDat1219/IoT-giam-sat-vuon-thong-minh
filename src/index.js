@@ -9,7 +9,7 @@ import "remixicon/fonts/remixicon.css";
 import "aos/dist/aos.css"; // You can also use <link> for styles
 import AOS from "aos";
 AOS.init();
-ReactDOM.createRoot(document.getElementById("root")).render(
+ReactDOM.createRoot(document.getElementById("fb-root")).render(
   <React.StrictMode>
     <BrowserRouter>
       <App />

@@ -8,6 +8,7 @@ import UserPro from "../components/User/User";
 import AdminHome from "../components/Auth/AdminHome";
 import LandingPage from "../components/LandingPage/LandingPage";
 import BangDuLieu from "../components/BangData/DataTable";
+import ControlDevice from "../components/ControlDevice/ControlDevice";
 const Routers = () => {
   const isLoggedIn = window.localStorage.getItem("loggedIn");
   const isAdminIn = window.localStorage.getItem("isadmin");
@@ -62,10 +63,18 @@ const Routers = () => {
       <Route
         path="/bangdulieu"
         element={
-          isLoggedIn == "true" && isAdminIn == "false" ? <BangDuLieu/> : <Login />
+          isLoggedIn == "true" && isAdminIn == "false" ? <BangDuLieu /> : <Login />
+        }
+      />
+
+      <Route
+        path="/control"
+        element={
+          isLoggedIn == "true" && isAdminIn == "false" ? <ControlDevice /> : <Login />
         }
       />
     </Routes>
+
   );
 };
 
