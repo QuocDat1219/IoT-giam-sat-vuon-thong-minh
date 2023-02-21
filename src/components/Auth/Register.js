@@ -1,7 +1,7 @@
 import React, { Component, useState } from "react";
 import { Link } from "react-router-dom";
 import Background from "../images/login.jpg";
-import icon from "../images/IOTCAM.png";
+import icon from "../images/IOT.png";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
@@ -110,16 +110,16 @@ const Register = () => {
     <div
       className="flex h-screen w-full items-center justify-center bg-gray-900 bg-cover bg-no-repeat"
       style={{
-        backgroundImage: `url(${Background})`,
+        background: "linear-gradient(90deg,rgb(36, 192, 60) 10%,rgb(63, 240, 78) 85%)"
       }}
     >
       <ToastContainer />
       {/* rounded-xl bg-gray-800 bg-opacity-50 px-16 py-10 shadow-lg backdrop-blur-md max-sm:px-8 */}
       <div
-        className="rounded-xl bg-gray-800 bg-opacity-50 px-16 py-3 shadow-lg backdrop-blur-md max-sm:px-8"
-        style={{ backdropFilter: " blur(0px)" }}
+        className="bg-white rounded-xl bg-white-700 bg-opacity-100 px-16 "
+        style={{ backdropFilter: " blur(0px)", boxShadow:"2px 4px 10px 1px rgb(201 201 201 / 70%)" }}
       >
-        <div className="text-white">
+        <div className="text-black">
           <div className="mb-4 flex flex-col items-center">
             <img src={icon} width="100" alt="" />
             <h1
@@ -133,7 +133,7 @@ const Register = () => {
           <form onSubmit={handleSubmit}>
             <div className="mb-4 text-lg">
               <input
-                className="rounded-3xl border-none bg-yellow-400 bg-opacity-70 px-6 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md"
+                  className="rounded-3xl border-none bg-amber-300 bg-opacity-70 px-6 py-2 text-center text-inherit placeholder-gray-900 shadow-lg outline-none backdrop-blur-md"
                 type="text"
                 placeholder="Nhập First Name "
                 onChange={(e) => setFname(e.target.value)}
@@ -141,7 +141,7 @@ const Register = () => {
             </div>
             <div className="mb-4 text-lg">
               <input
-                className="rounded-3xl border-none bg-yellow-400 bg-opacity-70 px-6 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md"
+                 className="rounded-3xl border-none bg-amber-300 bg-opacity-70 px-6 py-2 text-center text-inherit placeholder-gray-900 shadow-lg outline-none backdrop-blur-md"
                 type="text"
                 placeholder="Nhập Last Name "
                 onChange={(e) => setLname(e.target.value)}
@@ -149,7 +149,7 @@ const Register = () => {
             </div>
             <div className="mb-4 text-lg">
               <input
-                className="rounded-3xl border-none bg-yellow-400 bg-opacity-70 px-6 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md"
+               className="rounded-3xl border-none bg-amber-300 bg-opacity-70 px-6 py-2 text-center text-inherit placeholder-gray-900 shadow-lg outline-none backdrop-blur-md"
                 type="email"
                 placeholder="Nhập email"
                 onChange={(e) => setEmail(e.target.value)}
@@ -158,7 +158,7 @@ const Register = () => {
 
             <div className="mb-4 text-lg">
               <input
-                className="rounded-3xl border-none bg-yellow-400 bg-opacity-70 px-6 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md"
+               className="rounded-3xl border-none bg-amber-300 bg-opacity-70 px-6 py-2 text-center text-inherit placeholder-gray-900 shadow-lg outline-none backdrop-blur-md"
                 type="Password"
                 placeholder="Nhập password"
                 onChange={(e) => setPassword(e.target.value)}
@@ -166,16 +166,16 @@ const Register = () => {
             </div>
             <div className="mb-4 text-lg">
               <input
-                className="rounded-3xl border-none bg-yellow-400 bg-opacity-70 px-6 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md"
+                 className="rounded-3xl border-none bg-amber-300 bg-opacity-70 px-6 py-2 text-center text-inherit placeholder-gray-900 shadow-lg outline-none backdrop-blur-md"
                 type="Password"
                 placeholder="Nhập lại password"
                 onChange={(e) => setConfirmPassword(e.target.value)}
               />
             </div>
-            <div className="mt-8 flex justify-center text-lg text-black">
+            <div className="mt-2 mb-4 flex justify-center text-lg text-black">
               <button
                 type="submit"
-                className="rounded-3xl bg-yellow-400 bg-opacity-70 px-10 py-2 text-white shadow-xl backdrop-blur-md transition-colors duration-300 hover:bg-yellow-600"
+                className="rounded-3xl border-none bg-amber-300 bg-opacity-70 px-6 py-2 text-center text-inherit placeholder-gray-900 shadow-lg outline-none backdrop-blur-md"
               >
                 Đăng ký
               </button>
@@ -183,7 +183,7 @@ const Register = () => {
           </form>
           <Link to={"/login"}>
             {" "}
-            <span className="flex justify-center items-center mt-3">
+            <span className="flex justify-center items-center mt-2 mb-4 ">
               Có tài khoản ? Đăng nhập
             </span>
           </Link>

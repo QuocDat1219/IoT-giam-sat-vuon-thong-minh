@@ -16,7 +16,7 @@ export default function Testimonials() {
   return (
     <>
       <section>
-        <div className="container sliders">
+        <div className="container sliders" style={{ marginLeft: "40%" }}>
           <h2 className="section__title">About Us</h2>
           <Swiper
             effect={"cards"}
@@ -30,9 +30,8 @@ export default function Testimonials() {
                   <img className="memberavt" src={quocdat} alt="" srcset="" />
                 </div>
                 <h4>Lê Nguyễn Quốc Đạt</h4>
-                <p>
-                   Công việc: Team lead + Fontend developer
-                </p>
+                <p>Công việc: Team lead + Fontend developer</p>
+                <p>Email: 1900025@gmail.com</p>
               </div>
             </SwiperSlide>
             <SwiperSlide>
@@ -42,21 +41,19 @@ export default function Testimonials() {
                   <img className="memberavt" src={lapthuan} alt="" srcset="" />
                 </div>
                 <h4>Đỗ Đoàn Lập Thuận</h4>
-                <p>
-                  Công việc: Backend developer
-                </p>
+                <p>Công việc: Backend developer</p>
+                <p>Email: 19004204@gmail.com</p>
               </div>
             </SwiperSlide>
             <SwiperSlide>
               {" "}
               <div className="slide__item">
                 <div className="slide__img-01">
-                  <img className="memberavt" src={giabao} alt="" srcset=""  />
+                  <img className="memberavt" src={giabao} alt="" srcset="" />
                 </div>
                 <h4>Trần Gia Bảo</h4>
-                <p>
-                  Công việc: Tester
-                </p>
+                <p>Công việc: Tester + Backend developer</p>
+                <p>Email: 19004012@gmail.com</p>
               </div>
             </SwiperSlide>
             <SwiperSlide>
@@ -66,9 +63,8 @@ export default function Testimonials() {
                   <img className="memberavt" src={tuananh} alt="" srcset="" />
                 </div>
                 <h4>Nguyễn Hoàng Tuấn Anh</h4>
-                <p>
-                  Công việc: Fontend developer
-                </p>
+                <p>Công việc: Fontend developer</p>
+                <p>Email: 19004007@gmail.com</p>
               </div>
             </SwiperSlide>
           </Swiper>

@@ -176,7 +176,7 @@ const UserPro = (props) => {
                     width: "500px",
                     borderRadius: "10px",
                     marginTop: "30px",
-                    boxShadow: "0px 0px 15px hsl(88, 37%, 62%)",
+                    boxShadow: "0px 0px 15px rgba(134, 131, 131, 0.7)",
                     margin: "auto",
                     paddingBottom: "30px",
                   }}
