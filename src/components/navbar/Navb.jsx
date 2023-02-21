@@ -57,17 +57,17 @@ const Navb = () => {
           >
             <FaUsb style={{ fontSize: "25px" }} />
             {conn == "connect" ? (
-              <p
+              <strong
                 style={{ fontSize: "16px", color: "green", paddingLeft: "5px" }}
               >
                 {" "}
                 Connected{" "}
-              </p>
+              </strong>
             ) : (
-              <p style={{ fontSize: "16px", color: "red", paddingLeft: "5px" }}>
+              <strong style={{ fontSize: "16px", color: "red", paddingLeft: "5px" }}>
                 {" "}
                 Disconnect{" "}
-              </p>
+              </strong>
             )}
           </div>
         </div>
