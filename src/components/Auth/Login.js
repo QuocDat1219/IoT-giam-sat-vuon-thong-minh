@@ -5,19 +5,19 @@ import "react-toastify/dist/ReactToastify.css";
 import Background from "../images/login.jpg";
 import icon from "../images/IOTCAM.png";
 const Login = () => {
-  const Navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  
   function handleSubmit(e) {
     e.preventDefault();
-    // document.getElementById("submit").disabled = true;
-
     console.log(email, password);
     if (email == "" || password == "") {
       toast.warning("Vui lòng nhập đủ thông tin");
     } else {
       toast("Đang xử lý");
+
+      document.getElementById("submit").disabled = true;
+
       fetch("https://api-vuon-thong-minh.onrender.com/users/login-user", {
         method: "POST",
         headers: {
@@ -40,8 +40,9 @@ const Login = () => {
             loginRequest();
           } else {
             toast.error("Sai email hoặc mật khẩu! ");
+            document.getElementById("submit").disabled = false;
           }
-          // document.getElementById("submit").disabled = false;
+          
         });
       const loginRequest = async () => {
         await fetch(
@@ -83,6 +84,7 @@ const Login = () => {
               alert("Token expired login again");
               window.localStorage.clear();
               window.location.href = "/login";
+              
             }
           });
       };
