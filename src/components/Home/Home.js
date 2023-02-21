@@ -8,7 +8,7 @@ import Sidebar from "../Sidebar";
 import Navb from "../navbar/Navb";
 import axios from "axios";
 import "react-toastify/dist/ReactToastify.css";
-
+import Footer from "../LandingPage/UI/Footer";
 const Home = () => {
   const [doam, setDoam] = useState("");
   const [nhietdo, setNhietdo] = useState("");
@@ -18,6 +18,7 @@ const Home = () => {
 
   let urls =
     "https://api-vuon-thong-minh.onrender.com/datas/datadetail/" + userEmail;
+    
   useEffect(() => {
     const fetchData = async () => {
       await axios
@@ -54,19 +55,11 @@ const Home = () => {
             <div className="wt">
               <LiquidTank water={ultrasonic} />
             </div>
-            <div style={{ marginTop: "50px" }}>
-              <footer
-                className="ft"
-                style={{
-                  textAlign: "center",
-                  fontSize: "20px",
-                  fontWeight: "bolder",
-                }}
-              >
-                © Copyright 2023
-              </footer>
+            <div style={{paddingLeft:"20px", paddingRight:"15px", paddingTop:"15px"}}>
+            <Footer />
             </div>
           </div>
+
         </Sidebar>
       </div>
     </>

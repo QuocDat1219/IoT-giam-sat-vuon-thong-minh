@@ -3,21 +3,21 @@ import { Link, useNavigate, Routes, Route } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Background from "../images/login.jpg";
-import icon from "../images/IOTCAM.png";
+import icon from "../images/IOT.png";
 const Login = () => {
-  const Navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  
   function handleSubmit(e) {
     e.preventDefault();
-    document.getElementById("submit").disabled = true;
-
     console.log(email, password);
     if (email == "" || password == "") {
       toast.warning("Vui lòng nhập đủ thông tin");
     } else {
       toast("Đang xử lý");
+
+      document.getElementById("submit").disabled = true;
+
       fetch("https://api-vuon-thong-minh.onrender.com/users/login-user", {
         method: "POST",
         headers: {
@@ -40,8 +40,9 @@ const Login = () => {
             loginRequest();
           } else {
             toast.error("Sai email hoặc mật khẩu! ");
+            document.getElementById("submit").disabled = false;
           }
-          // document.getElementById("submit").disabled = false;
+          
         });
       const loginRequest = async () => {
         await fetch(
@@ -83,6 +84,7 @@ const Login = () => {
               alert("Token expired login again");
               window.localStorage.clear();
               window.location.href = "/login";
+              
             }
           });
       };
@@ -93,15 +95,17 @@ const Login = () => {
     <div
       className="flex h-screen w-full items-center justify-center bg-white-900 bg-cover bg-no-repeat"
       style={{
-        backgroundImage: `url(${Background})`,
+        //
+        background: "linear-gradient(90deg,rgb(36, 192, 60) 10%,rgb(63, 240, 78) 85%)"
       }}
     >
       <ToastContainer />
       <div
-        className="rounded-xl bg-gray-800 bg-opacity-50 px-16 py-10 shadow-lg backdrop-blur-md max-sm:px-8"
-        style={{ backdropFilter: " blur(0px)" }}
+        // className="rounded-xl bg-white bg-opacity-50 px-16 py-7 shadow-lg backdrop-blur-md max-sm:px-8"
+        className="bg-white rounded-xl bg-white-700 bg-opacity-100 px-16 py-7"
+        style={{ backdropFilter: " blur(0px)", boxShadow:"2px 4px 10px 1px rgb(201 201 201 / 70%)" }}
       >
-        <div className="text-white">
+        <div className="text-black">
           <div className="mb-4 flex flex-col items-center">
             <img src={icon} width="100" alt="" srcset="" />
             <h1
@@ -115,7 +119,7 @@ const Login = () => {
           <form>
             <div className="mb-4 text-lg">
               <input
-                className="rounded-3xl border-none bg-yellow-400 bg-opacity-70 px-6 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md"
+                className="rounded-3xl border-none bg-amber-300 bg-opacity-70 px-6 py-2 text-center text-inherit placeholder-gray-900 shadow-lg outline-none backdrop-blur-md"
                 type="email"
                 name="email"
                 placeholder="Email"
@@ -126,7 +130,7 @@ const Login = () => {
 
             <div className="mb-4 text-lg">
               <input
-                className="rounded-3xl border-none bg-yellow-400 bg-opacity-70 px-6 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md"
+                className="rounded-3xl border-none bg-amber-300 bg-opacity-70 px-6 py-2 text-center text-inherit placeholder-gray-900 shadow-lg outline-none backdrop-blur-md"
                 type="Password"
                 name="name"
                 placeholder="Password"
@@ -134,18 +138,18 @@ const Login = () => {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
-            <div className="mt-8 flex justify-center text-lg text-black">
+            <div className="mt-8 mb-4 flex justify-center text-lg text-black">
               <button
                 onClick={handleSubmit}
                 id="submit"
-                className="rounded-3xl bg-yellow-400 bg-opacity-70 px-10 py-2 text-white shadow-xl backdrop-blur-md transition-colors duration-300 hover:bg-yellow-600"
+                className="rounded-3xl bg-amber-300 bg-opacity-70 px-10 py-2 text-black shadow-xl backdrop-blur-md transition-colors duration-300 hover:bg-yellow-600"
               >
                 Login
               </button>
             </div>
             <Link to={"/Register"}>
               {" "}
-              <span className="flex justify-center items-center mt-3">
+              <span className="flex justify-center items-center mt-3 mb-4">
                 Đăng ký tài khoản ?
               </span>
             </Link>

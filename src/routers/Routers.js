@@ -7,74 +7,74 @@ import SensorManager from "../components/SensorManager/dataTable";
 import UserPro from "../components/User/User";
 import AdminHome from "../components/Auth/AdminHome";
 import LandingPage from "../components/LandingPage/LandingPage";
+import BangDuLieu from "../components/BangData/DataTable";
+import ControlDevice from "../components/ControlDevice/ControlDevice";
 const Routers = () => {
-
   const isLoggedIn = window.localStorage.getItem("loggedIn");
   const isAdminIn = window.localStorage.getItem("isadmin");
 
   return (
     <Routes>
-      <Route
-        exact
-        path="/"
-        element={
-          <LandingPage/>
-         }
-      />
+      <Route exact path="/" element={<LandingPage />} />
       <Route
         exact
         path="/adminhome"
         element={
-          isLoggedIn == "true" && isAdminIn == "true" ?
-            <AdminHome /> :
-            <Home />
+          isLoggedIn == "true" && isAdminIn == "true" ? <AdminHome /> : <Home />
         }
       />
       <Route
         exact
         path="/home"
         element={
-          isLoggedIn == "true" && isAdminIn == "false" ?
-            <Home /> :
-            <Login />
+          isLoggedIn == "true" && isAdminIn == "false" ? <Home /> : <Login />
         }
       />
 
-      <Route
-        path="login"
-        element={<Login />}
-      />
-      <Route
-        path="/Register"
-        element={<Register />}
-      />
+      <Route path="login" element={<Login />} />
+      <Route path="/Register" element={<Register />} />
       <Route
         path="/bieudo"
         element={
-          isLoggedIn == "true" && isAdminIn == "false" ?
-            <LineChart /> :
+          isLoggedIn == "true" && isAdminIn == "false" ? (
+            <LineChart />
+          ) : (
             <Login />
+          )
         }
-
       />
       <Route
         path="/sensor"
         element={
-          isLoggedIn == "true" && isAdminIn == "false" ?
-            <SensorManager /> :
+          isLoggedIn == "true" && isAdminIn == "false" ? (
+            <SensorManager />
+          ) : (
             <Login />
+          )
         }
-
       />
       <Route
         path="/user"
         element={
-          isLoggedIn == "true" && isAdminIn == "false" ?
-            <UserPro /> :
-            <Login />
+          isLoggedIn == "true" && isAdminIn == "false" ? <UserPro /> : <Login />
+        }
+      />
+
+      <Route
+        path="/bangdulieu"
+        element={
+          isLoggedIn == "true" && isAdminIn == "false" ? <BangDuLieu /> : <Login />
+        }
+      />
+
+      <Route
+        path="/control"
+        element={
+          isLoggedIn == "true" && isAdminIn == "false" ? <ControlDevice /> : <Login />
         }
       />
     </Routes>
+
   );
 };
 
