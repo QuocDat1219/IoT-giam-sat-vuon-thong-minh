@@ -48,6 +48,7 @@ const List = () => {
     const intervalId = setInterval(gedataTable, 5000);
     return () => clearInterval(intervalId);
   }, []);
+  
   const handelSaveClick = (item) => {
     console.log(item);
     dataItem = item;
