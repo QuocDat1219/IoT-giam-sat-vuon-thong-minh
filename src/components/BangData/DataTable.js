@@ -14,7 +14,13 @@ import { Column } from "primereact/column";
 import "../BangData/Datatable.css";
 
 import Footer from "../LandingPage/UI/Footer";
+import { useEffect, useState } from "react";
+import axios from "axios";
+let num = 1;
 const BangDuLieu = () => {
+  const [dataDHTLog, setDataDHTLog] = useState([]);
+  const [dataMHLog, setDataMHLog] = useState([]);
+  const [dataUltraLog, setDataUltraLog] = useState([]);
   const data = [
     {
       times: "12:00:00",
@@ -53,54 +59,71 @@ const BangDuLieu = () => {
     },
   ];
 
+  const urls =
+    "https://api-vuon-thong-minh.onrender.com/datas/datadetail/" +
+    window.localStorage.getItem("Emaildetails");
+  useEffect(() => {
+    const gedataTable = async () => {
+      await axios
+        .get(urls)
+        .then((result) => {
+          console.log(result);
+          // console.log(result.data.data.sensor);
+          setDataDHTLog(result.data.data.dhtlog);
+          setDataMHLog(result.data.data.mhlog);
+          setDataUltraLog(result.data.data.ultralog);
+        })
+        .catch((err) => {
+          throw new Error(err);
+        });
+    };
+    gedataTable();
+    const intervalId = setInterval(gedataTable, 5000);
+    return () => clearInterval(intervalId);
+  }, []);
+
   return (
     <div className="home">
       <Sidebar>
         <div className="homeContainer">
           <Navb />
-          <div>
+          <div style={{ paddingTop: "30px" }}>
             {data ? (
               <TableContainer
                 component={Paper}
                 className="table container mx-auto"
               >
-                <ToastContainer />
+                <h2>Nhiệt độ và độ ẩm</h2>
                 <Table sx={{ minWidth: 650 }} aria-label="simple table">
                   <TableHead>
                     <TableRow>
-                      <TableCell className="tableCell">STT</TableCell>
-                      <TableCell className="tableCell">Thời gian</TableCell>
-                      <TableCell className="tableCell">Nhiệt độ</TableCell>
-                      <TableCell className="tableCell">
+                      <TableCell className="tableCell" align="center">
+                        Nhiệt độ
+                      </TableCell>
+                      <TableCell className="tableCell" align="center">
                         Độ ẩm không khí
                       </TableCell>
-                      <TableCell className="tableCell">Độ ẩm đất</TableCell>
-                      <TableCell className="tableCell">
-                        Lưu lượng nước
+                      <TableCell className="tableCell" align="center">
+                        Thời gian
                       </TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
-                    {data.map((item, index) => (
-                      <TableRow key={index}>
-                        <TableCell className="tableCell">{index + 1}</TableCell>
-                        <TableCell className="tableCell">
-                          {item.times}
-                        </TableCell>
-                        <TableCell className="tableCell">
-                          {item.nhietdo}
-                        </TableCell>
-                        <TableCell className="tableCell">
-                          {item.doamkk}
-                        </TableCell>
-                        <TableCell className="tableCell">
-                          {item.doamdat}
-                        </TableCell>
-                        <TableCell className="tableCell">
-                          {item.llnuoc}
-                        </TableCell>
-                      </TableRow>
-                    ))}
+                    {dataDHTLog
+                      .map((item, index) => (
+                        <TableRow key={index}>
+                          <TableCell className="tableCell" align="center">
+                            {item.nhietdo}
+                          </TableCell>
+                          <TableCell className="tableCell" align="center">
+                            {item.doam}
+                          </TableCell>
+                          <TableCell className="tableCell" align="center">
+                            {item.createAt}
+                          </TableCell>
+                        </TableRow>
+                      ))
+                      .slice(-5)}
                   </TableBody>
                 </Table>
               </TableContainer>
@@ -108,8 +131,78 @@ const BangDuLieu = () => {
               "loading"
             )}
           </div>
-          <div style={{paddingTop:"10px"}}>
-          <Footer />
+          <div style={{ paddingTop: "30px" }}>
+            {data ? (
+              <TableContainer
+                component={Paper}
+                className="table container mx-auto"
+              >
+                <ToastContainer />
+                <h2>Độ ẩm đất</h2>
+                <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                  <TableHead>
+                    <TableRow>
+                      <TableCell className="tableCell"  align="center">Độ ẩm đất</TableCell>
+                      <TableCell className="tableCell"  align="center">Thời gian</TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {dataMHLog
+                      .map((item, index) => (
+                        <TableRow key={index}>
+                          <TableCell className="tableCell" align="center">{item.mh}</TableCell>
+                          <TableCell className="tableCell" align="center">
+                            {item.createAt}
+                          </TableCell>
+                        </TableRow>
+                      ))
+                      .slice(-5)}
+                  </TableBody>
+                </Table>
+              </TableContainer>
+            ) : (
+              "loading"
+            )}
+          </div>
+          <div style={{ paddingTop: "30px" }}>
+            {data ? (
+              <TableContainer
+                component={Paper}
+                className="table container mx-auto"
+              >
+                <ToastContainer />
+                <h2>Lưu lượng nước bình chứa</h2>
+                <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                  <TableHead>
+                    <TableRow>
+                      <TableCell className="tableCell"  align="center">
+                        Lưu lượng nước
+                      </TableCell>
+                      <TableCell className="tableCell"  align="center">Thời gian</TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {dataUltraLog
+                      .map((item, index) => (
+                        <TableRow key={index}>
+                          <TableCell className="tableCell"  align="center">
+                            {item.ultra}
+                          </TableCell>
+                          <TableCell className="tableCell" align="center">
+                            {item.createAt}
+                          </TableCell>
+                        </TableRow>
+                      ))
+                      .slice(-5)}
+                  </TableBody>
+                </Table>
+              </TableContainer>
+            ) : (
+              "loading"
+            )}
+          </div>
+          <div style={{ paddingTop: "10px" }}>
+            <Footer />
           </div>
         </div>
       </Sidebar>

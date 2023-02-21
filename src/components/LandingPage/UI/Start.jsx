@@ -1,6 +1,7 @@
 import React from "react";
 import "../Style/start.css";
 import startImg from "../../images/mohinh.jpg";
+import { Link } from "react-router-dom";
 function Start() {
   return (
     <section id="classes">
@@ -23,14 +24,16 @@ function Start() {
             <h2 className="section__title">
               <span className="highlights">
                 <h1>HOẠT ĐỘNG</h1>
-                </span>
+              </span>
             </h2>
             <p>
               Hệ thống được kiểm soát và điều khiển bằng website
               <br />
               Đồng thời dữ liệu được lưu trữ hoàn toàn bằng các dịch vụ đám mây
             </p>
-            <button className="register__btn">Get Started</button>
+            <Link to={"/login"}>
+              <button className="register__btn">Get Started</button>
+            </Link>
           </div>
         </div>
       </div>

@@ -2,6 +2,7 @@ import React from "react";
 import heroImg from "../../images/iothead.jpg";
 import dumbleIcon from "../../images/IOT.png";
 import "../Style/hero.css";
+import { Link } from "react-router-dom";
 const Hero = () => {
   return (
     <section id="home">
@@ -31,7 +32,8 @@ const Hero = () => {
               data-aos-delay="200"
               data-aos-duration="2000"
             >
-              <button className="register__btn">Get Started</button>
+              <Link to={"/login"}>
+              <button className="register__btn">Get Started</button></Link>
             </div>
           </div>
           {/* ============= HERO IMG ================= */}
