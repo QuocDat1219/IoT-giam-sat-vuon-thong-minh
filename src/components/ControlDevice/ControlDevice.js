@@ -1,137 +1,128 @@
-import Sidebar from "../Sidebar";
+import { Sidebar } from "..";
+import "./table.scss";
 import Navb from "../navbar/Navb";
-import Form from 'react-bootstrap/Form';
-import BootstrapSwitchButton from 'bootstrap-switch-button-react';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import Footer from "../LandingPage/UI/Footer";
-import { useState } from "react";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
 import "./ControlDevice.css";
+import axios from "axios";
+import { useState, useEffect } from "react";
+import { Button } from "@mui/material";
+import { ToastContainer, toast } from "react-toastify";
 import { padding } from "@mui/system";
+import PuffLoader from "react-spinners/PuffLoader";
+import Footer from "../LandingPage/UI/Footer";
 
 const ControlDevice = () => {
-    const [showModal, setShowModal] = useState(false);
-    const [controlDevice, setControlDevice] = useState([]);
-    const [devicename, setDeviceName] = useState("");
-    const handleShowModal = () => {
-        setShowModal(true);
-    }
-    return (
+  const [dieukhien, setDieukhien] = useState([]);
+  const [controlDevice, setControlDevice] = useState([]);
+  const [devicename, setDeviceName] = useState("");
+  const [loading, setLoading] = useState(false);
+  const updateOn = async (key, status, name) => {
+    await axios
+      .put(
+        "https://iotsmarthome-5d008-default-rtdb.firebaseio.com/iotdata/control/" +
+          key +
+          ".json",
+        {
+          name: name,
+          status: -status,
+        }
+      )
+      .then((result) => {
+        toast({ status });
+        if (status == "1") {
+          toast("Đã mở");
+        } else toast("Đã tắt");
+      })
+      .catch((err) => {
+        toast(err.message);
+      });
+  };
 
-        <div className="home">
-            <Sidebar>
-                <div className="homeContainer">
-                    <Navb />
-                    {controlDevice ? (
-                        <>
-                            <h1 className="title">Điều khiển các thiết bị từ xa</h1>
-                            <Container>
-                                <Row md={3}>
-                                    <Col>
-                                        <div className="control">
-                                            <div className="controlbody">
-                                                <Form.Group className="mb-3">
-                                                    <Form.Label className="devicename">Tên thiết bị: <strong>Đèn</strong>
-                                                    </Form.Label>
-                                                </Form.Group>
-                                                <Form.Group className="mb-3">
-                                                    <Form.Label className="devicestatus">Chỉnh sửa: <Form.Label>    </Form.Label>
-                                                    </Form.Label>
-
-                                                    <button className="btnEdit" style={{ fontSize: "24px" }}
-                                                        onClick={handleShowModal}>
-                                                        <i className="fas fa-edit"></i>
-                                                    </button>
-                                                </Form.Group>
-
-                                                <Form.Group className="mb-3">
-                                                    <Form.Label className="titlecontrol">Điều khiển: </Form.Label>
-                                                    <BootstrapSwitchButton checked={true} onstyle="success" onlabel="On" offlabel="Off" style='px-10 mx-2' />
-                                                </Form.Group>
-                                            </div>
-                                        </div>
-                                    </Col>
-                                    <Col>
-                                        <div className="control">
-                                            <div className="controlbody">
-                                                <Form.Group className="mb-3">
-                                                    <Form.Label className="devicename">Tên thiết bị: <strong>Đèn</strong>
-                                                    </Form.Label>
-                                                </Form.Group>
-                                                <Form.Group className="mb-3">
-                                                    <Form.Label className="devicestatus">Chỉnh sửa: <Form.Label>  </Form.Label>
-
-                                                    </Form.Label>
-                                                    <button className="btnEdit" style={{ fontSize: "24px" }}>
-                                                        <i className="fas fa-edit"></i>
-                                                    </button>
-                                                </Form.Group>
-                                                <Form.Group className="mb-3" controlId="formBasicTimeWork">
-                                                    <Form.Label className="titlecontrol">Điều khiển: </Form.Label>
-                                                    <BootstrapSwitchButton checked={true} onstyle="success" onlabel="On" offlabel="Off" style='px-10 mx-2' />
-                                                </Form.Group>
-                                            </div>
-                                        </div>
-                                    </Col>
-                                </Row>
-                            </Container>
-                        </>
-                    ) : (
-                        "Loading..."
-                    )}
-                </div>
-                {showModal ? (
-                    <div className="bodyModal">
-                        <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
-                            <div className="relative w-auto my-6 mx-auto max-w-3xl">
-
-                                <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
-
-                                    <div className="flex items-start justify-between p-3 border-b border-solid border-slate-200 rounded-t">
-                                        <h3 className="text-2xl font-semibold">
-                                            Chỉnh sửa thiết bị
-                                        </h3>
-                                        <button
-                                            style={{ color: 'red' }}
-                                            className="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
-                                            onClick={() => setShowModal(false)}
-                                        >X
-                                        </button>
-                                    </div>
-                                    <Form style={{width:"500px", padding:"10px"}}>
-                                        <Form.Group className="mb-3">                         
-                                            <Form.Label className="devicename">Tên thiết bị: <strong>Đèn</strong>
-                                            </Form.Label>
-                                            <br /><br />
-                                            <Form.Control 
-                                            type="text" 
-                                            value={devicename}
-                                            placeholder="Nhập tên mới"
-                                            onChange={(e) => setDeviceName(e.target.value)}
-                                            />
-                                        </Form.Group>
-                                        <div className="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
-                                            <button
-                                                className="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                                                type="submit"
-                                            >
-                                                Cập nhật
-                                            </button>
-                                        </div>
-                                    </Form>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
-                    </div>
-                ) : null}
-                <div style={{ paddingTop: "10px" }}>
-                    <Footer />
-                </div>
-            </Sidebar>
+  useEffect(() => {
+    setInterval(() => {
+      const getData = async () => {
+        await axios
+          .get(
+            "https://iotsmarthome-5d008-default-rtdb.firebaseio.com/iotdata.json"
+          )
+          .then(async (result) => {
+            await setDieukhien(result.data.control);
+            setLoading(true);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      };
+      getData();
+    }, 1000);
+  }, []);
+  return loading ? (
+    <div className="home">
+      <Sidebar>
+        <div className="homeContainer">
+          <Navb />
+          <TableContainer component={Paper} className="table container mx-auto">
+            <Table sx={{ minWidth: 650 }} aria-label="simple table">
+              <TableHead>
+                <TableRow>
+                  <TableCell className="tableCell">Stt</TableCell>
+                  <TableCell className="tableCell">Thiết bị</TableCell>
+                  <TableCell className="tableCell">Trạng thái</TableCell>
+                  <TableCell className="tableCell">Hành động</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {dieukhien
+                  ? dieukhien.map((data, key) => (
+                      <TableRow key={key}>
+                        <TableCell className="tableCell">
+                          <div className="cellWrapper">{key}</div>
+                        </TableCell>
+                        <TableCell className="tableCell">
+                          <div className="cellWrapper">
+                            {data ? data.name : "Loading..."}
+                          </div>
+                        </TableCell>
+                        <TableCell className="tableCell">
+                          <span className={`status ${data ? data.status : ""}`}>
+                            {data.status === 1 ? "Tắt" : "Bật"}
+                          </span>
+                        </TableCell>
+                        <TableCell>
+                          <Button
+                            className={
+                              data.status === 1 ? "status on" : "status off"
+                            }
+                            onClick={() => {
+                              updateOn(key, data.status, data.name);
+                              // alert(key);
+                            }}
+                          >
+                            {data.status === 1 ? "Bật" : "Tắt"}
+                          </Button>
+                        </TableCell>
+                      </TableRow>
+                    ))
+                  : "Loading..."}
+              </TableBody>
+            </Table>
+          </TableContainer>
+          <div style={{ paddingTop: "15px" }}>
+            <Footer />
+          </div>
         </div>
-
-    );
+      </Sidebar>
+    </div>
+  ) : (
+    <div className="fixLoading">
+      <PuffLoader className="loading" color="#36d7b7" size={80} />
+    </div>
+  );
 };
 export default ControlDevice;
