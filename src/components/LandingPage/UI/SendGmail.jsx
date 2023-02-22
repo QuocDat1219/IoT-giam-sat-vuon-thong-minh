@@ -46,7 +46,7 @@ export const SendEmail = () => {
 
   return (
     <div>
-      <StyledContactForm>
+      <StyledContactForm style={{ marginRight: "400px" }}>
         <div className="formfb">
           <form ref={form} onSubmit={sendEmail}>
             <p
@@ -60,8 +60,9 @@ export const SendEmail = () => {
             >
               Feed Back
             </p>
-            <label style={{ fontWeight: "bolder", fontSize: "18px" }}>
+            <label style={{ fontWeight: "bolder", fontSize: "18px", paddingBottom:"10px" }}>
               Name
+
             </label>
             <input
               className="title_ip"
@@ -72,10 +73,11 @@ export const SendEmail = () => {
             />
             <label
               className="title_lb"
-              style={{ fontWeight: "bolder", fontSize: "18px" }}
+              style={{ fontWeight: "bolder", fontSize: "18px",paddingBottom:"10px" }}
             >
               Email
             </label>
+
             <input
               className="title_ip"
               type="email"
@@ -85,10 +87,11 @@ export const SendEmail = () => {
             />
             <label
               className="title_lb"
-              style={{ fontWeight: "bolder", fontSize: "18px" }}
+              style={{ fontWeight: "bolder", fontSize: "18px",paddingBottom:"10px" }}
             >
               Message
             </label>
+
             <textarea
               className="textt"
               name="message"
