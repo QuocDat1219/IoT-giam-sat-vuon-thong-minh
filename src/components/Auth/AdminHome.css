@@ -1,0 +1,33 @@
+.homeAdmin{
+    display: flex;
+    width: auto;
+}
+.homeContainerAdmin{
+    width: 100%;
+}
+.Total{
+    display: flex;
+    margin-left: 50px;
+    padding-top: 40px;
+    padding-right: 50px;
+    width: auto;
+}
+.userTotal{
+    margin-left: 50px;
+}
+.deviceTotal{
+    margin-left: 150px;
+}
+.deviceC{
+    margin-left: 130px;
+}
+.deviceD{
+    margin-left: 60px;
+}
+.tableU{
+    padding-top: 80px;
+    width: 80%;
+    margin-left: 130px;
+    margin-right: 50%;
+
+}

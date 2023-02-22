@@ -112,11 +112,11 @@ const List = () => {
                       <TableCell className="tableCell">Thiết bi</TableCell>
                       <TableCell className="tableCell">Trạng thái</TableCell>
                       <TableCell className="tableCell">Hành động</TableCell>
-                    </TableRow>
+                    </TableRow>           
                   </TableHead>
                   <TableBody>
                     {dtTable.map((item, index) => (
-                      <TableRow key={index}>
+                      <TableRow TableRowkey={index}>
                         <TableCell className="tableCell">{index + 1}</TableCell>
                         <TableCell className="tableCell">{item.name}</TableCell>
                         <TableCell className="tableCell">

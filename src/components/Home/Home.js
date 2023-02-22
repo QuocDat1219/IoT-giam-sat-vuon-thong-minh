@@ -18,7 +18,7 @@ const Home = () => {
 
   let urls =
     "https://api-vuon-thong-minh.onrender.com/datas/datadetail/" + userEmail;
-    
+
   useEffect(() => {
     const fetchData = async () => {
       await axios
@@ -42,24 +42,27 @@ const Home = () => {
   return (
     <>
       <div className="home">
-      
         <Sidebar>
           <div className="homeContainer">
             <Navb />
             <div className="bangnhiet">
               <ND nhietdo={nhietdo} />
-
               <DOAM doam={doam} />
               <Doamdat mhsensor={mhsensor} />
             </div>
             <div className="wt">
               <LiquidTank water={ultrasonic} />
             </div>
-            <div style={{paddingLeft:"20px", paddingRight:"15px", paddingTop:"15px"}}>
-            <Footer />
+            <div
+              style={{
+                paddingLeft: "20px",
+                paddingRight: "15px",
+                paddingTop: "15px",
+              }}
+            >
+              <Footer />
             </div>
           </div>
-
         </Sidebar>
       </div>
     </>

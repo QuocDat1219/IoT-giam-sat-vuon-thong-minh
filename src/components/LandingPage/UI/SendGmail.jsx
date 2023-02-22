@@ -40,7 +40,6 @@ export const SendEmail = () => {
         },
         (error) => {
           console.log(error.text);
-          toast.success("Gửi không thành công");
         }
       );
   };
@@ -61,7 +60,9 @@ export const SendEmail = () => {
             >
               Feed Back
             </p>
-            <label style={{fontWeight:"bolder",fontSize:"18px"}}>Name</label>
+            <label style={{ fontWeight: "bolder", fontSize: "18px" }}>
+              Name
+            </label>
             <input
               className="title_ip"
               type="text"
@@ -69,7 +70,12 @@ export const SendEmail = () => {
               placeholder="Vui lòng nhập họ tên"
               onChange={(e) => setname(e.target.value)}
             />
-            <label className="title_lb" style={{fontWeight:"bolder",fontSize:"18px"}}>Email</label>
+            <label
+              className="title_lb"
+              style={{ fontWeight: "bolder", fontSize: "18px" }}
+            >
+              Email
+            </label>
             <input
               className="title_ip"
               type="email"
@@ -77,7 +83,12 @@ export const SendEmail = () => {
               placeholder="Vui lòng nhập email"
               onChange={(e) => setemail(e.target.value)}
             />
-            <label className="title_lb" style={{fontWeight:"bolder",fontSize:"18px"}}>Message</label>
+            <label
+              className="title_lb"
+              style={{ fontWeight: "bolder", fontSize: "18px" }}
+            >
+              Message
+            </label>
             <textarea
               className="textt"
               name="message"
@@ -85,7 +96,7 @@ export const SendEmail = () => {
               onChange={(e) => setnoidung(e.target.value)}
             />
             <button className="btn" type="submit">
-            <span>Click me</span>
+              <span>Click me</span>
             </button>
           </form>
         </div>
