@@ -1,0 +1,42 @@
+.control{
+    -webkit-box-shadow: 2px 4px 10px 5px rgba(0,0,0,0.47);
+    box-shadow: 4px 4px 10px 4px rgba(201,201,201,0.70);
+    height: 100%;
+    width: 100%;
+    border-radius: 10px;
+    border: none;
+}
+.home_controldevice{
+    width: 100%;
+    display: flex;
+}
+.title{
+    font-size: 25px;
+    font-weight: 500;
+    color: #757575;
+    padding-bottom: 20px;
+}
+.home{
+    padding-bottom: 20px;
+}
+.devicename{
+    font-size: 25px;
+}
+.controlbody{
+    padding-top: 10px;
+    padding-left: 10px;
+}
+.devicestatus{
+    font-size: 20px;
+}
+.titlecontrol{
+    font-size: 20px;
+}
+.hommeContainer{
+    margin: 0px;
+    padding: 0px;
+}
+.EditDevice__btn{
+    font-size: 20px;
+    text-align: center;;
+}

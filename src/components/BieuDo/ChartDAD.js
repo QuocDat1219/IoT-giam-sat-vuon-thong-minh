@@ -10,8 +10,34 @@ import {
   CChartPolarArea,
   CChartRadar,
 } from '@coreui/react-chartjs'
+import axios from "axios";
 
-const ChartDAD = (props) => {
+const ChartDAD = () => {
+  const [chartArrayDoAmDat,setChartArrayDoAmDat] = useState();
+  const [chartArrayThoiGian, setChartArrayThoiGian] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      await axios
+        .get(
+          "https://api-vuon-thong-minh.onrender.com/datas/datadetail/lapthuan44@gmail.com"
+        )
+        .then(async (result) => {
+          await setChartArrayDoAmDat(
+            result.data.data.mhlog
+            .map((item) => item.mh).slice(-7)
+          );
+          await setChartArrayThoiGian(
+            result.data.data.mhlog
+            .map((item) => item.createAt).slice(-7)
+          );
+        })
+        .catch((err) => {});
+    };
+    fetchData();
+    const intervalId = setInterval(fetchData, 5000);
+    return () => clearInterval(intervalId);
+  }, []);
   return (
     <CCol xs={6}>
     <CCard className="mb-4">
@@ -19,7 +45,7 @@ const ChartDAD = (props) => {
       <CCardBody>
         <CChartLine
           data={{
-            labels: ['5 minute', '10 minute', '15 minute', '20 minute', '25 minute', '30 minute', '35 minute'],
+            labels: chartArrayThoiGian,
             datasets: [
               {
                 label: 'Độ ẩm đất',
@@ -27,7 +53,7 @@ const ChartDAD = (props) => {
                 borderColor: 'RGBA( 139, 0, 0, 1 )',
                 pointBackgroundColor: 'RGBA( 139, 0, 0, 1 )',
                 pointBorderColor: '#fff',
-                data: [0, 5, 30, 25.9, 36.7, 80, 60],
+                data: chartArrayDoAmDat,
               },
             ],
           }}
