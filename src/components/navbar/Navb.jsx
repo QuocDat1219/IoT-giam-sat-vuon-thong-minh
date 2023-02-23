@@ -1,6 +1,5 @@
 import "./Navb.scss";
 import NotificationsActiveIcon from "@mui/icons-material/NotificationsActive";
-import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import React, { useEffect, useState } from "react"; //react hooks
 import { FaUsb } from "react-icons/fa";
@@ -8,7 +7,6 @@ import AppHeaderDropdown from "../header/AppHeaderDropdown";
 import Form from "react-bootstrap/Form";
 import "./Button.css";
 const Navb = () => {
-  const userName = window.localStorage.getItem("Namedateils");
   const [conn, setConn] = useState("");
   const userEmail = window.localStorage.getItem("Emaildetails");
   const [showModel, setshowModel] = useState(false);
@@ -50,6 +48,13 @@ const Navb = () => {
     return () => clearTimeout(intervalId);
   }, []);
 
+  const handleResetBtn = async () => {
+      await axios
+      .post("",{
+      
+      })
+      .then()
+  };
   return (
     <div className="nb">
       <div className="wrapper">
@@ -104,16 +109,6 @@ const Navb = () => {
             <NotificationsActiveIcon className="icon" />
             <div className="counter">1</div>
           </div>
-          {/* <Link to="/user">
-            <div className="item">
-              <span className="username">{userName}</span>
-              <img
-                src="https://www.iriset.in/tms/uploads/profile/profile.png"
-                alt="user"
-                className="avatar"
-              />
-            </div>
-          </Link> */}
           <div className="item">
             <AppHeaderDropdown />
           </div>
@@ -147,8 +142,9 @@ const Navb = () => {
                     <button
                       className="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                       type="submit"
+                      onClick={handleResetBtn}
                     >
-                      Cập nhật
+                      Reset
                     </button>
                   </div>
                 </Form>

@@ -6,7 +6,6 @@ import React, { useEffect, useState } from "react";
 import PacmanLoader from "react-spinners/PacmanLoader";
 
 const DOAM = (props) => {
-console.log(props.doam);
   return props.doam == null ? (
     <>
       <div className="ND flex justify-center items-center">
