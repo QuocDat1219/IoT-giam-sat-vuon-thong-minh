@@ -126,13 +126,11 @@ const List = () => {
                             >
                               Đang hoạt động
                             </strong>
-                          ) : item.status == "0" ? (
+                          ) : (
                             <strong className="active" style={{ color: "red" }}>
                               Không hoạt động
                             </strong>
-                          ) : (<strong className="active" style={{ color: "red" }}>
-                              Không phát hiện thiết bị
-                        </strong>)}
+                          )}
                         </TableCell>
                         <TableCell className="tableCell">
                           <Button

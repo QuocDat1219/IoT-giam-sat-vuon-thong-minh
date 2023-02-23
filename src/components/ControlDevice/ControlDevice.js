@@ -18,19 +18,27 @@ import Footer from "../LandingPage/UI/Footer";
 const ControlDevice = () => {
   const [dieukhien, setDieukhien] = useState([]);
   const [loading, setLoading] = useState(false);
+  const userEmail = window.localStorage.getItem("Emaildetails");
+  let urls =
+    "https://api-vuonthongminh.vercel.app/datas/datadetail/" + userEmail;
   const updateOn = async (key, status, name) => {
+    console.log(status); 
+    console.log(name);
+    if(status === 0){
+      status += 1;
+    }else{
+      status -= 1;
+    }
     await axios
-      .put(
-        "https://iotsmarthome-5d008-default-rtdb.firebaseio.com/iotdata/control/" +
-          key +
-          ".json",
-        {
+      .post(
+        "https://api-vuonthongminh.vercel.app/datas/updatecontrol",{
+          email: userEmail,
+          status: status,
           name: name,
-          status: -status,
-        }
+        }        
       )
       .then((result) => {
-        toast({ status });
+        console.log(result);
         if (status == "1") {
           toast("Đã mở");
         } else toast("Đã tắt");
@@ -45,10 +53,11 @@ const ControlDevice = () => {
       const getData = async () => {
         await axios
           .get(
-            "https://iotsmarthome-5d008-default-rtdb.firebaseio.com/iotdata.json"
+            urls
           )
           .then(async (result) => {
-            await setDieukhien(result.data.control);
+            await setDieukhien(result.data.data.control);
+            console.log(dieukhien);
             setLoading(true);
           })
           .catch((err) => {
@@ -97,7 +106,6 @@ const ControlDevice = () => {
                             }
                             onClick={() => {
                               updateOn(key, data.status, data.name);
-                              // alert(key);
                             }}
                           >
                             {data.status === 1 ? "Bật" : "Tắt"}
