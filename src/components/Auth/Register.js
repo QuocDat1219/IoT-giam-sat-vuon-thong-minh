@@ -110,7 +110,7 @@ const Register = () => {
     <div
       className="flex h-screen w-full items-center justify-center bg-gray-900 bg-cover bg-no-repeat"
       style={{
-        background: "linear-gradient(90deg,rgb(36, 192, 60) 10%,rgb(63, 240, 78) 85%)"
+        background: "linear-gradient(90deg,rgb(82, 242, 107) 10%,rgb(121, 242, 140) 85%)"
       }}
     >
       <ToastContainer />
