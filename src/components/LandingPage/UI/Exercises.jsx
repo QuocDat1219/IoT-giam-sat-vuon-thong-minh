@@ -12,7 +12,7 @@ const Exercises = () => {
             Concept <span className="highlights">IoT Green House</span>
           </h2>
           <p>
-            Green House là hệ thống trồng trọt hiện đại trên đồng ruộng ứng dụng công nghệ Internet Of Things.
+            Green House là hệ thống trồng trọt hiện đại trong nhà kính ứng dụng công nghệ Internet Of Things.
           </p>
         </div>
         <div className="exercise__wrapper">

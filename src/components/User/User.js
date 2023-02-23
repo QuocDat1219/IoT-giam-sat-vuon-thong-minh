@@ -7,7 +7,7 @@ import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import Footer from "../LandingPage/UI/Footer"
 var checkPassword =
   /^(?=.*[a-z])(?=.*[0-9])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
@@ -25,7 +25,7 @@ const UserPro = (props) => {
 
   useEffect(() => {
 
-    axios.post('https://api-vuon-thong-minh.onrender.com/users/user-data', {
+    axios.post('https://api-vuonthongminh.vercel.app/users/user-data', {
       token: window.localStorage.getItem("token"),
     })
       .then((data) => {
@@ -49,7 +49,7 @@ const UserPro = (props) => {
     } else {
       toast("Đang xử lý...");
       await axios
-        .post("https://api-vuon-thong-minh.onrender.com/users/changepassword", {
+        .post("https://api-vuonthongminh.vercel.app/users/changepassword", {
           tokenold: window.localStorage.getItem("token"),
           newpassword: newPassword,
           oldpassword: oldPassword
@@ -81,7 +81,7 @@ const UserPro = (props) => {
     }else{
       toast("Đang xử lý...");
       await axios
-        .post("https://api-vuon-thong-minh.onrender.com/users/edituser", {
+        .post("https://api-vuonthongminh.vercel.app/users/edituser", {
           token: window.localStorage.getItem("token"),
           lname: lnamees,
           fname: fnamees
@@ -108,21 +108,6 @@ const UserPro = (props) => {
         <div className="homeContainer">
           <Navb />
           <div>
-            <h1
-              className="name"
-              style={{
-                paddingLeft: "30px",
-                fontSize: "40px",
-                paddingTop: "20px",
-                fontFamily: "Roboto",
-                color: "#a0c279",
-                paddingBottom: "20px",
-                fontFamily: "Florence, cursive",
-              }}
-            >
-              {" "}
-              Thông tin cá nhân
-            </h1>
             <div className="card-container" style={{ textAlign: "center" }}>
               <div className="headerUser">
                 <img
@@ -130,8 +115,8 @@ const UserPro = (props) => {
                   src={avatar}
                   alt={data.lname}
                   style={{
-                    height: "300px",
-                    width: "300px",
+                    height: "200px",
+                    width: "200px",
                     marginTop: "10px",
                     marginBottom: "10px",
                   }}
@@ -166,8 +151,6 @@ const UserPro = (props) => {
               </div>
             </div>
             <form onSubmit={handleClickSave}>
-
-
               <div style={{ width: "100%", display: "flex", paddingTop: "30px" }}>
                 <div
                   style={{
@@ -188,7 +171,7 @@ const UserPro = (props) => {
                       fontSize: "30px",
                       paddingLeft: "150px",
                       paddingTop: "10px",
-                      color: "#a0c279",
+                      color: "#368f23",
                     }}
                   >
                     Sửa thông tin
@@ -231,9 +214,10 @@ const UserPro = (props) => {
                   <button
                     //  onClick={handleClickSave}
                     style={{
+                      color: "white",
                       width: "100px",
                       height: "50px",
-                      backgroundColor: "#a0c279",
+                      backgroundColor: "#368f23",
                       marginLeft: "202px",
                       marginTop: " 20px",
                       borderRadius: "10px",
@@ -282,7 +266,6 @@ const UserPro = (props) => {
                               borderRadius: "15px",
                               height: "45px",
                               width: "400px",
-
                               boxShadow: "rgb(187 203 205) 0px 2px 18px",
                             }}
                           />
@@ -356,6 +339,9 @@ const UserPro = (props) => {
                 <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
               </>
             ) : null}
+          </div>
+          <div style={{paddingTop:"15px"}}>
+          <Footer />
           </div>
         </div>
       </Sidebar>

@@ -19,10 +19,10 @@ function LandingPage() {
       <Exercises />
       <Start />
       <div style={{ display: "flex" }}>
-        <div>
+        <div style={{ margin: "auto" }}>
           <Testimonials />
         </div>
-        <div style={{marginLeft:"150px"}}>
+        <div style={{ margin: "auto"}}>
           <SendEmail />
         </div>
       </div>

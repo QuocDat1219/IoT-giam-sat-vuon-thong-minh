@@ -14,9 +14,15 @@ class ND extends React.Component {
     };
   }
   render() {
-    return this.props.nhietdo ? (
+    return this.props.nhietdo == null ? (
       <>
-        <div className="ND">
+       <div className="ND flex justify-center items-center">
+          <PacmanLoader color="#f44336" />
+        </div> 
+      </>
+    ) : (
+      <>
+       <div className="ND">
           <div className="top">
             <h1 className="title">
               Nhiệt độ không khí:{" "}
@@ -32,12 +38,6 @@ class ND extends React.Component {
               <Temp className="tm" value={this.props.nhietdo} />
             </div>
           </div>
-        </div>
-      </>
-    ) : (
-      <>
-        <div className="ND flex justify-center items-center">
-          <PacmanLoader color="#f44336" />
         </div>
       </>
     );

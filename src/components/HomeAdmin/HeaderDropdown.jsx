@@ -1,7 +1,9 @@
 import React from "react";
 import {
   CAvatar,
+  CBadge,
   CDropdown,
+  CDropdownDivider,
   CDropdownHeader,
   CDropdownItem,
   CDropdownMenu,
@@ -11,7 +13,7 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { ToastContainer, toast } from "react-toastify";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { Link, Navigate } from "react-router-dom";
-const AppHeaderDropdown = () => {
+const HeaderDropdown = () => {
   const Logout = async () => {
     {
       toast("Đăng xuất thành công ");
@@ -40,13 +42,8 @@ const AppHeaderDropdown = () => {
       </CDropdownToggle>
       <CDropdownMenu className="pt-0" placement="bottom-end">
         <CDropdownHeader className="bg-gray-200 fw-semibold py-2">
-          Account
+          Setting
         </CDropdownHeader>
-        <Link to="/user">
-          <CDropdownItem>
-            <AccountCircleIcon /> Quản lý tài khoản
-          </CDropdownItem>
-        </Link>
         <CDropdownItem onClick={Logout}>
           <LogoutIcon /> Đăng xuất
         </CDropdownItem>
@@ -54,4 +51,4 @@ const AppHeaderDropdown = () => {
     </CDropdown>
   );
 };
-export default AppHeaderDropdown;
+export default HeaderDropdown;
