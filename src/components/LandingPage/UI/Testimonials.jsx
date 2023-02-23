@@ -15,7 +15,7 @@ import tuananh from "../../images/tuananh.jpg";
 export default function Testimonials() {
   return (
     <>
-      <section>
+      <section id="About">
         <div className="container sliders" style={{ marginLeft: "40%" }}>
           <h2 className="section__title">About Us</h2>
           <Swiper

@@ -51,26 +51,42 @@ const Navb = () => {
   return (
     <div className="nb">
       <div className="wrapper">
-        <div className="connect">
+        <div className="connect" style={{display:"flex"}}>
           <div
             style={{ display: "flex", paddingLeft: "9px", textAlign: "left" }}
           >
             <FaUsb style={{ fontSize: "25px" }} />
             {conn == "connect" ? (
               <strong
-                style={{ fontSize: "16px", color: "green", paddingLeft: "5px" }}
+                style={{
+                  fontSize: "16px",
+                  color: "green",
+                  paddingLeft: "5px",
+                  paddingTop: "3px",
+                }}
               >
                 {" "}
                 Connected{" "}
               </strong>
             ) : (
-              <strong style={{ fontSize: "16px", color: "red", paddingLeft: "5px" }}>
+              <strong
+                style={{
+                  fontSize: "16px",
+                  color: "red",
+                  paddingLeft: "5px",
+                  paddingTop: "3px",
+                }}
+              >
                 {" "}
                 Disconnect{" "}
               </strong>
             )}
           </div>
+          <div className="btnRS" style={{marginLeft:"30px",paddingTop:"5px"}}>
+            <button style={{fontSize:"15px"}} type="submit">Reset</button>
+          </div>
         </div>
+
         <div className="items">
           <div className="item">
             <NotificationsActiveIcon className="icon" />

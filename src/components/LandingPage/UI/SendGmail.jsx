@@ -45,7 +45,7 @@ export const SendEmail = () => {
   };
 
   return (
-    <div>
+    <div id="send">
       <StyledContactForm style={{ marginRight: "400px" }}>
         <div className="formfb">
           <form ref={form} onSubmit={sendEmail}>
