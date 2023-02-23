@@ -31,7 +31,7 @@ const List = () => {
   const [selected, setSelected] = useState(options[0].value);
 
   const urls =
-    "https://api-vuon-thong-minh.onrender.com/datas/datadetail/" +
+    "https://api-vuonthongminh.vercel.app/datas/datadetail/" +
     window.localStorage.getItem("Emaildetails");
   useEffect(() => {
     const gedataTable = async () => {
@@ -69,7 +69,7 @@ const List = () => {
     const gioKetThuc = moment(endTimeOut, format);
     if(gioBatDau.isBefore(gioKetThuc)){
       await axios.post(
-        "https://api-vuon-thong-minh.onrender.com/datas/updatesensor",{
+        "https://api-vuonthongminh.vercel.app/datas/updatesensor",{
           name: dataItem.name,
           timeword: workTime,
           timeout: endTimeOut,
@@ -126,11 +126,13 @@ const List = () => {
                             >
                               Đang hoạt động
                             </strong>
-                          ) : (
+                          ) : item.status == "0" ? (
                             <strong className="active" style={{ color: "red" }}>
                               Không hoạt động
                             </strong>
-                          )}
+                          ) : (<strong className="active" style={{ color: "red" }}>
+                              Không phát hiện thiết bị
+                        </strong>)}
                         </TableCell>
                         <TableCell className="tableCell">
                           <Button

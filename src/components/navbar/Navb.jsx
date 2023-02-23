@@ -11,7 +11,7 @@ const Navb = () => {
   const userEmail = window.localStorage.getItem("Emaildetails");
 
   let urls =
-    "https://api-vuon-thong-minh.onrender.com/datas/datadetail/" + userEmail;
+    "https://api-vuonthongminh.vercel.app/datas/datadetail/" + userEmail;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -32,7 +32,7 @@ const Navb = () => {
   useEffect(() => {
     const updatedata = async () => {
       await axios
-        .post("https://api-vuon-thong-minh.onrender.com/datas/updatedht", {
+        .post("https://api-vuonthongminh.vercel.app/datas/updatedht", {
           email: userEmail,
           connect: "disconect",
         })

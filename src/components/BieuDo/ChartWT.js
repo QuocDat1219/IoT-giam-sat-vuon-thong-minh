@@ -11,7 +11,7 @@ const ChartWT = () => {
     const fetchData = async () => {
       await axios
         .get(
-          "https://api-vuon-thong-minh.onrender.com/datas/datadetail/lapthuan44@gmail.com"
+          "https://api-vuonthongminh.vercel.app/datas/datadetail/lapthuan44@gmail.com"
         )
         .then(async (result) => {
           await setChartArrayUltra(
