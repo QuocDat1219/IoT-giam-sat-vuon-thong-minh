@@ -66,40 +66,68 @@ const Register = () => {
   };
   const createData = async () => {
     await axios.post("https://api-vuonthongminh.vercel.app/datas/createdata", {
-      email: window.localStorage.getItem("Emaildetails"),
-      nhietdo: 0,
-      doam: 0,
-      mhsensor: 0,
-      ultrasonic: 0,
+      email: email,
+      nhietdo: "0",
+      doam: "0",
+      mhsensor: "0",
+      ultrasonic: "0",
       connect: "disconnect",
-      control: [],
+      reset: "0",
+      control: [
+        {
+          name: "Control 1",
+          status: 0,
+          digital: "D4"
+        },
+        {
+          name: "Control 2",
+          status: 0,
+          digital: "D7"
+        },
+        {
+          name: "Control 3",
+          status: 0,
+          digital: "D8"
+        }
+      ],
       sensor: [
         {
-          name: "DHT",
+          name: "Nhiệt độ",
           status: "0",
-          timeword: "15:00",
-          timeout: "2:00",
+          timeword: "6:00",
+          timeout: "15:00",
           nofi: "Email",
-          limit : 0,
+          limit: 0,
+        },
+        {
+          name: "Độ ẩm",
+          status: "0",
+          timeword: "6:00",
+          timeout: "15:00",
+          nofi: "Email",
+          limit: 0,
         },
         {
           name: "Ultrasonic",
           status: "0",
-          timeword: "15:00",
-          timeout: "2:00",
+          timeword: "6:00",
+          timeout: "15:00",
           nofi: "Email",
-          limit : 0,
+          limit: 0,
         },
         {
           name: "MH",
           status: "0",
-          timeword: "15:00",
-          timeout: "2:00",
+          timeword: "6:00",
+          timeout: "15:00",
           nofi: "Email",
-          limit : 0,
+          limit: 0,
         }
+
       ],
-     
+      dhtlog: [],
+      mhlog: [],
+      ultralog: [],
     })
       .then((data) => {
         console.log(data);
@@ -117,7 +145,7 @@ const Register = () => {
       {/* rounded-xl bg-gray-800 bg-opacity-50 px-16 py-10 shadow-lg backdrop-blur-md max-sm:px-8 */}
       <div
         className="bg-white rounded-xl bg-white-700 bg-opacity-100 px-16 "
-        style={{ backdropFilter: " blur(0px)", boxShadow:"2px 4px 10px 1px rgb(201 201 201 / 70%)" }}
+        style={{ backdropFilter: " blur(0px)", boxShadow: "2px 4px 10px 1px rgb(201 201 201 / 70%)" }}
       >
         <div className="text-black">
           <div className="mb-4 flex flex-col items-center">
@@ -133,7 +161,7 @@ const Register = () => {
           <form onSubmit={handleSubmit}>
             <div className="mb-4 text-lg">
               <input
-                  className="rounded-3xl border-none bg-amber-300 bg-opacity-70 px-6 py-2 text-center text-inherit placeholder-gray-900 shadow-lg outline-none backdrop-blur-md"
+                className="rounded-3xl border-none bg-amber-300 bg-opacity-70 px-6 py-2 text-center text-inherit placeholder-gray-900 shadow-lg outline-none backdrop-blur-md"
                 type="text"
                 placeholder="Nhập First Name "
                 onChange={(e) => setFname(e.target.value)}
@@ -141,7 +169,7 @@ const Register = () => {
             </div>
             <div className="mb-4 text-lg">
               <input
-                 className="rounded-3xl border-none bg-amber-300 bg-opacity-70 px-6 py-2 text-center text-inherit placeholder-gray-900 shadow-lg outline-none backdrop-blur-md"
+                className="rounded-3xl border-none bg-amber-300 bg-opacity-70 px-6 py-2 text-center text-inherit placeholder-gray-900 shadow-lg outline-none backdrop-blur-md"
                 type="text"
                 placeholder="Nhập Last Name "
                 onChange={(e) => setLname(e.target.value)}
@@ -149,7 +177,7 @@ const Register = () => {
             </div>
             <div className="mb-4 text-lg">
               <input
-               className="rounded-3xl border-none bg-amber-300 bg-opacity-70 px-6 py-2 text-center text-inherit placeholder-gray-900 shadow-lg outline-none backdrop-blur-md"
+                className="rounded-3xl border-none bg-amber-300 bg-opacity-70 px-6 py-2 text-center text-inherit placeholder-gray-900 shadow-lg outline-none backdrop-blur-md"
                 type="email"
                 placeholder="Nhập email"
                 onChange={(e) => setEmail(e.target.value)}
@@ -158,7 +186,7 @@ const Register = () => {
 
             <div className="mb-4 text-lg">
               <input
-               className="rounded-3xl border-none bg-amber-300 bg-opacity-70 px-6 py-2 text-center text-inherit placeholder-gray-900 shadow-lg outline-none backdrop-blur-md"
+                className="rounded-3xl border-none bg-amber-300 bg-opacity-70 px-6 py-2 text-center text-inherit placeholder-gray-900 shadow-lg outline-none backdrop-blur-md"
                 type="Password"
                 placeholder="Nhập password"
                 onChange={(e) => setPassword(e.target.value)}
@@ -166,7 +194,7 @@ const Register = () => {
             </div>
             <div className="mb-4 text-lg">
               <input
-                 className="rounded-3xl border-none bg-amber-300 bg-opacity-70 px-6 py-2 text-center text-inherit placeholder-gray-900 shadow-lg outline-none backdrop-blur-md"
+                className="rounded-3xl border-none bg-amber-300 bg-opacity-70 px-6 py-2 text-center text-inherit placeholder-gray-900 shadow-lg outline-none backdrop-blur-md"
                 type="Password"
                 placeholder="Nhập lại password"
                 onChange={(e) => setConfirmPassword(e.target.value)}
