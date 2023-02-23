@@ -13,14 +13,10 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { Button } from "@mui/material";
 import { ToastContainer, toast } from "react-toastify";
-import { padding } from "@mui/system";
-import PuffLoader from "react-spinners/PuffLoader";
 import Footer from "../LandingPage/UI/Footer";
 
 const ControlDevice = () => {
   const [dieukhien, setDieukhien] = useState([]);
-  const [controlDevice, setControlDevice] = useState([]);
-  const [devicename, setDeviceName] = useState("");
   const [loading, setLoading] = useState(false);
   const updateOn = async (key, status, name) => {
     await axios
@@ -62,7 +58,7 @@ const ControlDevice = () => {
       getData();
     }, 1000);
   }, []);
-  return loading ? (
+  return (
     <div className="home">
       <Sidebar>
         <div className="homeContainer">
@@ -118,10 +114,6 @@ const ControlDevice = () => {
           </div>
         </div>
       </Sidebar>
-    </div>
-  ) : (
-    <div className="fixLoading">
-      <PuffLoader className="loading" color="#36d7b7" size={80} />
     </div>
   );
 };

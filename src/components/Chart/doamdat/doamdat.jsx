@@ -9,7 +9,13 @@ import React, { useEffect, useState } from "react";
 import PacmanLoader from "react-spinners/PacmanLoader";
 
 const doamdat = (props) => {
-  return props.mhsensor ? (
+  return props.mhsensor == null ? (
+    <>
+      <div className="ND flex justify-center items-center">
+        <PacmanLoader color="#732817" />
+      </div>
+    </>
+  ) : (
     <>
       <div className="doamdat">
         <div className="top">
@@ -35,12 +41,6 @@ const doamdat = (props) => {
             />
           </div>
         </div>
-      </div>
-    </>
-  ) : (
-    <>
-      <div className="ND flex justify-center items-center">
-        <PacmanLoader color="#732817" />
       </div>
     </>
   );

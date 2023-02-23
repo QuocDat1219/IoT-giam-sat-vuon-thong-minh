@@ -1,23 +1,25 @@
-import React, { useEffect, useState } from "react";
-import { Link, useNavigate, Routes, Route } from "react-router-dom";
+import React, {useState } from "react";
+import { Link} from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Background from "../images/login.jpg";
 import icon from "../images/IOT.png";
+import PuffLoader from "react-spinners/PuffLoader";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  
+  const [isLoading, setIsLoading] = useState(false);
+
   function handleSubmit(e) {
     e.preventDefault();
-    console.log(email, password);
+
+    setIsLoading(true);
+
     if (email == "" || password == "") {
       toast.warning("Vui lòng nhập đủ thông tin");
+      setIsLoading(false);
     } else {
       toast("Đang xử lý");
-
       document.getElementById("submit").disabled = true;
-
       fetch("https://api-vuon-thong-minh.onrender.com/users/login-user", {
         method: "POST",
         headers: {
@@ -36,11 +38,11 @@ const Login = () => {
           if (data.status == "ok") {
             toast.success("Đăng nhập thành công");
             window.localStorage.setItem("token", data.data);
-
+            
             loginRequest();
           } else {
-            toast.error("Sai email hoặc mật khẩu! ");
-            document.getElementById("submit").disabled = false;
+            setIsLoading(false);
+            toast.error("Sai email hoặc mật khẩu! ");    
           }
           
         });
@@ -73,18 +75,20 @@ const Login = () => {
             window.localStorage.setItem("dtUser", JSON.stringify(data.data));
 
             if (data.data.userType == "Admin") {
+              setIsLoading(false);
               window.localStorage.setItem("isadmin", "true");
               window.location.href = "/adminhome";
             } else {
+              setIsLoading(false);
               window.localStorage.setItem("isadmin", "false");
               window.location.href = "/home";
             }
 
             if (data.data == "token expired") {
+              setIsLoading(false);
               alert("Token expired login again");
               window.localStorage.clear();
-              window.location.href = "/login";
-              
+              window.location.href = "/login";             
             }
           });
       };
@@ -141,10 +145,15 @@ const Login = () => {
             <div className="mt-8 mb-4 flex justify-center text-lg text-black">
               <button
                 onClick={handleSubmit}
+                disabled={isLoading}
                 id="submit"
                 className="rounded-3xl bg-amber-300 bg-opacity-70 px-10 py-2 text-black shadow-xl backdrop-blur-md transition-colors duration-300 hover:bg-yellow-600"
               >
-                Login
+                {isLoading ? 
+                  <div className="flex justify-center items-center">
+                  <PuffLoader color="#4cd137" size={30}/>
+               </div>
+                : 'Login'}
               </button>
             </div>
             <Link to={"/Register"}>

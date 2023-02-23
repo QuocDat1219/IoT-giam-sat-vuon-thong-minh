@@ -2,18 +2,20 @@ import "./doam.scss";
 import "react-circular-progressbar/dist/styles.css";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { CircularProgressbar } from "react-circular-progressbar";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import { color } from "@mui/system";
 import React, { useEffect, useState } from "react";
-import { getDatabase, ref, child, get } from "firebase/database";
 import PacmanLoader from "react-spinners/PacmanLoader";
 
 const DOAM = (props) => {
-
-  return props.doam ? (
+console.log(props.doam);
+  return props.doam == null ? (
     <>
-      <div className="DOAM">
+      <div className="ND flex justify-center items-center">
+              <PacmanLoader color="#4cd137" />
+      </div>
+    </>
+  ) :  (
+    <>
+       <div className="DOAM">
         <div className="top">
           <h1 className="title">
             Độ ẩm không khí:{" "}
@@ -37,12 +39,6 @@ const DOAM = (props) => {
             />
           </div>
         </div>
-      </div>
-    </>
-  ) : (
-    <>
-      <div className="ND flex justify-center items-center">
-        <PacmanLoader color="#4cd137" />
       </div>
     </>
   );
