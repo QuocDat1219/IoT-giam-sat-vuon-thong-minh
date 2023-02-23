@@ -40,7 +40,7 @@ const ControlDevice = () => {
       .then((result) => {
         console.log(result);
         if (status == "1") {
-          toast("Đã mở");
+          toast("Đã bật");
         } else toast("Đã tắt");
       })
       .catch((err) => {
@@ -86,15 +86,15 @@ const ControlDevice = () => {
                 {dieukhien
                   ? dieukhien.map((data, key) => (
                       <TableRow key={key}>
-                        <TableCell className="tableCell">
+                        <TableCell className="tablleBody">
                           <div className="cellWrapper">{key}</div>
                         </TableCell>
-                        <TableCell className="tableCell">
+                        <TableCell className="tablleBody">
                           <div className="cellWrapper">
                             {data ? data.name : "Loading..."}
                           </div>
                         </TableCell>
-                        <TableCell className="tableCell">
+                        <TableCell className="tablleBody">
                           <span className={`status ${data ? data.status : ""}`}>
                             {data.status === 1 ? "Tắt" : "Bật"}
                           </span>
