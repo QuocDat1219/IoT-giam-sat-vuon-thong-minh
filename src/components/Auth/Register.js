@@ -66,7 +66,7 @@ const Register = () => {
   };
   const createData = async () => {
     await axios.post("https://api-vuonthongminh.vercel.app/datas/createdata", {
-      email: window.localStorage.getItem("Emaildetails"),
+      email: email,
       nhietdo: "0",
       doam: "0",
       mhsensor: "0",
