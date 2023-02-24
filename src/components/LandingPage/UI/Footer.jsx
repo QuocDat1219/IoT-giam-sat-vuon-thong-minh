@@ -49,6 +49,7 @@ const Footer = () => {
               <li>
                 <a href="#">Dũng</a>
                 <a href="">Dung moi moi </a>
+                <a href="">Đạt moi moi </a>
               </li>
             </ul>
           </div>
