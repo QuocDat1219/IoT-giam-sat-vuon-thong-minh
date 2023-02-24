@@ -85,7 +85,7 @@ $borderW: 2px;
             top: $borderW;
             width: 100% / $numOfBlobs;
             height: 100%;
-            background: $cyan;
+            background: #07bc0c;
             border-radius: 100%;
             transform: translate3d(0,150%,0) scale(1.7);
             transition: transform 0.45s;
