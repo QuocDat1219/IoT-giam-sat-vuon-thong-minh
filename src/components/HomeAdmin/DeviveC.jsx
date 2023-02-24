@@ -7,9 +7,37 @@ import {
   Typography,
 } from "@mui/material";
 import UsbIcon from "@mui/icons-material/Usb";
+import { useState,useEffect } from "react";
+import axios from "axios";
 
-export const DeviceC = (props) => (
-  <div style={{width:"100%"}}>
+export const DeviceC = (props) => {
+  const [checkConnect, setCheckConnect] = useState("");
+  useEffect(() => {
+    const fetchData = async () => {
+      await axios
+        .get("https://api-vuonthongminh.vercel.app/datas/getalldata")
+        .then((result) => {
+          // const newdata = JSON.parse(result.data);
+          const count = result.data.data.reduce((total, item) => {
+            if (item.connect === 'connect') {
+              return total + 1;
+            }
+            return total;
+          }, 0);
+          setCheckConnect(count);
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    };
+
+    fetchData();
+    const intervalId = setInterval(fetchData, 5000);
+    return () => clearInterval(intervalId);
+  }, []);
+  
+  return(
+    <div style={{width:"100%"}}>
     <Card {...props}>
       <CardContent>
         <Grid container spacing={3} sx={{ justifyContent: "space-between" }}>
@@ -18,7 +46,7 @@ export const DeviceC = (props) => (
               Thiết bị đang kết nối
             </Typography>
             <Typography color="textPrimary" variant="h4">
-              2
+              {checkConnect}
             </Typography>
           </Grid>
           <Grid item>
@@ -43,5 +71,5 @@ export const DeviceC = (props) => (
       </CardContent>
     </Card>
   </div>
-);
+  )}
 export default DeviceC;
