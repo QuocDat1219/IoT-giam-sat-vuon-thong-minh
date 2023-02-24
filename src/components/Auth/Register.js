@@ -205,7 +205,17 @@ const Register = () => {
           <ToastContainer />
           <div class="login">
             <div class="container">
-            <img src={icon} alt="logo" width="100px" height="100px" style={{position:"absolute", marginLeft:"500px", marginTop:"-100px"}}></img>
+              <img
+                src={icon}
+                alt="logo"
+                width="100px"
+                height="100px"
+                style={{
+                  position: "absolute",
+                  marginLeft: "500px",
+                  marginTop: "-100px",
+                }}
+              ></img>
               <h1>
                 Đăng kí tài khoản
                 <br />

@@ -54,7 +54,7 @@
     position: relative;
     height: 100vh;
     width: 1194px;
-    background: url("https://wallpaperaccess.com/full/1598458.jpg") no-repeat center center scroll;
+    background: url("../images/1598458.jpg") no-repeat center center scroll;
     background-size: cover;
     float: left;
     -webkit-animation: bgslide 2.3s forwards;
@@ -115,7 +115,7 @@
     font-weight: bolder;
   }
   .login .container .login-form {
-    margin-top: 112px;
+    margin-top: 50px;
   }
   .login .container .login-form form {
     display: -ms-grid;
@@ -256,7 +256,7 @@
     }
     .bg-illustration {
       float: none;
-      background: url("https://i.ibb.co/rwncw7s/bg-mobile.png") center center;
+      background: url("../images/1598458.jpg") center center;
       background-size: cover;
       -webkit-animation: slideIn 0.8s ease-in-out forwards;
               animation: slideIn 0.8s ease-in-out forwards;
