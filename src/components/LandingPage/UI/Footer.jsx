@@ -46,6 +46,9 @@ const Footer = () => {
               <li>
                 <a href="#">Support us</a>
               </li>
+              <li>
+                <a href="#">Dũng</a>
+              </li>
             </ul>
           </div>
         </div>
