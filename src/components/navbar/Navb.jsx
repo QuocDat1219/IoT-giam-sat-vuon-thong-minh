@@ -7,7 +7,6 @@ import AppHeaderDropdown from "../header/AppHeaderDropdown";
 import Form from "react-bootstrap/Form";
 import { toast } from "react-toastify";
 import PuffLoader from "react-spinners/PuffLoader";
-import "./Button.css";
 import "./btnRs.scss";
 import RotateLeftIcon from "@mui/icons-material/RotateLeft";
 const Navb = () => {
@@ -79,14 +78,14 @@ const Navb = () => {
           <div
             style={{ display: "flex", paddingLeft: "9px", textAlign: "left" }}
           >
-            <FaUsb style={{ fontSize: "25px" }} />
+            <FaUsb style={{ fontSize: "30px", paddingTop: "12px" }} />
             {conn == "connect" ? (
               <strong
                 style={{
                   fontSize: "16px",
                   color: "green",
                   paddingLeft: "5px",
-                  paddingTop: "3px",
+                  paddingTop: "12px",
                 }}
               >
                 {" "}
@@ -98,7 +97,7 @@ const Navb = () => {
                   fontSize: "16px",
                   color: "red",
                   paddingLeft: "5px",
-                  paddingTop: "3px",
+                  paddingTop: "12px",
                 }}
               >
                 {" "}
@@ -106,13 +105,11 @@ const Navb = () => {
               </strong>
             )}
           </div>
-          <div
-            className="btnRS"
-            style={{ marginLeft: "30px", }}
-          >
+          <div className="btnRS" style={{ marginLeft: "30px" }}>
             <button
               style={{ fontSize: "15px" }}
               type="submit"
+              className="btn-85"
               onClick={() => setshowModel(true)}
             >
               <RotateLeftIcon />
@@ -122,10 +119,10 @@ const Navb = () => {
         </div>
 
         <div className="items">
-          <div className="item">
+          {/* <div className="item">
             <NotificationsActiveIcon className="icon" />
             <div className="counter">1</div>
-          </div>
+          </div> */}
           <div className="item">
             <AppHeaderDropdown />
           </div>
@@ -145,6 +142,8 @@ const Navb = () => {
                   <p style={{ fontSize: "20px" }}>
                     Bạn có muốn reset thiết bị không ?
                   </p>
+                  <br></br>
+                  <br></br>
                   <div className="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
                     <button
                       className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
