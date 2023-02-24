@@ -5,6 +5,7 @@ import React, { useEffect, useState } from "react"; //react hooks
 import { FaUsb } from "react-icons/fa";
 import AppHeaderDropdown from "../header/AppHeaderDropdown";
 import Form from "react-bootstrap/Form";
+import {  toast } from "react-toastify";
 import "./Button.css";
 const Navb = () => {
   const [conn, setConn] = useState("");
@@ -37,7 +38,7 @@ const Navb = () => {
           connect: "disconect",
         })
         .then(function (response) {
-          // console.log(response);
+          console.log(response);
         })
         .catch(function (error) {
           console.log(error);
@@ -48,13 +49,23 @@ const Navb = () => {
     return () => clearTimeout(intervalId);
   }, []);
 
+  //Handle reset device in web
   const handleResetBtn = async () => {
       await axios
-      .post("",{
-      
+      .post("https://api-vuonthongminh.vercel.app/datas/reset",{
+          reset: "1",
+          email: userEmail
       })
-      .then()
-  };
+      .then(function (response) {
+        console.log(response);
+        if(response.data.acknowledged == true) {
+          toast.success("Reset thành công");
+        }
+      })
+      .catch(function (error) {
+        toast.success("Reset không thành công");
+      })
+    }
   return (
     <div className="nb">
       <div className="wrapper">
@@ -124,13 +135,10 @@ const Navb = () => {
                     THÔNG BÁO
                   </h3>
                 </div>
-                <Form style={{ width: "500px", padding: "20px" }}>
-                  <Form.Group className="mb-3" controlId="formBasicAction">
-                    <Form.Label style={{ fontSize: "20px" }}>
+                <div style={{ width: "500px", padding: "20px" }}>
+                    <p style={{ fontSize: "20px" }}>
                       Bạn có muốn reset thiết bị không ?
-                      <Form.Label> </Form.Label>
-                    </Form.Label>
-                  </Form.Group>
+                    </p>
                   <div className="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
                     <button
                       className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
@@ -147,7 +155,7 @@ const Navb = () => {
                       Reset
                     </button>
                   </div>
-                </Form>
+                </div>
               </div>
             </div>
           </div>
