@@ -136,7 +136,7 @@
     background: -o-linear-gradient(110deg, #349e30 0%, #39f30b 100%);
     background: linear-gradient(-20deg, #349e30 0%, #39f30b 100%);
     border: none;
-    margin-top: 124px;
+    margin-top: 80px;
     margin-bottom: 20px;
     width: 241px;
     height: 58px;
@@ -185,9 +185,9 @@
     margin-left: 15px;
   }
   .login .container .forget-pass {
-    position: absolute;
+    position: relative;
     right: 0;
-    margin-top: 189px;
+    margin-top: 20px;
   }
   .login .container .forget-pass a {
     font-size: 16px;

@@ -5,12 +5,16 @@ import React, { useEffect, useState } from "react"; //react hooks
 import { FaUsb } from "react-icons/fa";
 import AppHeaderDropdown from "../header/AppHeaderDropdown";
 import Form from "react-bootstrap/Form";
-import {  toast } from "react-toastify";
+import { toast } from "react-toastify";
+import PuffLoader from "react-spinners/PuffLoader";
 import "./Button.css";
+import "./btnRs.scss";
+import RotateLeftIcon from "@mui/icons-material/RotateLeft";
 const Navb = () => {
   const [conn, setConn] = useState("");
   const userEmail = window.localStorage.getItem("Emaildetails");
   const [showModel, setshowModel] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   let urls =
     "https://api-vuon-thong-minh.onrender.com/datas/datadetail/" + userEmail;
 
@@ -51,21 +55,23 @@ const Navb = () => {
 
   //Handle reset device in web
   const handleResetBtn = async () => {
-      await axios
-      .post("https://api-vuonthongminh.vercel.app/datas/reset",{
-          reset: "1",
-          email: userEmail
+    setIsLoading(true);
+    await axios
+      .post("https://api-vuonthongminh.vercel.app/datas/reset", {
+        reset: "1",
+        email: userEmail,
       })
       .then(function (response) {
         console.log(response);
-        if(response.data.acknowledged == true) {
+        if (response.data.acknowledged == true) {
           toast.success("Reset thành công");
+          setIsLoading(false);
         }
       })
       .catch(function (error) {
         toast.success("Reset không thành công");
-      })
-    }
+      });
+  };
   return (
     <div className="nb">
       <div className="wrapper">
@@ -102,14 +108,14 @@ const Navb = () => {
           </div>
           <div
             className="btnRS"
-            style={{ marginLeft: "30px", paddingTop: "5px" }}
+            style={{ marginLeft: "30px", }}
           >
             <button
               style={{ fontSize: "15px" }}
               type="submit"
-              className="button"
               onClick={() => setshowModel(true)}
             >
+              <RotateLeftIcon />
               Reset
             </button>
           </div>
@@ -136,9 +142,9 @@ const Navb = () => {
                   </h3>
                 </div>
                 <div style={{ width: "500px", padding: "20px" }}>
-                    <p style={{ fontSize: "20px" }}>
-                      Bạn có muốn reset thiết bị không ?
-                    </p>
+                  <p style={{ fontSize: "20px" }}>
+                    Bạn có muốn reset thiết bị không ?
+                  </p>
                   <div className="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
                     <button
                       className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
@@ -152,7 +158,13 @@ const Navb = () => {
                       type="submit"
                       onClick={handleResetBtn}
                     >
-                      Reset
+                      {isLoading ? (
+                        <div className="flex justify-center items-center">
+                          <PuffLoader color="#f1c40f" size={30} />
+                        </div>
+                      ) : (
+                        "Reset"
+                      )}
                     </button>
                   </div>
                 </div>

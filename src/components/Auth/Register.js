@@ -23,7 +23,6 @@ const Register = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setUserType("");
-
     //Kiểm tra dữ liệu nhập của người dùng
     if (fname == "" || lname == "" || email == "" || password == "") {
       toast("Vui lòng nhập đầy đủ thông tin đăng ký!");
@@ -80,18 +79,18 @@ const Register = () => {
           {
             name: "Control 1",
             status: 0,
-            digital: "D4"
+            digital: "D4",
           },
           {
             name: "Control 2",
             status: 0,
-            digital: "D7"
+            digital: "D7",
           },
           {
             name: "Control 3",
             status: 0,
-            digital: "D8"
-          }
+            digital: "D8",
+          },
         ],
         sensor: [
           {
@@ -123,12 +122,10 @@ const Register = () => {
       .then((data) => {
         console.log(data);
         toast.success("Đăng ký thành công");
-        setTimeout( window.location.href = "/home",2000);
-       
+        setTimeout((window.location.href = "/home"), 2000);
       });
   };
   return (
-    
     <div>
       <div>
         <div className="parent clearfix">
@@ -188,7 +185,7 @@ const Register = () => {
                   />
 
                   <div
-                    class="btn_DK"
+                    class="forget-pass"
                     style={{
                       fontSize: "16px",
                       fontWeight: "normal",
@@ -209,7 +206,7 @@ const Register = () => {
                         <PuffLoader color="#4cd137" size={30} />
                       </div>
                     ) : (
-                      "Đăng kí"
+                      "Đăng ký"
                     )}
                   </button>
                 </form>

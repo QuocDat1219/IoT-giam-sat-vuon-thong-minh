@@ -206,7 +206,9 @@ const Login = () => {
                   onChange={(e) => setPassword(e.target.value)}
                 />
                
-                  <div class="forget-pass">
+                  <div class="forget-pass" style={{
+                    textAlign:"right",
+                  }}>
                   <Link to={"/Register"}>
                     <a href="#">
                       Chưa có tài khoản? <b>Đăng kí tại đây!</b>
@@ -225,7 +227,7 @@ const Login = () => {
                       <PuffLoader color="#4cd137" size={30} />
                     </div>
                   ) : (
-                    "Login"
+                    "Đăng nhập"
                   )}
                 </button>
               </form>
