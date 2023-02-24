@@ -69,13 +69,30 @@ const Register = () => {
   const createData = async () => {
     await axios
       .post("https://api-vuonthongminh.vercel.app/datas/createdata", {
-        email: window.localStorage.getItem("Emaildetails"),
+        email: email,
         nhietdo: 0,
         doam: 0,
         mhsensor: 0,
         ultrasonic: 0,
         connect: "disconnect",
-        control: [],
+        reset: "0",
+        control: [
+          {
+            name: "Control 1",
+            status: 0,
+            digital: "D4"
+          },
+          {
+            name: "Control 2",
+            status: 0,
+            digital: "D7"
+          },
+          {
+            name: "Control 3",
+            status: 0,
+            digital: "D8"
+          }
+        ],
         sensor: [
           {
             name: "DHT",
