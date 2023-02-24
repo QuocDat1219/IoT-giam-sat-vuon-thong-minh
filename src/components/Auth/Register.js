@@ -97,24 +97,24 @@ const Register = () => {
           {
             name: "DHT",
             status: "0",
-            timeword: "15:00",
-            timeout: "2:00",
+            timeword: "6:00",
+            timeout: "15:00",
             nofi: "Email",
             limit: 0,
           },
           {
             name: "Ultrasonic",
             status: "0",
-            timeword: "15:00",
-            timeout: "2:00",
+            timeword: "6:00",
+            timeout: "15:00",
             nofi: "Email",
             limit: 0,
           },
           {
             name: "MH",
             status: "0",
-            timeword: "15:00",
-            timeout: "2:00",
+            timeword: "6:00",
+            timeout: "15:00",
             nofi: "Email",
             limit: 0,
           },
@@ -123,92 +123,11 @@ const Register = () => {
       .then((data) => {
         console.log(data);
         toast.success("Đăng ký thành công");
+        window.location.href("/login");
       });
   };
   return (
-    // <div
-    //   className="flex h-screen w-full items-center justify-center bg-gray-900 bg-cover bg-no-repeat"
-    //   style={{
-    //     background: "linear-gradient(90deg,rgb(82, 242, 107) 10%,rgb(121, 242, 140) 85%)"
-    //   }}
-    // >
-    //   <ToastContainer />
-    //   {/* rounded-xl bg-gray-800 bg-opacity-50 px-16 py-10 shadow-lg backdrop-blur-md max-sm:px-8 */}
-    //   <div
-    //     className="bg-white rounded-xl bg-white-700 bg-opacity-100 px-16 "
-    //     style={{ backdropFilter: " blur(0px)", boxShadow:"2px 4px 10px 1px rgb(201 201 201 / 70%)" }}
-    //   >
-    //     <div className="text-black">
-    //       <div className="mb-4 flex flex-col items-center">
-    //         <img src={icon} width="100" alt="" />
-    //         <h1
-    //           className="mb-2 text-2xl"
-    //           style={{ fontSize: "30px", fontFamily: "'Saira', sans-serif" }}
-    //         >
-    //           GREEN HOUSE
-    //         </h1>
-    //         <span className="text-black-500">Enter Register Details</span>
-    //       </div>
-    //       <form onSubmit={handleSubmit}>
-    //         <div className="mb-4 text-lg">
-    //           <input
-    //               className="rounded-3xl border-none bg-amber-300 bg-opacity-70 px-6 py-2 text-center text-inherit placeholder-gray-900 shadow-lg outline-none backdrop-blur-md"
-    //             type="text"
-    //             placeholder="Nhập First Name "
-    //             onChange={(e) => setFname(e.target.value)}
-    //           />
-    //         </div>
-    //         <div className="mb-4 text-lg">
-    //           <input
-    //              className="rounded-3xl border-none bg-amber-300 bg-opacity-70 px-6 py-2 text-center text-inherit placeholder-gray-900 shadow-lg outline-none backdrop-blur-md"
-    //             type="text"
-    //             placeholder="Nhập Last Name "
-    //             onChange={(e) => setLname(e.target.value)}
-    //           />
-    //         </div>
-    //         <div className="mb-4 text-lg">
-    //           <input
-    //            className="rounded-3xl border-none bg-amber-300 bg-opacity-70 px-6 py-2 text-center text-inherit placeholder-gray-900 shadow-lg outline-none backdrop-blur-md"
-    //             type="email"
-    //             placeholder="Nhập email"
-    //             onChange={(e) => setEmail(e.target.value)}
-    //           />
-    //         </div>
-
-    //         <div className="mb-4 text-lg">
-    //           <input
-    //            className="rounded-3xl border-none bg-amber-300 bg-opacity-70 px-6 py-2 text-center text-inherit placeholder-gray-900 shadow-lg outline-none backdrop-blur-md"
-    //             type="Password"
-    //             placeholder="Nhập password"
-    //             onChange={(e) => setPassword(e.target.value)}
-    //           />
-    //         </div>
-    //         <div className="mb-4 text-lg">
-    //           <input
-    //              className="rounded-3xl border-none bg-amber-300 bg-opacity-70 px-6 py-2 text-center text-inherit placeholder-gray-900 shadow-lg outline-none backdrop-blur-md"
-    //             type="Password"
-    //             placeholder="Nhập lại password"
-    //             onChange={(e) => setConfirmPassword(e.target.value)}
-    //           />
-    //         </div>
-    //         <div className="mt-2 mb-4 flex justify-center text-lg text-black">
-    //           <button
-    //             type="submit"
-    //             className="rounded-3xl border-none bg-amber-300 bg-opacity-70 px-6 py-2 text-center text-inherit placeholder-gray-900 shadow-lg outline-none backdrop-blur-md"
-    //           >
-    //             Đăng ký
-    //           </button>
-    //         </div>
-    //       </form>
-    //       <Link to={"/login"}>
-    //         {" "}
-    //         <span className="flex justify-center items-center mt-2 mb-4 ">
-    //           Có tài khoản ? Đăng nhập
-    //         </span>
-    //       </Link>
-    //     </div>
-    //   </div>
-    // </div>
+    
     <div>
       <div>
         <div className="parent clearfix">
