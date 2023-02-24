@@ -31,12 +31,12 @@ const TableUser = () => {
   useEffect(() => {
     const gedataTable = async () => {
       await axios
-        .get ("https://api-vuonthongminh.vercel.app/datas/getalldata")
+        .get ("https://api-vuonthongminh.vercel.app/users/getalluser")
         .then((result) => {
           const newdata = JSON.stringify(result.data.data);
           // setEmail(result.data.data.data.data.email);
           setEmail(JSON.parse(newdata));
-          
+          console.log(JSON.parse(newdata));      
         })
         .catch((err) => {
           throw new Error(err);
@@ -66,11 +66,11 @@ const TableUser = () => {
               <TableBody>
               
               {email.map((item, index) =>(
-                <TableRow>
-                  <TableCell className="tableCell">1</TableCell>
-                  <TableCell className="tableCell" style={{textAlign:"center"}}>Lap Thuan</TableCell>
+                <TableRow key={index}>
+                  <TableCell className="tableCell">{index}</TableCell>
+                  <TableCell className="tableCell" style={{textAlign:"center"}}>{item.fname + " " + item.lname}</TableCell>
                   
-                  <TableCell key={index} className="tableCell" style={{textAlign:"center"}}>
+                  <TableCell className="tableCell" style={{textAlign:"center"}}>
                     {item.email}
                   </TableCell>
                   

@@ -38,7 +38,7 @@ const Navb = () => {
       await axios
         .post("https://api-vuon-thong-minh.onrender.com/datas/updatedht", {
           email: userEmail,
-          connect: "disconect",
+          connect: "disconnect",
         })
         .then(function (response) {
           console.log(response);
