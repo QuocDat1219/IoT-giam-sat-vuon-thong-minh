@@ -46,7 +46,7 @@ const Routers = () => {
         path="/Register"
         element={
           isLoggedIn == "false" ? (
-            <Login />
+            <Register />
           ) : isAdminIn == "true" ?(
             <AdminHome />
           ) : (
