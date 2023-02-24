@@ -55,6 +55,9 @@ const List = () => {
     dataItem = item;
     setShowModal(true);
     console.log(dataItem); //lần đầu = ""
+    setWorkTime("");
+    setEndTimeOut("");
+    setLimit("");
   };
   //sự kiện chọn select
   const handleChange = event => {
