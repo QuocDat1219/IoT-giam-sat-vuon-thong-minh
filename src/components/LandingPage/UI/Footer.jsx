@@ -45,7 +45,7 @@ const Footer = () => {
               </li>
               <li>
                 <a href="#">Support us</a>
-                <a href="">Đây là dũng môi</a>
+           
               </li>
             </ul>
           </div>

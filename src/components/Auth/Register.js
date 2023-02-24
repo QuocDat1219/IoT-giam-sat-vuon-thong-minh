@@ -123,7 +123,8 @@ const Register = () => {
       .then((data) => {
         console.log(data);
         toast.success("Đăng ký thành công");
-        window.location.href("/login");
+        setTimeout( window.location.href = "/home",2000);
+       
       });
   };
   return (
