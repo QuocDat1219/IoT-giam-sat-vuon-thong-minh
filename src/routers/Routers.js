@@ -30,9 +30,31 @@ const Routers = () => {
           isLoggedIn == "true" && isAdminIn == "false" ? <Home /> : <Login />
         }
       />
-
-      <Route path="login" element={<Login />} />
-      <Route path="/Register" element={<Register />} />
+      <Route
+        path="/login"
+        element={
+          isLoggedIn == "false" ? (
+            <Login />
+          ) : isAdminIn == "true" ?(
+            <AdminHome />
+          ) : (
+            <Home />
+          )
+        }
+      />
+      <Route
+        path="/Register"
+        element={
+          isLoggedIn == "false" ? (
+            <Login />
+          ) : isAdminIn == "true" ?(
+            <AdminHome />
+          ) : (
+            <Home />
+          )
+        }
+      />
+      
       <Route
         path="/bieudo"
         element={
