@@ -7,8 +7,30 @@ import {
   Typography,
 } from "@mui/material";
 import ImportantDevicesIcon from "@mui/icons-material/ImportantDevices";
+import { useState,useEffect } from "react";
+import axios from "axios";
 
-export const DeviceTotal = (props) => (
+export const DeviceTotal = (props) => {
+  const [totalDevice, setTotalDevice] = useState("");
+  useEffect(() => {
+    const fetchData = async () => {
+      await axios
+        .get("https://api-vuonthongminh.vercel.app/datas/getalldata")
+        .then((result) => {
+          const numOfDevice = result.data.data.filter(obj => obj.connect !== undefined).length;
+          setTotalDevice(numOfDevice)
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    };
+
+    fetchData();
+    const intervalId = setInterval(fetchData, 5000);
+    return () => clearInterval(intervalId);
+  }, []);
+
+  return (  
   <div style={{width:"135%"}}>
     <Card {...props}>
       <CardContent>
@@ -18,7 +40,7 @@ export const DeviceTotal = (props) => (
               Tổng thiết bị
             </Typography>
             <Typography color="textPrimary" variant="h4">
-              4
+              {totalDevice}
             </Typography>
           </Grid>
           <Grid item>
@@ -43,5 +65,5 @@ export const DeviceTotal = (props) => (
       </CardContent>
     </Card>
   </div>
-);
+)};
 export default DeviceTotal;

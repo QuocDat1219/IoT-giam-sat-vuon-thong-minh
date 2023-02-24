@@ -7,10 +7,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { Button, Select } from "@mui/material";
 import { ToastContainer, toast } from "react-toastify";
-import { DataTable } from "primereact/datatable";
-import { Column } from "primereact/column";
 import "../BangData/Datatable.css";
 
 import Footer from "../LandingPage/UI/Footer";
