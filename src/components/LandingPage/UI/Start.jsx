@@ -35,7 +35,7 @@ function Start() {
             <Link to={"/Register"}>
             <div class="buttons">
                   <button class="blob-btn">
-                    Get Started
+                    Trải nghiệm ngay 
                     <span class="blob-btn__inner">
                       <span class="blob-btn__blobs">
                         <span class="blob-btn__blob"></span>

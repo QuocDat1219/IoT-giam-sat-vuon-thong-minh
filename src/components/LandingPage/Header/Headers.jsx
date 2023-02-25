@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const nav__links = [
   {
     path: "#home",
-    display: "Home",
+    display: "Trang chủ",
   },
   {
     path: "#schedule",
@@ -17,11 +17,11 @@ const nav__links = [
   },
   {
     path: "#About",
-    display: "About US",
+    display: "Nhà sáng tạo",
   },
   {
     path: "#send",
-    display: "Feed back",
+    display: "Phản hồi",
   },
 ];
 

@@ -17,7 +17,7 @@ export default function Testimonials() {
     <>
       <section id="About">
         <div className="container sliders" style={{ marginLeft: "40%" }}>
-          <h2 className="section__title">About Us</h2>
+          <h2 className="section__title" style={{marginLeft:"40px", color:"#07bc0c"}}>NHÀ SÁNG TẠO</h2>
           <Swiper
             effect={"cards"}
             grabCursor={true}

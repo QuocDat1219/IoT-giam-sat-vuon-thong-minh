@@ -36,7 +36,7 @@ const Hero = () => {
               <Link to={"/Register"}>
                 <div class="buttons">
                   <button class="blob-btn">
-                    Get Started
+                    trải nghiệm ngay
                     <span class="blob-btn__inner">
                       <span class="blob-btn__blobs">
                         <span class="blob-btn__blob"></span>

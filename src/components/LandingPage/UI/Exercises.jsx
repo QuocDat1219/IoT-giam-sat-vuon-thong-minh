@@ -9,7 +9,7 @@ const Exercises = () => {
       <div className="container exercise__container">
         <div className="exercise__top">
           <h2 className="section__title">
-            Concept <span className="highlights">IoT Green House</span>
+            Ý tưởng  <span className="highlights">IoT Green House</span>
           </h2>
           <p>
             Green House là hệ thống trồng trọt hiện đại trong nhà kính ứng dụng công nghệ Internet Of Things.

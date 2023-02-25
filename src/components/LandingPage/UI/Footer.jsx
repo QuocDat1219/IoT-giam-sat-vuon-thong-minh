@@ -13,11 +13,17 @@ const Footer = () => {
               <div className="logo__img">
                 <img src={logo} alt="" />
               </div>
-              <h2 style={{ color: "var(--primary-color)", paddingTop: "10px",fontSize:"22px" }}>
+              <h2
+                style={{
+                  color: "var(--primary-color)",
+                  paddingTop: "10px",
+                  fontSize: "22px",
+                }}
+              >
                 Green House
               </h2>
             </div>
-            <p style={{ marginLeft: "30px",fontSize:"15px" }}>
+            <p style={{ marginLeft: "30px", fontSize: "15px" }}>
               Chăm sóc và theo dõi khu vườn của bạn
             </p>
           </div>
@@ -30,22 +36,21 @@ const Footer = () => {
                 <a href="#">Vĩnh Long</a>
               </li>
               <li>
-                <a href="#">greenhousedatb@gmail.com</a>
+                <a>greenhousedatb@gmail.com</a>
               </li>
             </ul>
           </div>
           <div className="footer__box">
-            <h4 className="footer__title">Quick links</h4>
+            <h4 className="footer__title">Đường dẫn nhanh </h4>
             <ul className="footer__links">
               <li>
-                <a href="#">About us</a>
+                <a href="#home">Giới thiệu</a>
               </li>
               <li>
-                <a href="#">Contact us</a>
+                <a href="#classes">Hoạt động</a>
               </li>
               <li>
-                <a href="#">Support us</a>
-           
+                <a href="#About">Nhà sáng tạo</a>
               </li>
             </ul>
           </div>
