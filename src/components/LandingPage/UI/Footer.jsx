@@ -29,11 +29,11 @@ const Footer = () => {
           </div>
 
           <div className="footer__box">
-            <h4 className="footer__title">Liên hệ</h4>
+            <h4 className="footer__title">Liên Hệ</h4>
 
             <ul className="footer__links">
               <li>
-                <a href="#">Vĩnh Long</a>
+                <a>Vĩnh Long</a>
               </li>
               <li>
                 <a>greenhousedatb@gmail.com</a>
@@ -41,7 +41,7 @@ const Footer = () => {
             </ul>
           </div>
           <div className="footer__box">
-            <h4 className="footer__title">Đường dẫn nhanh </h4>
+            <h4 className="footer__title">Giúp Đỡ </h4>
             <ul className="footer__links">
               <li>
                 <a href="#home">Giới thiệu</a>
