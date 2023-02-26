@@ -3,13 +3,14 @@ import "react-circular-progressbar/dist/styles.css";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { CircularProgressbar } from "react-circular-progressbar";
 import React, { useEffect, useState } from "react";
-import PacmanLoader from "react-spinners/PacmanLoader";
+import RingLoader from "react-spinners/RingLoader";
+
 
 const DOAM = (props) => {
   return props.doam == null ? (
     <>
       <div className="ND flex justify-center items-center">
-              <PacmanLoader color="#4cd137" />
+              <RingLoader color="#4cd137" />
       </div>
     </>
   ) :  (

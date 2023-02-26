@@ -6,17 +6,17 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import Form from 'react-bootstrap/Form';
+import Form from "react-bootstrap/Form";
 import { useState, useEffect } from "react";
 import { Button } from "@mui/material";
 import axios from "axios";
-import {  toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Sidebar } from "..";
 import Navb from "../navbar/Navb";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import Footer from "../LandingPage/UI/Footer";
-import moment from 'moment';
+import moment from "moment";
 let dataItem = null;
 const List = () => {
   const [showModal, setShowModal] = useState(false);
@@ -25,8 +25,8 @@ const List = () => {
   const [endTimeOut, setEndTimeOut] = useState("");
   const [limits, setLimit] = useState("");
   const options = [
-    { value: 'Email', text: 'Email' },
-    { value: 'Telegram', text: 'Telegram' }
+    { value: "Email", text: "Email" },
+    { value: "Telegram", text: "Telegram" },
   ];
   const [selected, setSelected] = useState(options[0].value);
 
@@ -49,7 +49,7 @@ const List = () => {
     const intervalId = setInterval(gedataTable, 5000);
     return () => clearInterval(intervalId);
   }, []);
-  
+
   const handelSaveClick = (item) => {
     console.log(item);
     dataItem = item;
@@ -60,42 +60,42 @@ const List = () => {
     setLimit("");
   };
   //sự kiện chọn select
-  const handleChange = event => {
+  const handleChange = (event) => {
     console.log(event.target.value);
     setSelected(event.target.value);
   };
   //sự kiện submit
   const handleEditSensor = async (e) => {
     e.preventDefault();
-    const format = 'HH:mm';
+    const format = "HH:mm";
     const gioBatDau = moment(workTime, format);
     const gioKetThuc = moment(endTimeOut, format);
-    if(gioBatDau.isBefore(gioKetThuc)){
-      await axios.post(
-        "https://api-vuonthongminh.vercel.app/datas/updatesensor",{
+    if (gioBatDau.isBefore(gioKetThuc)) {
+      await axios
+        .post("https://api-vuonthongminh.vercel.app/datas/updatesensor", {
           name: dataItem.name,
           timeword: workTime,
           timeout: endTimeOut,
           nofi: selected,
           email: window.localStorage.getItem("Emaildetails"),
-          limit: limits
+          limit: limits,
         })
-      .then(function(response) {
-        if(response.data.status == "update success"){
-          toast.success("Thay đổi thành công");
-          setShowModal(false);
-        }
-      })
-      .catch(function (error) {
-        console.log(error);
-        toast.warning("Thay đổi không thành công");
-      });
+        .then(function (response) {
+          if (response.data.status == "update success") {
+            toast.success("Thay đổi thành công");
+            setShowModal(false);
+          }
+        })
+        .catch(function (error) {
+          console.log(error);
+          toast.warning("Thay đổi không thành công");
+        });
       console.log(gioBatDau);
       console.log(gioKetThuc);
-    }else {
+    } else {
       toast.warning("Thời gian bắt đầu phải lớn hơn thời gian kết thúc");
     }
-};
+  };
   return (
     <div className="home">
       <Sidebar>
@@ -114,7 +114,7 @@ const List = () => {
                       <TableCell className="tableCell">Thiết bi</TableCell>
                       <TableCell className="tableCell">Trạng thái</TableCell>
                       <TableCell className="tableCell">Hành động</TableCell>
-                    </TableRow>           
+                    </TableRow>
                   </TableHead>
                   <TableBody>
                     {dtTable.map((item, index) => (
@@ -158,68 +158,93 @@ const List = () => {
             <div>
               <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
                 <div className="relative w-auto my-6 mx-auto max-w-3xl">
-
                   <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
-
                     <div className="flex items-start justify-between p-3 border-b border-solid border-slate-200 rounded-t">
                       <h3 className="text-2xl font-semibold">
                         Cài đặt thiết bị: <strong>{dataItem.name}</strong>
                       </h3>
                       <button
-                        style={{ color: 'red' }}
+                        style={{ color: "red" }}
                         className="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
                         onClick={() => setShowModal(false)}
-                      >X
+                      >
+                        X
                       </button>
                     </div>
-                    <Form style={{ width: "500px", padding: "20px" }}
-                    onSubmit={handleEditSensor}>
+                    <Form
+                      style={{ width: "500px", padding: "20px" }}
+                      onSubmit={handleEditSensor}
+                    >
                       <Form.Group className="mb-3" controlId="formBasicAction">
-                        <Form.Label>Trạng thái thiết bị: <Form.Label> </Form.Label></Form.Label>
+                        <Form.Label>
+                          Trạng thái thiết bị: <Form.Label> </Form.Label>
+                        </Form.Label>
                         <Form.Text className="text-muted">
-                          {dataItem.status == "1" ? (<strong style={{ color: "#2ecc71" }}>Đang hoạt động</strong>) : (<strong style={{ color: "red" }}>Không hoạt động</strong>)}
+                          {dataItem.status == "1" ? (
+                            <strong style={{ color: "#2ecc71" }}>
+                              Đang hoạt động
+                            </strong>
+                          ) : (
+                            <strong style={{ color: "red" }}>
+                              Không hoạt động
+                            </strong>
+                          )}
                         </Form.Text>
                       </Form.Group>
 
-                      <Form.Group className="mb-3" controlId="formBasicTimeWork">
-                        <Form.Label>Thời gian hoạt động: <strong>{dataItem.timeword}</strong>
+                      <Form.Group
+                        className="mb-3"
+                        controlId="formBasicTimeWork"
+                      >
+                        <Form.Label>
+                          Thời gian hoạt động:{" "}
+                          <strong>{dataItem.timeword}</strong>
                         </Form.Label>
                         <Form.Control
                           type="time"
                           name="worktime"
                           value={workTime}
-                          onChange={(e) => setWorkTime(e.target.value)} 
-                          required/>
+                          onChange={(e) => setWorkTime(e.target.value)}
+                          required
+                        />
                       </Form.Group>
 
                       <Form.Group className="mb-3" controlId="formBasicTimeEnd">
-                        <Form.Label>Thời gian hoạt dừng: <strong>{dataItem.timeout}</strong>
+                        <Form.Label>
+                          Thời gian hoạt dừng:{" "}
+                          <strong>{dataItem.timeout}</strong>
                         </Form.Label>
                         <Form.Control
                           type="time"
                           name="endtime"
                           value={endTimeOut}
-                          onChange={(e) => setEndTimeOut(e.target.value)} 
-                          required/>
+                          onChange={(e) => setEndTimeOut(e.target.value)}
+                          required
+                        />
                       </Form.Group>
 
-                      <Form.Group className="mb-3" controlId="formBasicNotification">
-                        <Form.Label>Thông báo:
-                        </Form.Label>
-                        <Form.Select id="disabledSelect" value={selected} onChange={handleChange}>
-                        {options.map(option => (
-                          <option key={option.value} value={option.value}>
-                            {option.text}
-                          </option>
-                        ))}
+                      <Form.Group
+                        className="mb-3"
+                        controlId="formBasicNotification"
+                      >
+                        <Form.Label>Thông báo:</Form.Label>
+                        <Form.Select
+                          id="disabledSelect"
+                          value={selected}
+                          onChange={handleChange}
+                        >
+                          {options.map((option) => (
+                            <option key={option.value} value={option.value}>
+                              {option.text}
+                            </option>
+                          ))}
                         </Form.Select>
                       </Form.Group>
-                      
+
                       <Form.Group className="mb-3" controlId="formBasicLimit">
-                        <Form.Label>Ngưỡng thông số cảm biến:
-                        </Form.Label>
+                        <Form.Label>Ngưỡng thông số cảm biến:</Form.Label>
                         <Form.Control
-                         required
+                          required
                           type="number"
                           placeholder={dataItem.limit}
                           value={limits}
@@ -234,14 +259,14 @@ const List = () => {
                           Cập nhật
                         </button>
                       </div>
-                    </Form>                  
+                    </Form>
                   </div>
                 </div>
               </div>
               <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
             </div>
           ) : null}
-          <div style={{paddingTop:"10px"}}>
+          <div style={{ paddingTop: "10px" }}>
             <Footer />
           </div>
         </div>

@@ -68,7 +68,7 @@ const Navb = () => {
         }
       })
       .catch(function (error) {
-        toast.success("Reset không thành công");
+        toast.error("Reset không thành công");
       });
   };
   return (

@@ -25,16 +25,16 @@ const Register = () => {
     setUserType("");
     //Kiểm tra dữ liệu nhập của người dùng
     if (fname == "" || lname == "" || email == "" || password == "") {
-      toast("Vui lòng nhập đầy đủ thông tin đăng ký!");
+      toast.warning("Vui lòng nhập đầy đủ thông tin đăng ký!");
       return;
     } else if (!checkPassword.test(password) || password.length == "") {
-      toast.error("Mật khẩu không hợp lệ!");
+      toast.warning("Mật khẩu không hợp lệ!");
       return;
     } else if (!checkMail.test(email) || email.length == "") {
-      toast.error("Email không hợp lệ!");
+      toast.warning("Email không hợp lệ!");
       return;
     } else if (password != confirmPassword) {
-      toast.error("Mật khẩu và nhập lại mật khẩu không trùng khớp...");
+      toast.warning("Mật khẩu và nhập lại mật khẩu không trùng khớp...");
       return;
     }
     //Xử lý đăng ký
@@ -139,17 +139,19 @@ const Register = () => {
           <ToastContainer />
           <div class="login">
             <div class="container">
-              <img
-                src={icon}
-                alt="logo"
-                width="100px"
-                height="100px"
-                style={{
-                  position: "absolute",
-                  marginLeft: "500px",
-                  marginTop: "-100px",
-                }}
-              ></img>
+              <Link to={"/"}>
+                <img
+                  src={icon}
+                  alt="logo"
+                  width="100px"
+                  height="100px"
+                  style={{
+                    position: "absolute",
+                    marginLeft: "500px",
+                    marginTop: "-100px",
+                  }}
+                ></img>
+              </Link>
               <h1>
                 Đăng kí tài khoản
                 <br />

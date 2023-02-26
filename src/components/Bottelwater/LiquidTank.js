@@ -2,7 +2,7 @@ import * as React from "react";
 import { color } from "d3-color";
 import LiquidFillGauge from "react-liquid-gauge";
 import "./BottleWater.css";
-import PacmanLoader from "react-spinners/PacmanLoader";
+import RingLoader from "react-spinners/RingLoader";
 
 const LiquidTank = (props) => {
   const radius = 140;
@@ -31,7 +31,7 @@ const LiquidTank = (props) => {
   return props.water == null ? (
     <>
       <div className="ND flex justify-center items-center">
-        <PacmanLoader color="#1e3799" size={40} />
+        <RingLoader color="#1e3799" size={200} />
       </div>
     </>
   ) : (

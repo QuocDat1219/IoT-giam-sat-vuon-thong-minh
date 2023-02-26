@@ -41,8 +41,8 @@ const ControlDevice = () => {
       .then((result) => {
         console.log(result);
         if (status == "1") {
-          toast("Đã bật");
-        } else toast("Đã tắt");
+          toast.success("Đã bật");
+        } else toast.success("Đã tắt");
       })
       .catch((err) => {
         toast(err.message);
