@@ -21,10 +21,31 @@ import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 const TableUser = () => {
   const [showModel, setshowModel] = useState(false);
   const [dtTable, setdtTable] = useState([]);
+  const [email, setEmail] = useState([]);
+  // const [firstname, setFirstname] = useState("");
+  // const [lastname, setLastname] = useState("");
   //   const handelSubmit = (item) => {
   //     dataItem = item;
   //     // setshowModel(true);
   //   };
+  useEffect(() => {
+    const gedataTable = async () => {
+      await axios
+        .get ("https://api-vuonthongminh.vercel.app/users/getalluser")
+        .then((result) => {
+          const newdata = JSON.stringify(result.data.data);
+          // setEmail(result.data.data.data.data.email);
+          setEmail(JSON.parse(newdata));
+          console.log(JSON.parse(newdata));      
+        })
+        .catch((err) => {
+          throw new Error(err);
+        });
+    };
+    gedataTable();
+    const intervalId = setInterval(gedataTable, 5000);
+    return () => clearInterval(intervalId);
+  }, []);
 
   return (
     <div>
@@ -43,13 +64,16 @@ const TableUser = () => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {/* {dtTable.map((item, index) => ( */}
-                <TableRow>
-                  <TableCell className="tableCell">1</TableCell>
-                  <TableCell className="tableCell" style={{textAlign:"center"}}>Lap Thuan</TableCell>
+              
+              {email.map((item, index) =>(
+                <TableRow key={index}>
+                  <TableCell className="tableCell">{index}</TableCell>
+                  <TableCell className="tableCell" style={{textAlign:"center"}}>{item.fname + " " + item.lname}</TableCell>
+                  
                   <TableCell className="tableCell" style={{textAlign:"center"}}>
-                    Lapthuan44@gmail.com
+                    {item.email}
                   </TableCell>
+                  
                   <TableCell
                     className="table_btn"
                     style={{ textAlign: "center" }}
@@ -66,6 +90,7 @@ const TableUser = () => {
                     </Button>
                   </TableCell>
                 </TableRow>
+                ))}
                 {/* ))} */}
               </TableBody>
             </Table>

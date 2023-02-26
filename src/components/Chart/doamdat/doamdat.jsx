@@ -2,14 +2,17 @@ import "./doamdat.scss";
 import "react-circular-progressbar/dist/styles.css";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { CircularProgressbar } from "react-circular-progressbar";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import { color } from "@mui/system";
 import React, { useEffect, useState } from "react";
 import PacmanLoader from "react-spinners/PacmanLoader";
 
 const doamdat = (props) => {
-  return props.mhsensor ? (
+  return props.mhsensor == null ? (
+    <>
+      <div className="ND flex justify-center items-center">
+        <PacmanLoader color="#732817" />
+      </div>
+    </>
+  ) : (
     <>
       <div className="doamdat">
         <div className="top">
@@ -35,12 +38,6 @@ const doamdat = (props) => {
             />
           </div>
         </div>
-      </div>
-    </>
-  ) : (
-    <>
-      <div className="ND flex justify-center items-center">
-        <PacmanLoader color="#732817" />
       </div>
     </>
   );

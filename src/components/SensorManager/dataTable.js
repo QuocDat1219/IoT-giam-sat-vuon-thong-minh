@@ -8,14 +8,15 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import Form from 'react-bootstrap/Form';
 import { useState, useEffect } from "react";
-import { Button, Select } from "@mui/material";
+import { Button } from "@mui/material";
 import axios from "axios";
-import { ToastContainer, toast } from "react-toastify";
+import {  toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Sidebar } from "..";
 import Navb from "../navbar/Navb";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import Footer from "../LandingPage/UI/Footer";
+import moment from 'moment';
 let dataItem = null;
 const List = () => {
   const [showModal, setShowModal] = useState(false);
@@ -30,7 +31,7 @@ const List = () => {
   const [selected, setSelected] = useState(options[0].value);
 
   const urls =
-    "https://api-vuon-thong-minh.onrender.com/datas/datadetail/" +
+    "https://api-vuonthongminh.vercel.app/datas/datadetail/" +
     window.localStorage.getItem("Emaildetails");
   useEffect(() => {
     const gedataTable = async () => {
@@ -54,46 +55,46 @@ const List = () => {
     dataItem = item;
     setShowModal(true);
     console.log(dataItem); //lần đầu = ""
+    setWorkTime("");
+    setEndTimeOut("");
+    setLimit("");
   };
   //sự kiện chọn select
   const handleChange = event => {
     console.log(event.target.value);
     setSelected(event.target.value);
   };
-
-  const checkDataFrom = async ()=>{
-    let a = dataItem.timeword;
-    let b = dataItem.timeout;
-    if(workTime === ""){
-      setWorkTime(a);
-    }
-    if(endTimeOut === ""){
-      setEndTimeOut(b);
-    }
-  }
   //sự kiện submit
   const handleEditSensor = async (e) => {
     e.preventDefault();
-    console.log(window.localStorage.getItem("Emaildetails"));
-    await checkDataFrom();
-    await axios.post(
-      "https://api-vuon-thong-minh.onrender.com/datas/updatesensor",{
-        name: dataItem.name,
-        timeword: workTime,
-        timeout: endTimeOut,
-        nofi: selected,
-        email: window.localStorage.getItem("Emaildetails"),
-        limit: limits
+    const format = 'HH:mm';
+    const gioBatDau = moment(workTime, format);
+    const gioKetThuc = moment(endTimeOut, format);
+    if(gioBatDau.isBefore(gioKetThuc)){
+      await axios.post(
+        "https://api-vuonthongminh.vercel.app/datas/updatesensor",{
+          name: dataItem.name,
+          timeword: workTime,
+          timeout: endTimeOut,
+          nofi: selected,
+          email: window.localStorage.getItem("Emaildetails"),
+          limit: limits
+        })
+      .then(function(response) {
+        if(response.data.status == "update success"){
+          toast.success("Thay đổi thành công");
+          setShowModal(false);
+        }
       })
-    .then(function(response) {
-      if(response.data.status == "update success"){
-        toast.success("Thay đổi thành công");
-      }
-    })
-    .catch(function (error) {
-      console.log(error);
-      toast.warning("Thay đổi không thành công");
-    });
+      .catch(function (error) {
+        console.log(error);
+        toast.warning("Thay đổi không thành công");
+      });
+      console.log(gioBatDau);
+      console.log(gioKetThuc);
+    }else {
+      toast.warning("Thời gian bắt đầu phải lớn hơn thời gian kết thúc");
+    }
 };
   return (
     <div className="home">
@@ -226,13 +227,6 @@ const List = () => {
                         ></Form.Control>
                       </Form.Group>
                       <div className="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
-                        <button
-                          className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                          type="button"
-                          onClick={() => setShowModal(false)}
-                        >
-                          Thoát
-                        </button>
                         <button
                           className="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                           type="submit"

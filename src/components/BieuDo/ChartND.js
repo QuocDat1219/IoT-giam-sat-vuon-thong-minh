@@ -7,12 +7,15 @@ const ChartND = () => {
   const [chartArrayNhietdo, setChartArrayNhietdo] = useState([]);
   const [chartArrayDoAm, setChartArrayDoAm] = useState([]);
   const [chartArrayThoiGian, setChartArrayThoiGian] = useState([]);
+  const userEmail = window.localStorage.getItem("Emaildetails");
 
+  let urls =
+    "https://api-vuonthongminh.vercel.app/datas/datadetail/" + userEmail;
   useEffect(() => {
     const fetchData = async () => {
       await axios
         .get(
-          "https://api-vuon-thong-minh.onrender.com/datas/datadetail/lapthuan44@gmail.com"
+          urls
         )
         .then(async (result) => {
           await setChartArrayNhietdo(

@@ -45,7 +45,7 @@ export const SendEmail = () => {
   };
 
   return (
-    <div>
+    <div id="send">
       <StyledContactForm style={{ marginRight: "400px" }}>
         <div className="formfb">
           <form ref={form} onSubmit={sendEmail}>
@@ -54,14 +54,14 @@ export const SendEmail = () => {
                 textAlign: "center",
                 fontSize: "40px",
                 fontWeight: "bolder",
-                color: "#21344d",
+                color: "#07bc0c",
                 paddingBottom: "50px",
               }}
             >
-              Feed Back
+              PHẢN HỒI
             </p>
             <label style={{ fontWeight: "bolder", fontSize: "18px", paddingBottom:"10px" }}>
-              Name
+              Họ tên 
 
             </label>
             <input
@@ -89,7 +89,7 @@ export const SendEmail = () => {
               className="title_lb"
               style={{ fontWeight: "bolder", fontSize: "18px",paddingBottom:"10px" }}
             >
-              Message
+              Nội dung phản hồi
             </label>
 
             <textarea
@@ -99,7 +99,7 @@ export const SendEmail = () => {
               onChange={(e) => setnoidung(e.target.value)}
             />
             <button className="btn" type="submit">
-              <span>Click me</span>
+              <span>Gửi</span>
             </button>
           </form>
         </div>

@@ -25,7 +25,7 @@ const UserPro = (props) => {
 
   useEffect(() => {
 
-    axios.post('https://api-vuon-thong-minh.onrender.com/users/user-data', {
+    axios.post('https://api-vuonthongminh.vercel.app/users/user-data', {
       token: window.localStorage.getItem("token"),
     })
       .then((data) => {
@@ -49,7 +49,7 @@ const UserPro = (props) => {
     } else {
       toast("Đang xử lý...");
       await axios
-        .post("https://api-vuon-thong-minh.onrender.com/users/changepassword", {
+        .post("https://api-vuonthongminh.vercel.app/users/changepassword", {
           tokenold: window.localStorage.getItem("token"),
           newpassword: newPassword,
           oldpassword: oldPassword
@@ -81,7 +81,7 @@ const UserPro = (props) => {
     }else{
       toast("Đang xử lý...");
       await axios
-        .post("https://api-vuon-thong-minh.onrender.com/users/edituser", {
+        .post("https://api-vuonthongminh.vercel.app/users/edituser", {
           token: window.localStorage.getItem("token"),
           lname: lnamees,
           fname: fnamees

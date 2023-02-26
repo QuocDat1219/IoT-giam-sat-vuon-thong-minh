@@ -28,7 +28,13 @@ const LiquidTank = (props) => {
     },
   ];
 
-  return props.water ? (
+  return props.water == null ? (
+    <>
+      <div className="ND flex justify-center items-center">
+        <PacmanLoader color="#1e3799" size={40} />
+      </div>
+    </>
+  ) : (
     <>
       <div className="Bottlewater">
         <div className="top">
@@ -91,12 +97,6 @@ const LiquidTank = (props) => {
             }}
           />
         </div>
-      </div>
-    </>
-  ) : (
-    <>
-      <div className="ND flex justify-center items-center">
-        <PacmanLoader color="#1e3799" size={40} />
       </div>
     </>
   );

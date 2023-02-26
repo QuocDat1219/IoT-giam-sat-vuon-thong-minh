@@ -10,14 +10,14 @@ import axios from "axios";
 import "react-toastify/dist/ReactToastify.css";
 import Footer from "../LandingPage/UI/Footer";
 const Home = () => {
-  const [doam, setDoam] = useState("");
-  const [nhietdo, setNhietdo] = useState("");
-  const [mhsensor, setMhsensor] = useState("");
-  const [ultrasonic, setUltrasonic] = useState("");
+  const [doam, setDoam] = useState(null);
+  const [nhietdo, setNhietdo] = useState(null);
+  const [mhsensor, setMhsensor] = useState(null);
+  const [ultrasonic, setUltrasonic] = useState(null);
   const userEmail = window.localStorage.getItem("Emaildetails");
 
   let urls =
-    "https://api-vuon-thong-minh.onrender.com/datas/datadetail/" + userEmail;
+    "https://api-vuonthongminh.vercel.app/datas/datadetail/" + userEmail;
 
   useEffect(() => {
     const fetchData = async () => {

@@ -13,30 +13,35 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { Button } from "@mui/material";
 import { ToastContainer, toast } from "react-toastify";
-import { padding } from "@mui/system";
-import PuffLoader from "react-spinners/PuffLoader";
 import Footer from "../LandingPage/UI/Footer";
-
+import ModeEditIcon from "@mui/icons-material/ModeEdit";
+import { SetMealSharp } from "@mui/icons-material";
+import Form from "react-bootstrap/Form";
 const ControlDevice = () => {
+  const [showModel, setshowModel] = useState(false);
   const [dieukhien, setDieukhien] = useState([]);
-  const [controlDevice, setControlDevice] = useState([]);
-  const [devicename, setDeviceName] = useState("");
   const [loading, setLoading] = useState(false);
+  const userEmail = window.localStorage.getItem("Emaildetails");
+  let urls =
+    "https://api-vuonthongminh.vercel.app/datas/datadetail/" + userEmail;
   const updateOn = async (key, status, name) => {
+    console.log(status);
+    console.log(name);
+    if (status === 0) {
+      status += 1;
+    } else {
+      status -= 1;
+    }
     await axios
-      .put(
-        "https://iotsmarthome-5d008-default-rtdb.firebaseio.com/iotdata/control/" +
-          key +
-          ".json",
-        {
-          name: name,
-          status: -status,
-        }
-      )
+      .post("https://api-vuonthongminh.vercel.app/datas/updatecontrol", {
+        email: userEmail,
+        status: status,
+        name: name,
+      })
       .then((result) => {
-        toast({ status });
+        console.log(result);
         if (status == "1") {
-          toast("Đã mở");
+          toast("Đã bật");
         } else toast("Đã tắt");
       })
       .catch((err) => {
@@ -48,11 +53,10 @@ const ControlDevice = () => {
     setInterval(() => {
       const getData = async () => {
         await axios
-          .get(
-            "https://iotsmarthome-5d008-default-rtdb.firebaseio.com/iotdata.json"
-          )
+          .get(urls)
           .then(async (result) => {
-            await setDieukhien(result.data.control);
+            await setDieukhien(result.data.data.control);
+            console.log(dieukhien);
             setLoading(true);
           })
           .catch((err) => {
@@ -62,7 +66,7 @@ const ControlDevice = () => {
       getData();
     }, 1000);
   }, []);
-  return loading ? (
+  return (
     <div className="home">
       <Sidebar>
         <div className="homeContainer">
@@ -81,15 +85,23 @@ const ControlDevice = () => {
                 {dieukhien
                   ? dieukhien.map((data, key) => (
                       <TableRow key={key}>
-                        <TableCell className="tableCell">
+                        <TableCell className="tablleBody">
                           <div className="cellWrapper">{key}</div>
                         </TableCell>
-                        <TableCell className="tableCell">
+                        <TableCell className="tablleBody">
                           <div className="cellWrapper">
-                            {data ? data.name : "Loading..."}
+                            {data ? data.name : "Loading..."}{" "}
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <button
+                              ariant="contained"
+                              color="primary"
+                              onClick={() => setshowModel(true)}
+                            >
+                              <ModeEditIcon />
+                            </button>
                           </div>
                         </TableCell>
-                        <TableCell className="tableCell">
+                        <TableCell className="tablleBody">
                           <span className={`status ${data ? data.status : ""}`}>
                             {data.status === 1 ? "Tắt" : "Bật"}
                           </span>
@@ -101,7 +113,6 @@ const ControlDevice = () => {
                             }
                             onClick={() => {
                               updateOn(key, data.status, data.name);
-                              // alert(key);
                             }}
                           >
                             {data.status === 1 ? "Bật" : "Tắt"}
@@ -117,11 +128,47 @@ const ControlDevice = () => {
             <Footer />
           </div>
         </div>
+
+        {showModel ? (
+          <div>
+          <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
+            <div className="relative w-auto my-6 mx-auto max-w-3xl">
+              <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+                <div className="flex items-start justify-between p-3 border-b border-solid border-slate-200 rounded-t">
+                  <h3 className="text-2xl font-semibold text-center m-2 w-100">
+                    Chỉnh sửa thông tin
+                  </h3>
+                </div>
+                <Form style={{ width: "500px", padding: "20px" }}>
+                  <Form.Group className="mb-3" controlId="formBasicAction">
+                    <Form.Label style={{ fontSize: "20px" }}>
+                      Tên thiết bị: <Form.Label> </Form.Label>
+                    </Form.Label>
+                    <Form.Control required type=" "></Form.Control>
+                  </Form.Group>
+                  <div className="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
+                    <button
+                      className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                      type="button"
+                      onClick={() => setshowModel(false)}
+                    >
+                      Thoát
+                    </button>
+                    <button
+                      className="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                      type="submit"
+                    >
+                      Cập nhật
+                    </button>
+                  </div>
+                </Form>
+              </div>
+            </div>
+          </div>
+          <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
+        </div>
+        ) : null}
       </Sidebar>
-    </div>
-  ) : (
-    <div className="fixLoading">
-      <PuffLoader className="loading" color="#36d7b7" size={80} />
     </div>
   );
 };

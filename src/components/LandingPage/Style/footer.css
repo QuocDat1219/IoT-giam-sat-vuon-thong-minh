@@ -1,6 +1,7 @@
 .footer {
     padding   : 50px 0px;
-    background: #eeeaff;
+    /* background: #f7f5fa; */
+    box-shadow: 2px 4px 10px 1px rgba(201,201,201,0.70);
 }
 
 .footer__wrapper {
@@ -21,13 +22,15 @@
 }
 
 .footer__title {
-    font-size    : 1.2rem;
+    font-size    : 22px;
     color        : var(--heading-color);
     margin-bottom: 20px;
+    font-weight: bold;
 }
 
 .footer__links li {
     line-height: 28px;
+    font-size: 15px;
 }
 
 .footer__links li a {

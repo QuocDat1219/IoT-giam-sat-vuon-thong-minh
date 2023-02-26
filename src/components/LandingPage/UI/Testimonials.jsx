@@ -15,9 +15,9 @@ import tuananh from "../../images/tuananh.jpg";
 export default function Testimonials() {
   return (
     <>
-      <section>
+      <section id="About">
         <div className="container sliders" style={{ marginLeft: "40%" }}>
-          <h2 className="section__title">About Us</h2>
+          <h2 className="section__title" style={{marginLeft:"40px", color:"#07bc0c"}}>NHÀ SÁNG TẠO</h2>
           <Swiper
             effect={"cards"}
             grabCursor={true}
@@ -31,7 +31,7 @@ export default function Testimonials() {
                 </div>
                 <div className="introduce">
                 <h4>Tên: Lê Nguyễn Quốc Đạt</h4>
-                <p>Công việc: Team lead + Fontend developer</p>
+                <p>Công việc: Team lead + Frontend developer</p>
                 <p>Email: 1900025@gmail.com</p>
                 </div>
               </div>
@@ -70,7 +70,7 @@ export default function Testimonials() {
                 </div>
                 <div className="introduce">
                 <h4>Tên: Nguyễn Hoàng Tuấn Anh</h4>
-                <p>Công việc: Fontend developer</p>
+                <p>Công việc: Frontend developer</p>
                 <p>Email: 19004007@gmail.com</p>
                 </div>
               </div>
