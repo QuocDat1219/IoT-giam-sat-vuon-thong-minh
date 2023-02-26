@@ -3,7 +3,7 @@ import "react-circular-progressbar/dist/styles.css";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import React, { useEffect, useState } from "react";
 import Temp from "./temp";
-import PacmanLoader from "react-spinners/PacmanLoader";
+import RingLoader from "react-spinners/RingLoader";
 
 class ND extends React.Component {
   constructor(props) {
@@ -17,7 +17,7 @@ class ND extends React.Component {
     return this.props.nhietdo == null ? (
       <>
        <div className="ND flex justify-center items-center">
-          <PacmanLoader color="#f44336" />
+          <RingLoader color="#f44336" />
         </div> 
       </>
     ) : (

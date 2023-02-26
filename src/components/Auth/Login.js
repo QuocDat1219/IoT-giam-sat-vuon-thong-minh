@@ -20,9 +20,9 @@ const Login = () => {
       toast.warning("Vui lòng nhập đủ thông tin");
       setIsLoading(false);
     } else {
-      toast("Đang xử lý");
+      // toast("Đang xử lý");
       document.getElementById("submit").disabled = true;
-      fetch("https://api-vuonthongminh.vercel.app/users/login-user", {
+      fetch("https://api-vuon-thong-minh.onrender.com/users/login-user", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -48,7 +48,7 @@ const Login = () => {
           }
         });
       const loginRequest = async () => {
-        await fetch("https://api-vuonthongminh.vercel.app/users/user-data", {
+        await fetch("https://api-vuon-thong-minh.onrender.com/users/user-data", {
           method: "POST",
           crossDomain: true,
           headers: {
@@ -95,7 +95,7 @@ const Login = () => {
 
   return (
     <div>
-      <div className="parent clearfix"> 
+      <div className="parent clearfix">
         <div className="bg-illustration">
           <div class="burger-btn">
             <span></span>
@@ -103,12 +103,22 @@ const Login = () => {
             <span></span>
           </div>
         </div>
-        <ToastContainer />
+        <ToastContainer pauseOnHover={false} draggable={false} />
         <div class="login">
           <div class="container">
-          <Link to={"/"}>
-          <img src={icon} alt="logo" width="100px" height="100px" style={{position:"absolute", marginLeft:"500px", marginTop:"-100px"}}></img>
-          </Link>
+            <Link to={"/"}>
+              <img
+                src={icon}
+                alt="logo"
+                width="100px"
+                height="100px"
+                style={{
+                  position: "absolute",
+                  marginLeft: "500px",
+                  marginTop: "-100px",
+                }}
+              ></img>
+            </Link>
             <h1>
               Đăng nhập
               <br />
@@ -116,7 +126,6 @@ const Login = () => {
             </h1>
 
             <div class="login-form">
-              
               <form action="">
                 <input
                   type="email"
@@ -131,17 +140,20 @@ const Login = () => {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                 />
-               
-                  <div class="forget-pass" style={{
-                    textAlign:"right",
-                  }}>
+
+                <div
+                  class="forget-pass"
+                  style={{
+                    textAlign: "right",
+                  }}
+                >
                   <Link to={"/Register"}>
                     <a href="#">
                       Chưa có tài khoản? <b>Đăng kí tại đây!</b>
                     </a>
-                    </Link>
-                  </div>
-              
+                  </Link>
+                </div>
+
                 <button
                   type="submit"
                   onClick={handleSubmit}

@@ -14,7 +14,7 @@ import { Link, Navigate } from "react-router-dom";
 const AppHeaderDropdown = () => {
   const Logout = async () => {
     {
-      toast("Đăng xuất thành công ");
+      toast.success("Đăng xuất thành công ");
       const logtime = () => {
         window.localStorage.clear();
         window.localStorage.setItem("loggedIn", "false");
@@ -31,7 +31,7 @@ const AppHeaderDropdown = () => {
 
   return (
     <CDropdown variant="nav-item" style={{ listStyle: "none" }}>
-      <ToastContainer />
+      <ToastContainer pauseOnHover={false} draggable={false} autoClose={2500} />
       <CDropdownToggle lacement="bottom-end" className="py-0" caret={false}>
         <CAvatar
           src="https://www.iriset.in/tms/uploads/profile/profile.png"

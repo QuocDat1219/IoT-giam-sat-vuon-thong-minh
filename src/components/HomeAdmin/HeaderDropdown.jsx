@@ -16,7 +16,7 @@ import { Link, Navigate } from "react-router-dom";
 const HeaderDropdown = () => {
   const Logout = async () => {
     {
-      toast("Đăng xuất thành công ");
+      toast.success("Đăng xuất thành công ");
       const logtime = () => {
         window.localStorage.clear();
         window.localStorage.setItem("loggedIn", "false");

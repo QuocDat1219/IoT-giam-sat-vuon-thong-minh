@@ -31,7 +31,7 @@ const TableUser = () => {
   useEffect(() => {
     const gedataTable = async () => {
       await axios
-        .get ("https://api-vuonthongminh.vercel.app/users/getalluser")
+        .get ("https://api-vuon-thong-minh.onrender.com/users/getalluser")
         .then((result) => {
           const newdata = JSON.stringify(result.data.data);
           // setEmail(result.data.data.data.data.email);

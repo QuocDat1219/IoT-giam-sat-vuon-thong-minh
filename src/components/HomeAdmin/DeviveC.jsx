@@ -15,7 +15,7 @@ export const DeviceC = (props) => {
   useEffect(() => {
     const fetchData = async () => {
       await axios
-        .get("https://api-vuonthongminh.vercel.app/datas/getalldata")
+        .get("https://api-vuon-thong-minh.onrender.com/datas/getalldata")
         .then((result) => {
           // const newdata = JSON.parse(result.data);
           const count = result.data.data.reduce((total, item) => {
