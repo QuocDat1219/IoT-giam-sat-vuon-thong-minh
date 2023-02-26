@@ -23,7 +23,7 @@ const ControlDevice = () => {
   const [loading, setLoading] = useState(false);
   const userEmail = window.localStorage.getItem("Emaildetails");
   let urls =
-    "https://api-vuonthongminh.vercel.app/datas/datadetail/" + userEmail;
+    "https://api-vuon-thong-minh.onrender.com/datas/datadetail/" + userEmail;
   const updateOn = async (key, status, name) => {
     console.log(status);
     console.log(name);
@@ -33,7 +33,7 @@ const ControlDevice = () => {
       status -= 1;
     }
     await axios
-      .post("https://api-vuonthongminh.vercel.app/datas/updatecontrol", {
+      .post("https://api-vuon-thong-minh.onrender.com/datas/updatecontrol", {
         email: userEmail,
         status: status,
         name: name,

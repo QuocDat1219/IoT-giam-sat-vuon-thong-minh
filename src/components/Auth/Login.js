@@ -22,7 +22,7 @@ const Login = () => {
     } else {
       // toast("Đang xử lý");
       document.getElementById("submit").disabled = true;
-      fetch("https://api-vuonthongminh.vercel.app/users/login-user", {
+      fetch("https://api-vuon-thong-minh.onrender.com/users/login-user", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -48,7 +48,7 @@ const Login = () => {
           }
         });
       const loginRequest = async () => {
-        await fetch("https://api-vuonthongminh.vercel.app/users/user-data", {
+        await fetch("https://api-vuon-thong-minh.onrender.com/users/user-data", {
           method: "POST",
           crossDomain: true,
           headers: {

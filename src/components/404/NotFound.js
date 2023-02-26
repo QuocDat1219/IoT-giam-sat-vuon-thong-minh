@@ -1,13 +1,10 @@
 import React from "react";
 import "./NotFound.scss";
-import Header from "../LandingPage/Header/Headers";
 import { Link } from "react-router-dom";
 const Notfount = () => {
   return (
     <div>
-      <div>
-        <Header />
-      </div>
+     
       <div>
         <section class="page_404">
           <div class="container">

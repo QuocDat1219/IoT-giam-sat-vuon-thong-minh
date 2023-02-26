@@ -39,7 +39,7 @@ const Register = () => {
     }
     //Xử lý đăng ký
     toast("Đang xử lý...");
-    fetch("https://api-vuonthongminh.vercel.app/users/register", {
+    fetch("https://api-vuon-thong-minh.onrender.com/users/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -67,7 +67,7 @@ const Register = () => {
   };
   const createData = async () => {
     await axios
-      .post("https://api-vuonthongminh.vercel.app/datas/createdata", {
+      .post("https://api-vuon-thong-minh.onrender.com/datas/createdata", {
         email: email,
         nhietdo: 0,
         doam: 0,

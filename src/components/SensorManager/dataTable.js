@@ -31,7 +31,7 @@ const List = () => {
   const [selected, setSelected] = useState(options[0].value);
 
   const urls =
-    "https://api-vuonthongminh.vercel.app/datas/datadetail/" +
+    "https://api-vuon-thong-minh.onrender.com/datas/datadetail/" +
     window.localStorage.getItem("Emaildetails");
   useEffect(() => {
     const gedataTable = async () => {
@@ -72,7 +72,7 @@ const List = () => {
     const gioKetThuc = moment(endTimeOut, format);
     if (gioBatDau.isBefore(gioKetThuc)) {
       await axios
-        .post("https://api-vuonthongminh.vercel.app/datas/updatesensor", {
+        .post("https://api-vuon-thong-minh.onrender.com/datas/updatesensor", {
           name: dataItem.name,
           timeword: workTime,
           timeout: endTimeOut,

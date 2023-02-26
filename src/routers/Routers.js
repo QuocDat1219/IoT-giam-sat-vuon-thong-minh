@@ -17,7 +17,7 @@ const Routers = () => {
   return (
     <Routes>
       <Route exact path="/" element={<LandingPage />} />
-      <Route exact path="/Notfound" element={<Notfound />} />
+      
       <Route
         exact
         path="/adminhome"
@@ -105,6 +105,7 @@ const Routers = () => {
           )
         }
       />
+      <Route path="*" element={<Notfound />} />
     </Routes>
   );
 };
