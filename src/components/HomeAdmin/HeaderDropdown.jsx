@@ -1,18 +1,14 @@
 import React from "react";
 import {
   CAvatar,
-  CBadge,
   CDropdown,
-  CDropdownDivider,
   CDropdownHeader,
   CDropdownItem,
   CDropdownMenu,
   CDropdownToggle,
 } from "@coreui/react";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { ToastContainer, toast } from "react-toastify";
 import LogoutIcon from "@mui/icons-material/Logout";
-import { Link, Navigate } from "react-router-dom";
 const HeaderDropdown = () => {
   const Logout = async () => {
     {
