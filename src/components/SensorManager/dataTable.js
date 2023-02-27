@@ -51,10 +51,8 @@ const List = () => {
   }, []);
   
   const handelSaveClick = (item) => {
-    console.log(item);
     dataItem = item;
     setShowModal(true);
-    console.log(dataItem); //lần đầu = ""
     setWorkTime("");
     setEndTimeOut("");
     setLimit("");

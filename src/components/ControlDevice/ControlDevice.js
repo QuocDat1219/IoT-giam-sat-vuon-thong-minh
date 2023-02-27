@@ -17,6 +17,7 @@ import Footer from "../LandingPage/UI/Footer";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import { SetMealSharp } from "@mui/icons-material";
 import Form from "react-bootstrap/Form";
+let dataDevice = null;
 const ControlDevice = () => {
   const [showModel, setshowModel] = useState(false);
   const [dieukhien, setDieukhien] = useState([]);
@@ -49,6 +50,12 @@ const ControlDevice = () => {
       });
   };
 
+  const handleShowModal = (data) => {
+    dataDevice = data;
+    setshowModel(true);
+    setDieukhien(data);
+    console.log(data);
+  };
   useEffect(() => {
     setInterval(() => {
       const getData = async () => {
@@ -95,7 +102,7 @@ const ControlDevice = () => {
                             <button
                               ariant="contained"
                               color="primary"
-                              onClick={() => setshowModel(true)}
+                              onClick={() => handleShowModal(data)}
                             >
                               <ModeEditIcon />
                             </button>
