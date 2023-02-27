@@ -8,21 +8,18 @@ import {
   ItemName,
 } from "./SidebarStyles";
 
-
 import { dummyData } from "..";
 
 const SidebarItems = ({ displaySidebar }) => {
   const [activeItem, setActiveItem] = useState(0);
 
-
   return (
     <ItemsList>
-      {dummyData.map((itemData, index) => ( 
+      {dummyData.map((itemData, index) => (
         <ItemContainer
           key={index}
           className={itemData.id === activeItem ? "active" : ""}
         >
- 
           <Link to={itemData.path}>
             <ItemWrapper>
               {itemData.icon}
