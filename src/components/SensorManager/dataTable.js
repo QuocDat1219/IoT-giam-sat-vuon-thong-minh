@@ -169,10 +169,10 @@ const List = () => {
                       onSubmit={handleEditSensor}
                     >
                       <Form.Group className="mb-3" controlId="formBasicAction">
-                        <Form.Label>
+                        <Form.Label className="labelTitle">
                           Trạng thái thiết bị: <Form.Label> </Form.Label>
                         </Form.Label>
-                        <Form.Text className="text-muted">
+                        <Form.Text className="labelTitle">
                           {dataItem.status == "1" ? (
                             <strong style={{ color: "#2ecc71" }}>
                               Đang hoạt động
@@ -189,7 +189,7 @@ const List = () => {
                         className="mb-3"
                         controlId="formBasicTimeWork"
                       >
-                        <Form.Label>
+                        <Form.Label className="labelTitle">
                           Thời gian hoạt động:{" "}
                           <strong>{dataItem.timeword}</strong>
                         </Form.Label>
@@ -203,7 +203,7 @@ const List = () => {
                       </Form.Group>
 
                       <Form.Group className="mb-3" controlId="formBasicTimeEnd">
-                        <Form.Label>
+                        <Form.Label className="labelTitle">
                           Thời gian hoạt dừng:{" "}
                           <strong>{dataItem.timeout}</strong>
                         </Form.Label>
@@ -220,7 +220,11 @@ const List = () => {
                         className="mb-3"
                         controlId="formBasicNotification"
                       >
-                        <Form.Label>Thông báo:</Form.Label>
+                        <Form.Label className="labelTitle">Thông báo: <Form.Label
+                          style={{ fontSize: "16px", fontWeight: "bold" }}>
+                          {dataItem.nofi}
+                        </Form.Label>
+                        </Form.Label>
                         <Form.Select
                           id="disabledSelect"
                           value={selected}
@@ -235,7 +239,12 @@ const List = () => {
                       </Form.Group>
 
                       <Form.Group className="mb-3" controlId="formBasicLimit">
-                        <Form.Label>Ngưỡng thông số cảm biến:</Form.Label>
+                        <Form.Label className="labelTitle">Ngưỡng thông số cảm biến: 
+                          <Form.Label
+                            style={{ fontSize: "16px", fontWeight: "bold" }}>
+                            {dataItem.limit}
+                          </Form.Label>
+                        </Form.Label>
                         <Form.Control
                           required
                           type="number"
