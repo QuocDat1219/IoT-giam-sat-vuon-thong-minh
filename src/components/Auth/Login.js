@@ -162,7 +162,7 @@ const Login = () => {
                 >
                   {isLoading ? (
                     <div className="flex justify-center items-center">
-                      <PuffLoader color="#4cd137" size={30} />
+                      <PuffLoader color="#eaeae8" size={40} />
                     </div>
                   ) : (
                     "Đăng nhập"

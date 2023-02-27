@@ -22,19 +22,24 @@ const Register = () => {
     /^(?=.*[a-z])(?=.*[0-9])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
   const handleSubmit = (e) => {
     e.preventDefault();
+    setIsLoading(true);
     setUserType("");
     //Kiểm tra dữ liệu nhập của người dùng
     if (fname == "" || lname == "" || email == "" || password == "") {
       toast.warning("Vui lòng nhập đầy đủ thông tin đăng ký!");
+      setIsLoading(false);
       return;
     } else if (!checkPassword.test(password) || password.length == "") {
       toast.warning("Mật khẩu không hợp lệ!");
+      setIsLoading(false);
       return;
     } else if (!checkMail.test(email) || email.length == "") {
       toast.warning("Email không hợp lệ!");
+      setIsLoading(false);
       return;
     } else if (password != confirmPassword) {
       toast.warning("Mật khẩu và nhập lại mật khẩu không trùng khớp...");
+      setIsLoading(false);
       return;
     }
     //Xử lý đăng ký
@@ -66,6 +71,8 @@ const Register = () => {
       });
   };
   const createData = async () => {
+    
+
     await axios
       .post("https://api-vuon-thong-minh.onrender.com/datas/createdata", {
         email: email,
@@ -75,6 +82,7 @@ const Register = () => {
         ultrasonic: 0,
         connect: "disconnect",
         reset: "0",
+        idtelegram: "",
         control: [
           {
             name: "Control 1",
@@ -120,7 +128,8 @@ const Register = () => {
         ],
       })
       .then((data) => {
-        console.log(data);
+        setIsLoading(false);
+        //console.log(data);
         toast.success("Đăng ký thành công");
         setTimeout((window.location.href = "/home"), 2000);
       });
@@ -136,7 +145,7 @@ const Register = () => {
               <span></span>
             </div>
           </div>
-          <ToastContainer />
+          <ToastContainer pauseOnHover={false} draggable={false} />
           <div class="login">
             <div class="container">
               <Link to={"/"}>
@@ -157,7 +166,7 @@ const Register = () => {
                 <br />
                 IoT -<span style={{ color: "#07bc0c" }}> Green House</span>
               </h1>
-
+              
               <div class="login-form">
                 <form action="" onSubmit={handleSubmit}>
                   <input
@@ -205,7 +214,7 @@ const Register = () => {
                   <button type="submit" disabled={isLoading}>
                     {isLoading ? (
                       <div className="flex justify-center items-center">
-                        <PuffLoader color="#4cd137" size={30} />
+                        <PuffLoader color="#eaeae8" size={40} />
                       </div>
                     ) : (
                       "Đăng ký"

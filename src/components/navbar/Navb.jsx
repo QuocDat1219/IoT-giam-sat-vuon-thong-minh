@@ -11,9 +11,10 @@ import "./btnRs.scss";
 import RotateLeftIcon from "@mui/icons-material/RotateLeft";
 const Navb = () => {
   const [conn, setConn] = useState("");
-  const userEmail = window.localStorage.getItem("Emaildetails");
+
   const [showModel, setshowModel] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const userEmail = window.localStorage.getItem("Emaildetails");
   let urls =
     "https://api-vuon-thong-minh.onrender.com/datas/datadetail/" + userEmail;
 
@@ -41,7 +42,7 @@ const Navb = () => {
           connect: "disconnect",
         })
         .then(function (response) {
-          console.log(response);
+          //console.log(response);
         })
         .catch(function (error) {
           console.log(error);

@@ -40,7 +40,7 @@ const AppHeaderDropdown = () => {
       </CDropdownToggle>
       <CDropdownMenu className="pt-0" placement="bottom-end">
         <CDropdownHeader className="bg-gray-200 fw-semibold py-2">
-          Account
+          Tài khoản
         </CDropdownHeader>
         <Link to="/user">
           <CDropdownItem>
