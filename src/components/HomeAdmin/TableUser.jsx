@@ -17,7 +17,7 @@ import Navb from "../navbar/Navb";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import Footer from "../LandingPage/UI/Footer";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
-
+let dataUsers = null;
 const TableUser = () => {
   const [showModel, setshowModel] = useState(false);
   const [dtTable, setdtTable] = useState([]);
@@ -47,6 +47,10 @@ const TableUser = () => {
     return () => clearInterval(intervalId);
   }, []);
 
+  const handleClickShowMedal = (item) => {
+    dataUsers = item;
+    setshowModel(true);
+  };
   return (
     <div>
       <div>
@@ -81,7 +85,7 @@ const TableUser = () => {
                     <Button
                       ariant="contained"
                       color="primary"
-                      onClick={() => setshowModel(true)}
+                      onClick={() => handleClickShowMedal(item)}
                     >
                       <ModeEditIcon />
                     </Button>
@@ -113,19 +117,19 @@ const TableUser = () => {
                 <Form style={{ width: "500px", padding: "20px" }}>
                   <Form.Group className="mb-3" controlId="formBasicAction">
                     <Form.Label style={{ fontSize: "20px" }}>
-                      Email: <Form.Label> </Form.Label>
+                      Email: <Form.Label className="labelUser">{dataUsers.email}</Form.Label>
                     </Form.Label>
                     <Form.Control required type="Email"></Form.Control>
                   </Form.Group>
                   <Form.Group className="mb-3" controlId="formBasicAction">
                     <Form.Label style={{ fontSize: "20px" }}>
-                      First Name: <Form.Label> </Form.Label>
+                      First Name: <Form.Label className="labelUser">{dataUsers.fname}</Form.Label>
                     </Form.Label>
                     <Form.Control required type="text"></Form.Control>
                   </Form.Group>
                   <Form.Group className="mb-3" controlId="formBasicAction">
                     <Form.Label style={{ fontSize: "20px" }}>
-                      Last Name: <Form.Label> </Form.Label>
+                      Last Name: <Form.Label className="labelUser">{dataUsers.lname}</Form.Label>
                     </Form.Label>
                     <Form.Control required type="text"></Form.Control>
                   </Form.Group>
