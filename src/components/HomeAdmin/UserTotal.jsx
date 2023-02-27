@@ -15,7 +15,7 @@ export const UserTotal = (props) => {
   useEffect(() => {
     const fetchData = async () => {
       await axios
-        .get("https://api-vuonthongminh.vercel.app/datas/getalldata")
+        .get("https://api-vuon-thong-minh.onrender.com/datas/getalldata")
         .then((result) => {
           const numOfEmailFields = result.data.data.filter(obj => obj.email !== undefined).length;
           setTotalUser(numOfEmailFields)

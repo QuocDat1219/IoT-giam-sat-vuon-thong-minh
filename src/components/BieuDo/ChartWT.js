@@ -11,7 +11,7 @@ const ChartWT = () => {
   const userEmail = window.localStorage.getItem("Emaildetails");
 
   let urls =
-    "https://api-vuonthongminh.vercel.app/datas/datadetail/" + userEmail;
+    "https://api-vuon-thong-minh.onrender.com/datas/datadetail/" + userEmail;
 
   useEffect(() => {
     const fetchData = async () => {

@@ -17,14 +17,14 @@ export const SendEmail = () => {
     e.preventDefault();
 
     if (name == "" || email == "" || noidung == "") {
-      toast("Vui lòng không để trống thông tin để có thể gửi phản hồi");
+      toast.warning("Vui lòng không để trống thông tin");
       return;
     } else if (!checkMail.test(email) || email.length == "") {
-      toast("Email không hợp lệ");
+      toast.warning("Email không hợp lệ");
       return;
     }
 
-    toast("Đang xử lý...");
+    // toast("Đang xử lý...");
 
     emailjs
       .sendForm(
@@ -36,7 +36,20 @@ export const SendEmail = () => {
       .then(
         (result) => {
           console.log(result.text);
-          toast.success("Gửi thành công");
+          toast.promise(
+            new Promise((resolve, reject) => {
+              setTimeout(() => {
+                resolve();
+              }, 2000);
+            }),
+            {
+              pending: "Đang xử lí....",
+              success: "Gửi thành công",
+            },
+            {
+              autoClose: 2000,
+            }
+          );
         },
         (error) => {
           console.log(error.text);
@@ -60,9 +73,14 @@ export const SendEmail = () => {
             >
               PHẢN HỒI
             </p>
-            <label style={{ fontWeight: "bolder", fontSize: "18px", paddingBottom:"10px" }}>
-              Họ tên 
-
+            <label
+              style={{
+                fontWeight: "bolder",
+                fontSize: "18px",
+                paddingBottom: "10px",
+              }}
+            >
+              Họ tên
             </label>
             <input
               className="title_ip"
@@ -73,7 +91,11 @@ export const SendEmail = () => {
             />
             <label
               className="title_lb"
-              style={{ fontWeight: "bolder", fontSize: "18px",paddingBottom:"10px" }}
+              style={{
+                fontWeight: "bolder",
+                fontSize: "18px",
+                paddingBottom: "10px",
+              }}
             >
               Email
             </label>
@@ -87,7 +109,11 @@ export const SendEmail = () => {
             />
             <label
               className="title_lb"
-              style={{ fontWeight: "bolder", fontSize: "18px",paddingBottom:"10px" }}
+              style={{
+                fontWeight: "bolder",
+                fontSize: "18px",
+                paddingBottom: "10px",
+              }}
             >
               Nội dung phản hồi
             </label>
@@ -104,7 +130,7 @@ export const SendEmail = () => {
           </form>
         </div>
       </StyledContactForm>
-      <ToastContainer />
+      <ToastContainer pauseOnHover={false} draggable={false} autoClose={2500} />
     </div>
   );
 };

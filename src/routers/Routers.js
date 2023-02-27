@@ -9,6 +9,7 @@ import AdminHome from "../components/Auth/AdminHome";
 import LandingPage from "../components/LandingPage/LandingPage";
 import BangDuLieu from "../components/BangData/DataTable";
 import ControlDevice from "../components/ControlDevice/ControlDevice";
+import Notfound from "../components/404/NotFound";
 const Routers = () => {
   const isLoggedIn = window.localStorage.getItem("loggedIn");
   const isAdminIn = window.localStorage.getItem("isadmin");
@@ -16,6 +17,7 @@ const Routers = () => {
   return (
     <Routes>
       <Route exact path="/" element={<LandingPage />} />
+      
       <Route
         exact
         path="/adminhome"
@@ -35,7 +37,7 @@ const Routers = () => {
         element={
           isLoggedIn == "false" ? (
             <Login />
-          ) : isAdminIn == "true" ?(
+          ) : isAdminIn == "true" ? (
             <AdminHome />
           ) : (
             <Home />
@@ -47,14 +49,14 @@ const Routers = () => {
         element={
           isLoggedIn == "false" ? (
             <Register />
-          ) : isAdminIn == "true" ?(
+          ) : isAdminIn == "true" ? (
             <AdminHome />
           ) : (
             <Home />
           )
         }
       />
-      
+
       <Route
         path="/bieudo"
         element={
@@ -85,18 +87,26 @@ const Routers = () => {
       <Route
         path="/bangdulieu"
         element={
-          isLoggedIn == "true" && isAdminIn == "false" ? <BangDuLieu /> : <Login />
+          isLoggedIn == "true" && isAdminIn == "false" ? (
+            <BangDuLieu />
+          ) : (
+            <Login />
+          )
         }
       />
 
       <Route
         path="/control"
         element={
-          isLoggedIn == "true" && isAdminIn == "false" ? <ControlDevice /> : <Login />
+          isLoggedIn == "true" && isAdminIn == "false" ? (
+            <ControlDevice />
+          ) : (
+            <Login />
+          )
         }
       />
+      <Route path="*" element={<Notfound />} />
     </Routes>
-
   );
 };
 

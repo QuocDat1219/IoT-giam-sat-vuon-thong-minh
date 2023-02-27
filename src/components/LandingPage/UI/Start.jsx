@@ -32,7 +32,7 @@ function Start() {
               <br />
               Đồng thời dữ liệu được lưu trữ hoàn toàn bằng các dịch vụ đám mây
             </p>
-            <Link to={"/Register"}>
+            <Link to={"/Notfound"}>
             <div class="buttons">
                   <button class="blob-btn">
                     Trải nghiệm ngay 

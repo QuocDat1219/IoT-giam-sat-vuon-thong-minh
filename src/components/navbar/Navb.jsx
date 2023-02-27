@@ -56,7 +56,7 @@ const Navb = () => {
   const handleResetBtn = async () => {
     setIsLoading(true);
     await axios
-      .post("https://api-vuonthongminh.vercel.app/datas/reset", {
+      .post("https://api-vuon-thong-minh.onrender.com/datas/reset", {
         reset: "1",
         email: userEmail,
       })
@@ -68,7 +68,7 @@ const Navb = () => {
         }
       })
       .catch(function (error) {
-        toast.success("Reset không thành công");
+        toast.error("Reset không thành công");
       });
   };
   return (

@@ -57,7 +57,7 @@ const BangDuLieu = () => {
   ];
 
   const urls =
-    "https://api-vuonthongminh.vercel.app/datas/datadetail/" +
+    "https://api-vuon-thong-minh.onrender.com/datas/datadetail/" +
     window.localStorage.getItem("Emaildetails");
   useEffect(() => {
     const gedataTable = async () => {
