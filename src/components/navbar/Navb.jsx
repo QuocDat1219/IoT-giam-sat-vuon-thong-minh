@@ -1,10 +1,8 @@
 import "./Navb.scss";
-import NotificationsActiveIcon from "@mui/icons-material/NotificationsActive";
 import axios from "axios";
 import React, { useEffect, useState } from "react"; //react hooks
 import { FaUsb } from "react-icons/fa";
 import AppHeaderDropdown from "../header/AppHeaderDropdown";
-import Form from "react-bootstrap/Form";
 import { toast } from "react-toastify";
 import PuffLoader from "react-spinners/PuffLoader";
 import "./btnRs.scss";
@@ -26,7 +24,7 @@ const Navb = () => {
           setConn(data.data.data.connect);
         })
         .catch((e) => {
-          console.log(e);
+          toast("Lỗi gọi API");
         });
     };
     fetchData();
@@ -45,7 +43,7 @@ const Navb = () => {
           //console.log(response);
         })
         .catch(function (error) {
-          console.log(error);
+          toast("Lỗi gọi API");
         });
     };
     updatedata();
@@ -62,7 +60,6 @@ const Navb = () => {
         email: userEmail,
       })
       .then(function (response) {
-        console.log(response);
         if (response.data.acknowledged == true) {
           toast.success("Reset thành công");
           setIsLoading(false);
