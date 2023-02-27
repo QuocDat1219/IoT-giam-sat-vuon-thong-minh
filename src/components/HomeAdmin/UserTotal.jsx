@@ -10,6 +10,7 @@ import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import PeopleIcon from "@mui/icons-material/PeopleOutlined";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import "./Css/UserTotal.css";
 export const UserTotal = (props) => {
   const [totalUser, setTotalUser] = useState("");
   useEffect(() => {
@@ -17,8 +18,10 @@ export const UserTotal = (props) => {
       await axios
         .get("https://api-vuon-thong-minh.onrender.com/datas/getalldata")
         .then((result) => {
-          const numOfEmailFields = result.data.data.filter(obj => obj.email !== undefined).length;
-          setTotalUser(numOfEmailFields)
+          const numOfEmailFields = result.data.data.filter(
+            (obj) => obj.email !== undefined
+          ).length;
+          setTotalUser(numOfEmailFields);
         })
         .catch((e) => {
           console.log(e);
@@ -31,7 +34,7 @@ export const UserTotal = (props) => {
   }, []);
 
   return (
-    <div style={{ width: "150%" }}>
+    <div style={{ width: "150%" }} className="total-US">
       <Card {...props}>
         <CardContent>
           <Grid container spacing={3} sx={{ justifyContent: "space-between" }}>
@@ -65,6 +68,6 @@ export const UserTotal = (props) => {
         </CardContent>
       </Card>
     </div>
-  )
+  );
 };
 export default UserTotal;

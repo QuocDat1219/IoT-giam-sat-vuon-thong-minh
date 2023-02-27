@@ -1,0 +1,16 @@
+.star-rating {
+    display: inline-block;
+    font-size: 2em;
+    unicode-bidi: bidi-override;
+    text-align: center;
+  }
+  
+  .star {
+    display: inline-block;
+    color: grey;
+    cursor: pointer;
+  }
+  
+  .star.selected {
+    color: gold;
+  }

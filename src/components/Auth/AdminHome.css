@@ -5,7 +5,7 @@
 .homeContainerAdmin{
     width: 100%;
 }
-.Total{
+.TotalUS{
     display: flex;
     margin-left: 50px;
     padding-top: 40px;
@@ -13,7 +13,7 @@
     width: auto;
 }
 .userTotal{
-    margin-left: 50px;
+    margin-left: 5%;
 }
 .deviceTotal{
     margin-left: 150px;
@@ -27,7 +27,7 @@
 .tableU{
     padding-top: 80px;
     width: 80%;
-    margin-left: 130px;
+    margin-left: 10%;
     margin-right: 50%;
 
 }

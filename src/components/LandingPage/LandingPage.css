@@ -67,3 +67,6 @@ ul {
   color      : var(--heading-color);
   font-weight: 700;
 }
+.feeback{
+  height: 40px;
+}
