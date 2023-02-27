@@ -38,7 +38,6 @@ const List = () => {
       await axios
         .get(urls)
         .then((result) => {
-          // console.log(result.data.data.sensor);
           setdtTable(result.data.data.sensor);
         })
         .catch((err) => {
@@ -59,7 +58,6 @@ const List = () => {
   };
   //sự kiện chọn select
   const handleChange = (event) => {
-    console.log(event.target.value);
     setSelected(event.target.value);
   };
   //sự kiện submit
@@ -85,11 +83,8 @@ const List = () => {
           }
         })
         .catch(function (error) {
-          console.log(error);
           toast.warning("Thay đổi không thành công");
         });
-      console.log(gioBatDau);
-      console.log(gioKetThuc);
     } else {
       toast.warning("Thời gian bắt đầu phải lớn hơn thời gian kết thúc");
     }
@@ -116,7 +111,7 @@ const List = () => {
                   </TableHead>
                   <TableBody>
                     {dtTable.map((item, index) => (
-                      <TableRow TableRowkey={index}>
+                      <TableRow key={index}>
                         <TableCell className="tableCell">{index + 1}</TableCell>
                         <TableCell className="tableCell">{item.name}</TableCell>
                         <TableCell className="tableCell">
