@@ -8,6 +8,7 @@ import Hero from "./UI/Hero";
 import Start from "./UI/Start";
 import Testimonials from "./UI/Testimonials";
 import SendEmail from "./UI/SendGmail";
+import Feedback from "./UI/Feedback";
 function LandingPage() {
   useEffect(() => {
     Aos.init();
@@ -22,9 +23,12 @@ function LandingPage() {
         <div style={{ margin: "auto" }}>
           <Testimonials />
         </div>
-        <div style={{ margin: "auto"}}>
+        <div style={{ margin: "auto" }}>
           <SendEmail />
         </div>
+      </div>
+      <div className="feeback">
+        <Feedback />
       </div>
       <Footer />
     </>

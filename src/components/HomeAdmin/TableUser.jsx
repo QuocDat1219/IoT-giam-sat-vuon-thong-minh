@@ -1,4 +1,4 @@
-import "./TableUser.css";
+import "./Css/TableUser.css";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -31,12 +31,12 @@ const TableUser = () => {
   useEffect(() => {
     const gedataTable = async () => {
       await axios
-        .get ("https://api-vuon-thong-minh.onrender.com/users/getalluser")
+        .get("https://api-vuon-thong-minh.onrender.com/users/getalluser")
         .then((result) => {
           const newdata = JSON.stringify(result.data.data);
           // setEmail(result.data.data.data.data.email);
           setEmail(JSON.parse(newdata));
-          console.log(JSON.parse(newdata));      
+          console.log(JSON.parse(newdata));
         })
         .catch((err) => {
           throw new Error(err);
@@ -60,40 +60,57 @@ const TableUser = () => {
               <TableHead>
                 <TableRow>
                   <TableCell className="tableCell">STT</TableCell>
-                  <TableCell className="tableCell"style={{textAlign:"center"}}>User</TableCell>
-                  <TableCell className="title-e" style={{textAlign:"center"}}>Email</TableCell>
+                  <TableCell
+                    className="tableCell"
+                    style={{ textAlign: "center" }}
+                  >
+                    User
+                  </TableCell>
+                  <TableCell
+                    className="title-e"
+                    style={{ textAlign: "center" }}
+                  >
+                    Email
+                  </TableCell>
                   <TableCell className="" style={{ textAlign: "center" }}>
                     Hành động
                   </TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
-              
-              {email.map((item, index) =>(
-                <TableRow key={index}>
-                  <TableCell className="tableCell">{index}</TableCell>
-                  <TableCell className="tableCell" style={{textAlign:"center"}}>{item.fname + " " + item.lname}</TableCell>
-                  
-                  <TableCell className="tableCell" style={{textAlign:"center"}}>
-                    {item.email}
-                  </TableCell>
-                  
-                  <TableCell
-                    className="table_btn"
-                    style={{ textAlign: "center" }}
-                  >
-                    <Button
-                      ariant="contained"
-                      color="primary"
-                      onClick={() => handleClickShowMedal(item)}
+                {email.map((item, index) => (
+                  <TableRow key={index}>
+                    <TableCell className="tableCell">{index}</TableCell>
+                    <TableCell
+                      className="tableCell"
+                      style={{ textAlign: "center" }}
                     >
-                      <ModeEditIcon />
-                    </Button>
-                    <Button>
-                      <DeleteForeverIcon />
-                    </Button>
-                  </TableCell>
-                </TableRow>
+                      {item.fname + " " + item.lname}
+                    </TableCell>
+
+                    <TableCell
+                      className="tableCell"
+                      style={{ textAlign: "center" }}
+                    >
+                      {item.email}
+                    </TableCell>
+
+                    <TableCell
+                      className="table_btn"
+                      style={{ textAlign: "center" }}
+                    >
+                      <Button
+                        ariant="contained"
+                        color="primary"
+                        onClick={() => setshowModel(true)}
+                      >
+                        <ModeEditIcon />
+                      </Button>
+                      <Button>
+                        <DeleteForeverIcon />
+                      </Button>
+                    </TableCell>
+                  </TableRow>
                 ))}
                 {/* ))} */}
               </TableBody>

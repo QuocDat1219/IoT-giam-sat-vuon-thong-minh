@@ -4,12 +4,12 @@ import emailjs from "@emailjs/browser";
 import styled from "styled-components";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import StarRating from "./StarFeedback";
 export const SendEmail = () => {
   const form = useRef();
   const [name, setname] = useState("");
   const [email, setemail] = useState("");
   const [noidung, setnoidung] = useState("");
-
   var checkMail =
     /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 
@@ -124,6 +124,21 @@ export const SendEmail = () => {
               placeholder="Vui lòng nhập thông tin phản hồi"
               onChange={(e) => setnoidung(e.target.value)}
             />
+
+            <div>
+            <label
+              className="title_lb"
+              style={{
+                fontWeight: "bolder",
+                fontSize: "18px",
+                paddingBottom: "10px",
+              }}
+            >
+              Đánh giá:
+            </label>
+            <br />
+              <StarRating totalStars={5} />
+            </div>
             <button className="btn" type="submit">
               <span>Gửi</span>
             </button>
