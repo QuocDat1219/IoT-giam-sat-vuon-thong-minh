@@ -1,7 +1,7 @@
 import React from "react";
 import "../Style/start.css";
 import "../Style/button.scss";
-import startImg from "../../images/mohinh.jpg";
+import startImg from "../../images/vcl.png";
 import { Link } from "react-router-dom";
 function Start() {
   return (
