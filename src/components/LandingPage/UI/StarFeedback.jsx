@@ -22,7 +22,10 @@ const StarRating = ({ totalStars }) => {
 
   return (
     <div className="star-rating">
-      {[...Array(totalStars)].map((n, i) => renderStar(i))}
+      {[...Array(totalStars)].map((n, i) => renderStar(i))}{" "}
+      <p className="selected-stars">
+        {selectedStars} trên {totalStars} sao được chọn
+      </p>
     </div>
   );
 };
