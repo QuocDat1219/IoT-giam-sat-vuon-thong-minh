@@ -78,7 +78,7 @@ const HeaderDropdown = () => {
       toast.error("Nhập lại mật khẩu không trùng khớp");
 
     } else {
-      toast("Đang xử lý...");
+      // toast("Đang xử lý...");
       await axios
         .post("https://api-vuon-thong-minh.onrender.com/users/changepassword", {
           tokenold: window.localStorage.getItem("token"),
@@ -90,10 +90,10 @@ const HeaderDropdown = () => {
           if (response.data.error === "Passwords don't match") {
             toast.error("Mật khẩu cũ không đúng");
           }
-          else if (response.data.status === "verified") {
-            toast.success("Đổi mật khẩu thành công");
-            setshowModalChangePAss(false);
-          }
+            else if (response.data.status === "verified") {
+              toast.success("Đổi mật khẩu thành công");
+              setshowModalChangePAss(false);
+            }
         })
         .catch(function (error) {
           console.log(error);

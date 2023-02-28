@@ -43,7 +43,7 @@ const Register = () => {
       return;
     }
     //Xử lý đăng ký
-    toast("Đang xử lý...");
+    // toast("Đang xử lý...");
     fetch("https://api-vuon-thong-minh.onrender.com/users/register", {
       method: "POST",
       headers: {
@@ -71,8 +71,6 @@ const Register = () => {
       });
   };
   const createData = async () => {
-    
-
     await axios
       .post("https://api-vuon-thong-minh.onrender.com/datas/createdata", {
         email: email,
@@ -129,7 +127,6 @@ const Register = () => {
       })
       .then((data) => {
         setIsLoading(false);
-        //console.log(data);
         toast.success("Đăng ký thành công");
         setTimeout((window.location.href = "/home"), 2000);
       });
@@ -166,7 +163,7 @@ const Register = () => {
                 <br />
                 IoT -<span style={{ color: "#07bc0c" }}> Green House</span>
               </h1>
-              
+
               <div class="login-form">
                 <form action="" onSubmit={handleSubmit}>
                   <input
