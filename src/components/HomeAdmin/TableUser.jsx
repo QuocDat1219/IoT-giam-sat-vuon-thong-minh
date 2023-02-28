@@ -10,24 +10,15 @@ import Form from "react-bootstrap/Form";
 import { useState, useEffect } from "react";
 import { Button, Select } from "@mui/material";
 import axios from "axios";
-import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Sidebar } from "..";
-import Navb from "../navbar/Navb";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
-import Footer from "../LandingPage/UI/Footer";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
-let dataUsers = null;
+let useData = null;
 const TableUser = () => {
   const [showModel, setshowModel] = useState(false);
   const [dtTable, setdtTable] = useState([]);
   const [email, setEmail] = useState([]);
-  // const [firstname, setFirstname] = useState("");
-  // const [lastname, setLastname] = useState("");
-  //   const handelSubmit = (item) => {
-  //     dataItem = item;
-  //     // setshowModel(true);
-  //   };
+  
   useEffect(() => {
     const gedataTable = async () => {
       await axios
@@ -46,6 +37,10 @@ const TableUser = () => {
     const intervalId = setInterval(gedataTable, 5000);
     return () => clearInterval(intervalId);
   }, []);
+const handleClickShowModal = (item) => {
+  useData = item;
+  setshowModel(true);
+}
 
   const handleClickShowMedal = (item) => {
     dataUsers = item;
@@ -134,19 +129,19 @@ const TableUser = () => {
                 <Form style={{ width: "500px", padding: "20px" }}>
                   <Form.Group className="mb-3" controlId="formBasicAction">
                     <Form.Label style={{ fontSize: "20px" }}>
-                      Email: <Form.Label className="labelUser">{dataUsers.email}</Form.Label>
+                      Email: <Form.Label className="titleUser">{useData.email}</Form.Label>
                     </Form.Label>
                     <Form.Control required type="Email"></Form.Control>
                   </Form.Group>
                   <Form.Group className="mb-3" controlId="formBasicAction">
                     <Form.Label style={{ fontSize: "20px" }}>
-                      First Name: <Form.Label className="labelUser">{dataUsers.fname}</Form.Label>
+                      First Name: <Form.Label className="titleUser">{useData.fname}</Form.Label>
                     </Form.Label>
                     <Form.Control required type="text"></Form.Control>
                   </Form.Group>
                   <Form.Group className="mb-3" controlId="formBasicAction">
                     <Form.Label style={{ fontSize: "20px" }}>
-                      Last Name: <Form.Label className="labelUser">{dataUsers.lname}</Form.Label>
+                      Last Name: <Form.Label className="titleUser">{useData.lname}</Form.Label>
                     </Form.Label>
                     <Form.Control required type="text"></Form.Control>
                   </Form.Group>
