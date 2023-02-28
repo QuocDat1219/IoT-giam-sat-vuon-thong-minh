@@ -1,4 +1,4 @@
-import "./Css/TableUser.css";
+import "./TableUser.css";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -41,11 +41,6 @@ const handleClickShowModal = (item) => {
   useData = item;
   setshowModel(true);
 }
-
-  const handleClickShowMedal = (item) => {
-    useData = item;
-    setshowModel(true);
-  };
   return (
     <div>
       <div>
@@ -97,7 +92,7 @@ const handleClickShowModal = (item) => {
                       <Button
                         ariant="contained"
                         color="primary"
-                        onClick={() => setshowModel(true)}
+                        onClick={() => handleClickShowModal(item)}
                       >
                         <ModeEditIcon />
                       </Button>
