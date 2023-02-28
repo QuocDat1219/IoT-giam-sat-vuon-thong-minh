@@ -43,7 +43,7 @@ const handleClickShowModal = (item) => {
 }
 
   const handleClickShowMedal = (item) => {
-    dataUsers = item;
+    useData = item;
     setshowModel(true);
   };
   return (
