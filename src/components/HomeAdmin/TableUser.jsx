@@ -16,9 +16,10 @@ import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 let useData = null;
 const TableUser = () => {
   const [showModel, setshowModel] = useState(false);
+  const [showThem, setshowThem] = useState(false);
   const [dtTable, setdtTable] = useState([]);
   const [email, setEmail] = useState([]);
-  
+
   useEffect(() => {
     const gedataTable = async () => {
       await axios
@@ -37,12 +38,22 @@ const TableUser = () => {
     const intervalId = setInterval(gedataTable, 5000);
     return () => clearInterval(intervalId);
   }, []);
-const handleClickShowModal = (item) => {
-  useData = item;
-  setshowModel(true);
-}
+  const handleClickShowModal = (item) => {
+    useData = item;
+    setshowModel(true);
+  };
   return (
     <div>
+      <div>
+        <button
+          style={{ fontSize: "15px", marginBottom: "20px" }}
+          type="submit"
+          className="btn_them"
+          onClick={() => setshowThem(true)}
+        >
+          Thêm
+        </button>
+      </div>
       <div>
         {dtTable ? (
           <TableContainer component={Paper} className="table container mx-auto">
@@ -110,6 +121,68 @@ const handleClickShowModal = (item) => {
           "loading"
         )}
       </div>
+      {showThem ? (
+        <div>
+          <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
+            <div className="relative w-auto my-6 mx-auto max-w-3xl">
+              <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+                <div className="flex items-start justify-between p-3 border-b border-solid border-slate-200 rounded-t">
+                  <h3 className="text-2xl font-semibold text-center m-2 w-100">
+                    Thêm Thành Viên
+                  </h3>
+                </div>
+                <Form style={{ width: "500px", padding: "20px" }}>
+                  <Form.Group className="mb-3" controlId="formBasicAction">
+                    <Form.Label style={{ fontSize: "20px" }}>
+                      Email:{" "}
+                      <Form.Label
+                        className="labelUser"
+                        type="email"
+                      ></Form.Label>
+                    </Form.Label>
+                    <Form.Control required type="Email"></Form.Control>
+                  </Form.Group>
+                  <Form.Group className="mb-3" controlId="formBasicAction">
+                    <Form.Label style={{ fontSize: "20px" }}>
+                      First Name:{" "}
+                      <Form.Label className="labelUser"></Form.Label>
+                    </Form.Label>
+                    <Form.Control required type="text"></Form.Control>
+                  </Form.Group>
+                  <Form.Group className="mb-3" controlId="formBasicAction">
+                    <Form.Label style={{ fontSize: "20px" }}>
+                      Last Name: <Form.Label className="labelUser"></Form.Label>
+                    </Form.Label>
+                    <Form.Control required type="text"></Form.Control>
+                  </Form.Group>
+                  <Form.Group className="mb-3" controlId="formBasicAction">
+                    <Form.Label style={{ fontSize: "20px" }}>
+                      Password: <Form.Label type="Password"> </Form.Label>
+                    </Form.Label>
+                    <Form.Control required type="text"></Form.Control>
+                  </Form.Group>
+                  <div className="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
+                    <button
+                      className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                      type="button"
+                      onClick={() => setshowThem(false)}
+                    >
+                      Thoát
+                    </button>
+                    <button
+                      className="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                      type="submit"
+                    >
+                      Cập nhật
+                    </button>
+                  </div>
+                </Form>
+              </div>
+            </div>
+          </div>
+          <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
+        </div>
+      ) : null}
 
       {showModel ? (
         <div>
@@ -124,19 +197,28 @@ const handleClickShowModal = (item) => {
                 <Form style={{ width: "500px", padding: "20px" }}>
                   <Form.Group className="mb-3" controlId="formBasicAction">
                     <Form.Label style={{ fontSize: "20px" }}>
-                      Email: <Form.Label className="titleUser">{useData.email}</Form.Label>
+                      Email:{" "}
+                      <Form.Label className="titleUser">
+                        {useData.email}
+                      </Form.Label>
                     </Form.Label>
                     <Form.Control required type="Email"></Form.Control>
                   </Form.Group>
                   <Form.Group className="mb-3" controlId="formBasicAction">
                     <Form.Label style={{ fontSize: "20px" }}>
-                      First Name: <Form.Label className="titleUser">{useData.fname}</Form.Label>
+                      First Name:{" "}
+                      <Form.Label className="titleUser">
+                        {useData.fname}
+                      </Form.Label>
                     </Form.Label>
                     <Form.Control required type="text"></Form.Control>
                   </Form.Group>
                   <Form.Group className="mb-3" controlId="formBasicAction">
                     <Form.Label style={{ fontSize: "20px" }}>
-                      Last Name: <Form.Label className="titleUser">{useData.lname}</Form.Label>
+                      Last Name:{" "}
+                      <Form.Label className="titleUser">
+                        {useData.lname}
+                      </Form.Label>
                     </Form.Label>
                     <Form.Control required type="text"></Form.Control>
                   </Form.Group>

@@ -1,7 +1,6 @@
-.btn_them{
+.btnRS{
     cursor: pointer;
-    width: 10%;
-    height: 30px;
+    width: 100%;
     padding: 5px 20px;
     font-size: 15px;
     text-align: center;
@@ -12,10 +11,10 @@
     border-radius: 15px;
     box-shadow: 0 9px #d9d9d9;
   }
-  .btn_them:hover{
+  .btnRS:hover{
     background-color: #3e8e41;
   }
-  .btn_them:active{
+  .btnRS:active{
     background-color: #3e8e41;
     box-shadow: 0 5px #666;
     transform: translateY(4px);

@@ -9,6 +9,7 @@ import Start from "./UI/Start";
 import Testimonials from "./UI/Testimonials";
 import SendEmail from "./UI/SendGmail";
 import Feedback from "./UI/Feedback";
+import CustomFeedback from "./UI/CustomFeedback";
 function LandingPage() {
   useEffect(() => {
     Aos.init();
@@ -28,7 +29,7 @@ function LandingPage() {
         </div>
       </div>
       <div className="feeback">
-        <Feedback />
+        <CustomFeedback />
       </div>
       <Footer />
     </>
