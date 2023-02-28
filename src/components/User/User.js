@@ -34,7 +34,13 @@ const UserPro = (props) => {
       token: window.localStorage.getItem("token"),
     })
       .then((data) => {
-        // console.log(data.data.data);
+        console.log(data.data.data);
+        if (data.data.data === "token expired") {
+          window.localStorage.clear();
+          window.localStorage.setItem("loggedIn", "false");
+          window.localStorage.getItem("loggedIn");
+          window.location.href = "/login";
+        }
         setData(data.data.data);
       })
 
@@ -49,17 +55,17 @@ const UserPro = (props) => {
 
   const handleChangePassword = async (e) => {
     e.preventDefault();
-    
+
     if (newPassword === "" || oldPassword === "" || newPasswordPL === "") {
       toast("Vui lòng nhập đầy đủ thông tin!");
-   
+
     } else if (!checkPassword.test(newPassword) || newPassword.length === "") {
       toast.error("Mật khẩu phải có chữ hoa, số và kí tự đặc biệt!");
-      
+
     }
     else if (newPassword != newPasswordPL) {
       toast.error("Nhập lại mật khẩu không trùng khớp");
-      
+
     } else {
       toast("Đang xử lý...");
       await axios
@@ -83,7 +89,7 @@ const UserPro = (props) => {
         });
     }
   };
-  
+
   const editidtelegram = async () => {
     await axios
       .post("https://api-vuon-thong-minh.onrender.com/datas/updatedht", {
@@ -106,7 +112,7 @@ const UserPro = (props) => {
     e.preventDefault();
     setIsLoading(true);
     if (fnamees === data.fname && lnamees === data.lname && idtelegrams == dataidtelegram) {
-      setIsLoading(false); 
+      setIsLoading(false);
       toast.warning("Thông tin không thay đổi");
     }
     else if (fnamees === "" || lnamees === "") {
@@ -322,13 +328,13 @@ const UserPro = (props) => {
                     }}
                   >
                     {isLoading ? (
-                    <div className="flex justify-center items-center">
-                      <PuffLoader color="#eaeae8" size={40} />
-                    </div>
-                  ) : (
-                    "Lưu"
-                  )}
-                    
+                      <div className="flex justify-center items-center">
+                        <PuffLoader color="#eaeae8" size={40} />
+                      </div>
+                    ) : (
+                      "Lưu"
+                    )}
+
                   </button>
                 </div>
 
