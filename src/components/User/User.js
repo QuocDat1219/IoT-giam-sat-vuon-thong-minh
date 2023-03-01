@@ -33,7 +33,13 @@ const UserPro = (props) => {
         token: window.localStorage.getItem("token"),
       })
       .then((data) => {
-        // console.log(data.data.data);
+        console.log(data.data.data);
+        if (data.data.data === "token expired") {
+          window.localStorage.clear();
+          window.localStorage.setItem("loggedIn", "false");
+          window.localStorage.getItem("loggedIn");
+          window.location.href = "/login";
+        }
         setData(data.data.data);
       });
 

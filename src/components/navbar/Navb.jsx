@@ -16,7 +16,22 @@ const Navb = () => {
   let urls =
     "https://api-vuon-thong-minh.onrender.com/datas/datadetail/" + userEmail;
 
+
+
   useEffect(() => {
+    axios.post('https://api-vuon-thong-minh.onrender.com/users/user-data', {
+      token: window.localStorage.getItem("token"),
+    })
+      .then((data) => {
+       //console.log(data.data.data);
+        if (data.data.data === "token expired") {
+          window.localStorage.clear();
+          window.localStorage.setItem("loggedIn", "false");
+          window.localStorage.getItem("loggedIn");
+          window.location.href = "/login";
+        }
+      })
+      
     const fetchData = async () => {
       await axios
         .get(urls)
@@ -28,7 +43,7 @@ const Navb = () => {
         });
     };
     fetchData();
-    const timeoutf = setTimeout(fetchData, 5000);
+    const timeoutf = setTimeout(fetchData, 2000);
     return () => clearTimeout(timeoutf);
   }, []);
 

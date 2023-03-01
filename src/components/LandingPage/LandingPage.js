@@ -8,7 +8,6 @@ import Hero from "./UI/Hero";
 import Start from "./UI/Start";
 import Testimonials from "./UI/Testimonials";
 import SendEmail from "./UI/SendGmail";
-import Feedback from "./UI/Feedback";
 import CustomFeedback from "./UI/CustomFeedback";
 function LandingPage() {
   useEffect(() => {

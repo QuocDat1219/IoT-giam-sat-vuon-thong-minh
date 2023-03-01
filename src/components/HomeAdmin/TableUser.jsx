@@ -57,10 +57,11 @@ const TableUser = () => {
         email: useData.email,
       })
       .then(function (response) {
-        if (response.status === "ok") {
-          toast.success("Xóa thành công");
+        console.log(response.data.status);
+        if (response.data.status === "ok") {
           setShowDeleted(false);
-        } else if (response.status === "error") {
+          toast.success("Xóa thành công");
+        } else{
           toast.error("Xóa không thành công");
         }
       })
