@@ -6,6 +6,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import PuffLoader from "react-spinners/PuffLoader";
+// import "./button.scss";
 const Register = () => {
   const [fname, setFname] = useState("");
   const [lname, setLname] = useState("");
@@ -45,30 +46,20 @@ const Register = () => {
     //Xử lý đăng ký
     // toast("Đang xử lý...");
     fetch("https://api-vuon-thong-minh.onrender.com/users/register", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-        "Access-Control-Allow-Origin": "*",
-      },
-      body: JSON.stringify({
-        fname,
-        email,
-        lname,
-        password,
-        userType,
-      }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.error == "User Exists") {
-          toast.warning("Email already registered");
-        } else if (data.status == "ok") {
-          createData();
-        } else {
-          toast.error("Đăng ký không thành công");
-        }
-      });
+      fname: fname,
+      email: email,
+      lname: lname,
+      password: password,
+      userType: userType,
+    }).then((data) => {
+      if (data.data.error == "User Exists") {
+        toast.warning("Email already registered");
+      } else if (data.data.status == "ok") {
+        createData();
+      } else {
+        toast.error("Đăng ký không thành công");
+      }
+    });
   };
   const createData = async () => {
     await axios
@@ -208,7 +199,7 @@ const Register = () => {
                     </Link>
                   </div>
 
-                  <button type="submit" disabled={isLoading}>
+                  <button type="submit" disabled={isLoading} className="btn-dn">
                     {isLoading ? (
                       <div className="flex justify-center items-center">
                         <PuffLoader color="#eaeae8" size={40} />

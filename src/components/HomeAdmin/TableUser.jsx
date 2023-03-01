@@ -1,4 +1,4 @@
-import "./TableUser.css";
+import "./Css/TableUser.css";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -22,6 +22,115 @@ const TableUser = () => {
   const [dtTable, setdtTable] = useState([]);
   const [email, setEmail] = useState([]);
   const [showDeleted, setShowDeleted] = useState(false);
+  const [fname, setFname] = useState("");
+  const [lname, setLname] = useState("");
+  const [password, setpassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [userType, setUserType] = useState("");
+  const [emailadd, setEmailAdd] = useState("");
+
+  // Add user
+  var checkMail =
+    /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+  var checkPassword =
+    /^(?=.*[a-z])(?=.*[0-9])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setUserType("");
+    console.log(emailadd);
+    //Kiểm tra dữ liệu nhập của người dùng
+    if (fname == "" || lname == "" || emailadd == "" || password == "") {
+      toast.warning("Vui lòng nhập đầy đủ thông tin đăng ký!");
+      return;
+    } else if (!checkPassword.test(password) || password.length == "") {
+      toast.warning("Mật khẩu không hợp lệ!");
+      return;
+    } else if (!checkMail.test(emailadd) || emailadd.length == "") {
+      toast.warning("Email không hợp lệ!");
+      return;
+    } else if (password != confirmPassword) {
+      toast.warning("Mật khẩu và nhập lại mật khẩu không trùng khớp...");
+      return;
+    }
+
+    await axios
+      .post("https://api-vuon-thong-minh.onrender.com/users/register", {
+        fname: fname,
+        email: emailadd,
+        lname: lname,
+        password: password,
+        userType: userType,
+      })
+      .then((data) => {
+        if (data.data.error == "User Exists") {
+          toast.warning("Email already registered");
+        } else if (data.data.status == "ok") {
+          createData();
+        } else {
+          toast.error("Thêm người dùng không thành công");
+        }
+      });
+  };
+  const createData = async () => {
+    await axios
+      .post("https://api-vuon-thong-minh.onrender.com/datas/createdata", {
+        email: emailadd,
+        nhietdo: 0,
+        doam: 0,
+        mhsensor: 0,
+        ultrasonic: 0,
+        connect: "disconnect",
+        reset: "0",
+        idtelegram: "",
+        control: [
+          {
+            name: "Control 1",
+            status: 0,
+            digital: "D4",
+          },
+          {
+            name: "Control 2",
+            status: 0,
+            digital: "D7",
+          },
+          {
+            name: "Control 3",
+            status: 0,
+            digital: "D8",
+          },
+        ],
+        sensor: [
+          {
+            name: "DHT",
+            status: "0",
+            timeword: "6:00",
+            timeout: "15:00",
+            nofi: "Email",
+            limit: 0,
+          },
+          {
+            name: "Ultrasonic",
+            status: "0",
+            timeword: "6:00",
+            timeout: "15:00",
+            nofi: "Email",
+            limit: 0,
+          },
+          {
+            name: "MH",
+            status: "0",
+            timeword: "6:00",
+            timeout: "15:00",
+            nofi: "Email",
+            limit: 0,
+          },
+        ],
+      })
+      .then((data) => {
+        toast.success("Thêm người dùng thành công");
+      });
+  };
 
   useEffect(() => {
     const gedataTable = async () => {
@@ -49,7 +158,7 @@ const TableUser = () => {
     useData = item;
     setShowDeleted(true);
   };
-
+  //delete user
   const handleDeleteUser = async () => {
     // toast("Dang xu li....");
     await axios
@@ -60,9 +169,9 @@ const TableUser = () => {
         console.log(response.data.status);
         if (response.data.status === "ok") {
           setShowDeleted(false);
-          toast.success("Xóa thành công");
-        } else{
-          toast.error("Xóa không thành công");
+          toast.success("Xóa người dùng thành công");
+        } else {
+          toast.error("Xóa người dùng không thành công");
         }
       })
       .catch(function (error) {
@@ -71,7 +180,7 @@ const TableUser = () => {
   };
   return (
     <div>
-      <ToastContainer />
+      <ToastContainer pauseOnHover={false} draggable={false} autoClose={2500} />
       <div>
         <button
           style={{ fontSize: "15px", marginBottom: "20px" }}
@@ -203,35 +312,65 @@ const TableUser = () => {
                     Thêm Thành Viên
                   </h3>
                 </div>
-                <Form style={{ width: "500px", padding: "20px" }}>
+                <Form
+                  style={{ width: "500px", padding: "20px" }}
+                  onSubmit={handleSubmit}
+                >
                   <Form.Group className="mb-3" controlId="formBasicAction">
                     <Form.Label style={{ fontSize: "20px" }}>
-                      Email:{" "}
-                      <Form.Label
-                        className="labelUser"
-                        type="email"
-                      ></Form.Label>
+                      Email: <Form.Label className="labelUser"></Form.Label>
                     </Form.Label>
-                    <Form.Control required type="Email"></Form.Control>
+                    <Form.Control
+                      required
+                      type="email"
+                      onChange={(e) => setEmailAdd(e.target.value)}
+                    ></Form.Control>
                   </Form.Group>
+
                   <Form.Group className="mb-3" controlId="formBasicAction">
                     <Form.Label style={{ fontSize: "20px" }}>
                       First Name:{" "}
                       <Form.Label className="labelUser"></Form.Label>
                     </Form.Label>
-                    <Form.Control required type="text"></Form.Control>
+                    <Form.Control
+                      required
+                      type="text"
+                      onChange={(e) => setFname(e.target.value)}
+                    ></Form.Control>
                   </Form.Group>
+
                   <Form.Group className="mb-3" controlId="formBasicAction">
                     <Form.Label style={{ fontSize: "20px" }}>
                       Last Name: <Form.Label className="labelUser"></Form.Label>
                     </Form.Label>
-                    <Form.Control required type="text"></Form.Control>
+                    <Form.Control
+                      required
+                      type="text"
+                      onChange={(e) => setLname(e.target.value)}
+                    ></Form.Control>
                   </Form.Group>
+
                   <Form.Group className="mb-3" controlId="formBasicAction">
                     <Form.Label style={{ fontSize: "20px" }}>
                       Password: <Form.Label type="Password"> </Form.Label>
                     </Form.Label>
-                    <Form.Control required type="text"></Form.Control>
+                    <Form.Control
+                      required
+                      type="text"
+                      onChange={(e) => setpassword(e.target.value)}
+                    ></Form.Control>
+                  </Form.Group>
+
+                  <Form.Group className="mb-3" controlId="formBasicAction">
+                    <Form.Label style={{ fontSize: "20px" }}>
+                      Nhập lại Password:{" "}
+                      <Form.Label type="Password"> </Form.Label>
+                    </Form.Label>
+                    <Form.Control
+                      required
+                      type="text"
+                      onChange={(e) => setConfirmPassword(e.target.value)}
+                    ></Form.Control>
                   </Form.Group>
                   <div className="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
                     <button

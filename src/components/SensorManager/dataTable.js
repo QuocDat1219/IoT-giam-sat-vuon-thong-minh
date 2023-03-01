@@ -156,13 +156,13 @@ const List = () => {
                       <h3 className="text-2xl font-semibold">
                         Cài đặt thiết bị: <strong>{dataItem.name}</strong>
                       </h3>
-                      <button
+                      {/* <button
                         style={{ color: "red" }}
                         className="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
                         onClick={() => setShowModal(false)}
                       >
                         X
-                      </button>
+                      </button> */}
                     </div>
                     <Form
                       style={{ width: "500px", padding: "20px" }}
@@ -220,10 +220,13 @@ const List = () => {
                         className="mb-3"
                         controlId="formBasicNotification"
                       >
-                        <Form.Label className="labelTitle">Thông báo: <Form.Label
-                          style={{ fontSize: "16px", fontWeight: "bold" }}>
-                          {dataItem.nofi}
-                        </Form.Label>
+                        <Form.Label className="labelTitle">
+                          Thông báo:{" "}
+                          <Form.Label
+                            style={{ fontSize: "16px", fontWeight: "bold" }}
+                          >
+                            {dataItem.nofi}
+                          </Form.Label>
                         </Form.Label>
                         <Form.Select
                           id="disabledSelect"
@@ -239,9 +242,11 @@ const List = () => {
                       </Form.Group>
 
                       <Form.Group className="mb-3" controlId="formBasicLimit">
-                        <Form.Label className="labelTitle">Ngưỡng thông số cảm biến: 
+                        <Form.Label className="labelTitle">
+                          Ngưỡng thông số cảm biến:
                           <Form.Label
-                            style={{ fontSize: "16px", fontWeight: "bold" }}>
+                            style={{ fontSize: "16px", fontWeight: "bold" }}
+                          >
                             {dataItem.limit}
                           </Form.Label>
                         </Form.Label>
@@ -255,9 +260,13 @@ const List = () => {
                       </Form.Group>
                       <div className="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
                         <button
-                          className="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                          type="submit"
+                          className="btn_us_thoat"
+                          type="button"
+                          onClick={() => setShowModal(false)}
                         >
+                          Đóng
+                        </button>
+                        <button className="btn_cn" type="submit">
                           Cập nhật
                         </button>
                       </div>

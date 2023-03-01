@@ -1,4 +1,5 @@
 import Sidebar from "../Sidebar";
+import "./User.scss";
 import Navb from "../navbar/Navb";
 import React, { useContext, useEffect, useState, useReducer } from "react";
 import "./ProfileCard.css";
@@ -53,13 +54,12 @@ const UserPro = (props) => {
     e.preventDefault();
 
     if (newPassword === "" || oldPassword === "" || newPasswordPL === "") {
-      toast("Vui lòng nhập đầy đủ thông tin!");
+      toast.warning("Vui lòng nhập đầy đủ thông tin!");
     } else if (!checkPassword.test(newPassword) || newPassword.length === "") {
       toast.error("Mật khẩu phải có chữ hoa, số và kí tự đặc biệt!");
     } else if (newPassword != newPasswordPL) {
       toast.error("Nhập lại mật khẩu không trùng khớp");
     } else {
-      // toast("Đang xử lý...");
       await axios
         .post("https://api-vuon-thong-minh.onrender.com/users/changepassword", {
           tokenold: window.localStorage.getItem("token"),
@@ -89,7 +89,20 @@ const UserPro = (props) => {
       })
       .then(function (data) {
         setIsLoading(false);
-        toast.success("Đổi thông tin thành công");
+        toast.promise(
+          new Promise((resolve, reject) => {
+            setTimeout(() => {
+              resolve();
+            }, 2000);
+          }),
+          {
+            pending: "Đang xử lí....",
+            success: "Đổi thông tin thành công",
+          },
+          {
+            autoClose: 2000,
+          }
+        );
       })
       .catch(function (error) {
         console.log(error);
@@ -111,7 +124,7 @@ const UserPro = (props) => {
       setIsLoading(false);
       toast.warning("Vui lòng nhập đủ thông tin");
     } else {
-      toast("Đang xử lý...");
+      // toast("Đang xử lý...");
       await axios
         .post("https://api-vuon-thong-minh.onrender.com/users/edituser", {
           token: window.localStorage.getItem("token"),
@@ -301,24 +314,17 @@ const UserPro = (props) => {
                   <button
                     //  onClick={handleClickSave}
                     style={{
-                      color: "white",
-                      width: "100px",
-                      height: "50px",
-                      backgroundColor: "#368f23",
                       marginLeft: "202px",
                       marginTop: " 20px",
-                      borderRadius: "10px",
                       fontSize: "20px",
-                      boxShadow: "15px",
                       height: "45px",
-                      width: "400px",
                       marginLeft: "45px",
-                      boxShadow: "rgb(187 203 205) 0px 2px 18px",
                     }}
+                    className="btn_luu"
                   >
                     {isLoading ? (
                       <div className="flex justify-center items-center">
-                        <PuffLoader color="#eaeae8" size={40} />
+                        <PuffLoader color="#eaeae8" size={25} />
                       </div>
                     ) : (
                       "Lưu"
@@ -463,17 +469,14 @@ const UserPro = (props) => {
                         {/*footer*/}
                         <div className="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
                           <button
-                            className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                            className="btn_us_thoat"
                             type="button"
                             onClick={() => setShowModal(false)}
                           >
                             Đóng
                           </button>
 
-                          <button
-                            className="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                            type="submit"
-                          >
+                          <button className="btn_us_luu" type="submit">
                             Đổi mật khẩu
                           </button>
                         </div>

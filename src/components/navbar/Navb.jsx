@@ -16,22 +16,21 @@ const Navb = () => {
   let urls =
     "https://api-vuon-thong-minh.onrender.com/datas/datadetail/" + userEmail;
 
-
-
   useEffect(() => {
-    axios.post('https://api-vuon-thong-minh.onrender.com/users/user-data', {
-      token: window.localStorage.getItem("token"),
-    })
+    axios
+      .post("https://api-vuon-thong-minh.onrender.com/users/user-data", {
+        token: window.localStorage.getItem("token"),
+      })
       .then((data) => {
-       //console.log(data.data.data);
+        //console.log(data.data.data);
         if (data.data.data === "token expired") {
           window.localStorage.clear();
           window.localStorage.setItem("loggedIn", "false");
           window.localStorage.getItem("loggedIn");
           window.location.href = "/login";
         }
-      })
-      
+      });
+
     const fetchData = async () => {
       await axios
         .get(urls)
@@ -159,14 +158,14 @@ const Navb = () => {
                   <br></br>
                   <div className="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
                     <button
-                      className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                      className="btn_rst"
                       type="button"
                       onClick={() => setshowModel(false)}
                     >
                       Thoát
                     </button>
                     <button
-                      className="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                      className="btn_rs_dn"
                       type="submit"
                       onClick={handleResetBtn}
                     >
