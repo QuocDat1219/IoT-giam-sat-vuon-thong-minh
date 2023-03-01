@@ -1,4 +1,5 @@
 import Sidebar from "../Sidebar";
+import "./User.scss";
 import Navb from "../navbar/Navb";
 import React, { useContext, useEffect, useState, useReducer } from "react";
 import "./ProfileCard.css";
@@ -7,59 +8,69 @@ import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Footer from "../LandingPage/UI/Footer"
+import Footer from "../LandingPage/UI/Footer";
+import PuffLoader from "react-spinners/PuffLoader";
 var checkPassword =
   /^(?=.*[a-z])(?=.*[0-9])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
 const UserPro = (props) => {
-
   const [data, setData] = useState("");
-  const [fnamee, setFName] = useState(data.fname);
-  const [lnamee, setLName] = useState(data.lname);
+  const [dataidtelegram, setDataIDtelegram] = useState("");
   const [fnamees, setFNames] = useState("");
   const [lnamees, setLNames] = useState("");
+  const [idtelegrams, setIDtelegram] = useState("");
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [newPasswordPL, setNewPasswordPL] = useState("");
   const [showModal, setShowModal] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
+  const userEmail = window.localStorage.getItem("Emaildetails");
+  let urls =
+    "https://api-vuon-thong-minh.onrender.com/datas/datadetail/" + userEmail;
   useEffect(() => {
-
-    axios.post('https://api-vuon-thong-minh.onrender.com/users/user-data', {
-      token: window.localStorage.getItem("token"),
-    })
+    axios
+      .post("https://api-vuon-thong-minh.onrender.com/users/user-data", {
+        token: window.localStorage.getItem("token"),
+      })
       .then((data) => {
         console.log(data.data.data);
+        if (data.data.data === "token expired") {
+          window.localStorage.clear();
+          window.localStorage.setItem("loggedIn", "false");
+          window.localStorage.getItem("loggedIn");
+          window.location.href = "/login";
+        }
         setData(data.data.data);
-      })
+      });
 
+    axios.get(urls).then((data) => {
+      // console.log(data.data.data.idtelegram);
+      setDataIDtelegram(data.data.data.idtelegram);
+    });
   }, []);
-
-
 
   const handleChangePassword = async (e) => {
     e.preventDefault();
+
     if (newPassword === "" || oldPassword === "" || newPasswordPL === "") {
-      toast("Vui lòng nhập đầy đủ thông tin!");
+      toast.warning("Vui lòng nhập đầy đủ thông tin!");
     } else if (!checkPassword.test(newPassword) || newPassword.length === "") {
       toast.error("Mật khẩu phải có chữ hoa, số và kí tự đặc biệt!");
-    }
-    else if (newPassword != newPasswordPL) {
+    } else if (newPassword != newPasswordPL) {
       toast.error("Nhập lại mật khẩu không trùng khớp");
     } else {
-      toast("Đang xử lý...");
       await axios
         .post("https://api-vuon-thong-minh.onrender.com/users/changepassword", {
           tokenold: window.localStorage.getItem("token"),
           newpassword: newPassword,
-          oldpassword: oldPassword
+          oldpassword: oldPassword,
         })
         .then(function (response) {
           // console.log(response);
           if (response.data.error === "Passwords don't match") {
             toast.error("Mật khẩu cũ không đúng");
-          }
-          else if (response.data.status === "verified") {
+          } else if (response.data.status === "verified") {
             toast.success("Đổi mật khẩu thành công");
           }
         })
@@ -70,37 +81,68 @@ const UserPro = (props) => {
     }
   };
 
+  const editidtelegram = async () => {
+    await axios
+      .post("https://api-vuon-thong-minh.onrender.com/datas/updatedht", {
+        email: window.localStorage.getItem("Emaildetails"),
+        idtelegram: idtelegrams,
+      })
+      .then(function (data) {
+        setIsLoading(false);
+        toast.promise(
+          new Promise((resolve, reject) => {
+            setTimeout(() => {
+              resolve();
+            }, 2000);
+          }),
+          {
+            pending: "Đang xử lí....",
+            success: "Đổi thông tin thành công",
+          },
+          {
+            autoClose: 2000,
+          }
+        );
+      })
+      .catch(function (error) {
+        console.log(error);
+        toast.error("Lỗi");
+      });
+  };
+
   const handleClickSave = async (e) => {
     e.preventDefault();
-
-    if(fnamees === data.fname && lnamees === data.lname){
+    setIsLoading(true);
+    if (
+      fnamees === data.fname &&
+      lnamees === data.lname &&
+      idtelegrams == dataidtelegram
+    ) {
+      setIsLoading(false);
       toast.warning("Thông tin không thay đổi");
-    }
-    else if(fnamees === "" || lnamees === "" ){
+    } else if (fnamees === "" || lnamees === "") {
+      setIsLoading(false);
       toast.warning("Vui lòng nhập đủ thông tin");
-    }else{
-      toast("Đang xử lý...");
+    } else {
+      // toast("Đang xử lý...");
       await axios
         .post("https://api-vuon-thong-minh.onrender.com/users/edituser", {
           token: window.localStorage.getItem("token"),
           lname: lnamees,
-          fname: fnamees
+          fname: fnamees,
         })
         .then(function (data) {
           // console.log(data);
-          
-          setData(data.data.data)
-          toast.success("Đổi thông tin thành công");
+
+          setData(data.data.data);
+          editidtelegram();
         })
         .catch(function (error) {
           console.log(error);
           toast.error("Lỗi");
         });
-  
     }
-   
   };
-
 
   return (
     <div className="home">
@@ -133,7 +175,6 @@ const UserPro = (props) => {
                   <h1 className="smaller-text">Họ và tên</h1>
                   <h2 className="bold-text" style={{ paddingBottom: "20px" }}>
                     {data ? data.fname + " " + data.lname : "Loading..."}
-
                   </h2>
                 </div>
                 <div className="likes">
@@ -151,7 +192,9 @@ const UserPro = (props) => {
               </div>
             </div>
             <form onSubmit={handleClickSave}>
-              <div style={{ width: "100%", display: "flex", paddingTop: "30px" }}>
+              <div
+                style={{ width: "100%", display: "flex", paddingTop: "30px" }}
+              >
                 <div
                   style={{
                     border: "0px black solid",
@@ -178,20 +221,48 @@ const UserPro = (props) => {
                   </label>
                   <br></br>
                   <br></br>
+                  <label
+                    className="text-center"
+                    style={{
+                      textAlign: "left",
+                      fontSize: "16px",
+                      paddingLeft: "50px",
+                      paddingTop: "10px",
+                      color: "#368f23",
+                    }}
+                  >
+                    Họ :
+                  </label>
+                  <br></br>
+                  <br></br>
                   <input
                     className="text-center"
                     // value={data.fname}
                     placeholder={data.fname}
-                  style={{
-                    border: "1px solid #d9d6d6",
-                    borderRadius: "15px",
-                    height: "45px",
-                    width: "400px",
-                    marginLeft: "45px",
-                    boxShadow: "rgb(187 203 205) 0px 2px 18px",
-                  }}
-                  onChange={(e) => setFNames(e.target.value)}
+                    style={{
+                      border: "1px solid #d9d6d6",
+                      borderRadius: "15px",
+                      height: "45px",
+                      width: "400px",
+                      marginLeft: "45px",
+                      boxShadow: "rgb(187 203 205) 0px 2px 18px",
+                    }}
+                    onChange={(e) => setFNames(e.target.value)}
                   />
+                  <br></br>
+                  <br></br>
+                  <label
+                    className="text-center"
+                    style={{
+                      textAlign: "left",
+                      fontSize: "16px",
+                      paddingLeft: "50px",
+                      paddingTop: "10px",
+                      color: "#368f23",
+                    }}
+                  >
+                    Tên :
+                  </label>
                   <br></br>
                   <br></br>
                   <input
@@ -210,29 +281,56 @@ const UserPro = (props) => {
                   />
                   <br></br>
                   <br></br>
-
-                  <button
-                    //  onClick={handleClickSave}
+                  <label
+                    className="text-center"
                     style={{
-                      color: "white",
-                      width: "100px",
-                      height: "50px",
-                      backgroundColor: "#368f23",
-                      marginLeft: "202px",
-                      marginTop: " 20px",
-                      borderRadius: "10px",
-                      fontSize: "20px",
-                      boxShadow: "15px",
+                      textAlign: "left",
+                      fontSize: "16px",
+                      paddingLeft: "50px",
+                      paddingTop: "10px",
+                      color: "#368f23",
+                    }}
+                  >
+                    ID Telegram :
+                  </label>
+                  <br></br>
+                  <br></br>
+                  <input
+                    className="text-center"
+                    // value={data.lname}
+                    placeholder={dataidtelegram}
+                    style={{
+                      border: "1px solid #d9d6d6",
+                      borderRadius: "15px",
                       height: "45px",
                       width: "400px",
                       marginLeft: "45px",
                       boxShadow: "rgb(187 203 205) 0px 2px 18px",
                     }}
+                    onChange={(e) => setIDtelegram(e.target.value)}
+                  />
+                  <br></br>
+                  <br></br>
+                  <button
+                    //  onClick={handleClickSave}
+                    style={{
+                      marginLeft: "202px",
+                      marginTop: " 20px",
+                      fontSize: "20px",
+                      height: "45px",
+                      marginLeft: "45px",
+                    }}
+                    className="btn_luu"
                   >
-                    Save
+                    {isLoading ? (
+                      <div className="flex justify-center items-center">
+                        <PuffLoader color="#eaeae8" size={25} />
+                      </div>
+                    ) : (
+                      "Lưu"
+                    )}
                   </button>
                 </div>
-
               </div>
             </form>
             {showModal ? (
@@ -243,7 +341,7 @@ const UserPro = (props) => {
                     <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
                       {/*header*/}
                       <div className="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t">
-                        <h3 className="text-3xl font-semibold">Đổi mật khẩu</h3>
+                        <h3 className="text-2xl font-semibold">Đổi mật khẩu</h3>
                         <button
                           className="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
                           onClick={() => setShowModal(false)}
@@ -256,6 +354,19 @@ const UserPro = (props) => {
                       {/*body*/}
                       <form onSubmit={handleChangePassword}>
                         <div className="relative p-6 flex-auto m-4">
+                          <label
+                            className="text-center"
+                            style={{
+                              textAlign: "left",
+                              fontSize: "16px",
+                              paddingTop: "10px",
+                              color: "#368f23",
+                            }}
+                          >
+                            Email :
+                          </label>
+                          <br></br>
+                          <br></br>
                           <input
                             className="text-center"
                             value={data.email}
@@ -269,6 +380,19 @@ const UserPro = (props) => {
                               boxShadow: "rgb(187 203 205) 0px 2px 18px",
                             }}
                           />
+                          <br></br>
+                          <br></br>
+                          <label
+                            className="text-center"
+                            style={{
+                              textAlign: "left",
+                              fontSize: "16px",
+                              paddingTop: "10px",
+                              color: "#368f23",
+                            }}
+                          >
+                            Mật khẩu cũ :
+                          </label>
                           <br></br>
                           <br></br>
                           <input
@@ -286,6 +410,19 @@ const UserPro = (props) => {
                           />
                           <br></br>
                           <br></br>
+                          <label
+                            className="text-center"
+                            style={{
+                              textAlign: "left",
+                              fontSize: "16px",
+                              paddingTop: "10px",
+                              color: "#368f23",
+                            }}
+                          >
+                            Mật khẩu mới :
+                          </label>
+                          <br></br>
+                          <br></br>
                           <input
                             className="text-center"
                             type="password"
@@ -299,6 +436,19 @@ const UserPro = (props) => {
                             }}
                             onChange={(e) => setNewPassword(e.target.value)}
                           />
+                          <br></br>
+                          <br></br>
+                          <label
+                            className="text-center"
+                            style={{
+                              textAlign: "left",
+                              fontSize: "16px",
+                              paddingTop: "10px",
+                              color: "#368f23",
+                            }}
+                          >
+                            Nhập lại mật khẩu :
+                          </label>
                           <br></br>
                           <br></br>
                           <input
@@ -319,16 +469,14 @@ const UserPro = (props) => {
                         {/*footer*/}
                         <div className="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
                           <button
-                            className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                            className="btn_us_thoat"
                             type="button"
                             onClick={() => setShowModal(false)}
                           >
                             Đóng
                           </button>
-                          <button
-                            className="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                            type="submit"
-                          >
+
+                          <button className="btn_us_luu" type="submit">
                             Đổi mật khẩu
                           </button>
                         </div>
@@ -340,8 +488,8 @@ const UserPro = (props) => {
               </>
             ) : null}
           </div>
-          <div style={{paddingTop:"15px"}}>
-          <Footer />
+          <div style={{ paddingTop: "15px" }}>
+            <Footer />
           </div>
         </div>
       </Sidebar>

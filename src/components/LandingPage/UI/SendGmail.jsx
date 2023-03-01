@@ -4,16 +4,21 @@ import emailjs from "@emailjs/browser";
 import styled from "styled-components";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import "../Style/StarRating.css";
+import axios from "axios";
+
 export const SendEmail = () => {
   const form = useRef();
   const [name, setname] = useState("");
   const [email, setemail] = useState("");
   const [noidung, setnoidung] = useState("");
+  const [selectedStars, setSelectedStars] = useState(0);
+  const [totalStars, setTotalStars] = useState(5);
 
   var checkMail =
     /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 
-  const sendEmail = (e) => {
+  const sendEmail = async (e) => {
     e.preventDefault();
 
     if (name == "" || email == "" || noidung == "") {
@@ -23,40 +28,38 @@ export const SendEmail = () => {
       toast.warning("Email không hợp lệ");
       return;
     }
-
+   await axios.post("https://api-vuon-thong-minh.onrender.com/feedback/newfeedback",{
+      name:name,
+      email:email,
+      note:noidung,
+      gate:selectedStars
+    }).then((data) =>{
+      console.log(data.data.status);
+      if(data.data.status){
+        toast.success("Gửi thành công - Cảm ơn bạn đã gửi đánh giá")
+      }else
+        toast.error("Lỗi")
+     
+    })
     // toast("Đang xử lý...");
-
-    emailjs
-      .sendForm(
-        "service_isfrjm3",
-        "template_udqroyo",
-        form.current,
-        "I-4tCdeia5owjqIoO"
-      )
-      .then(
-        (result) => {
-          console.log(result.text);
-          toast.promise(
-            new Promise((resolve, reject) => {
-              setTimeout(() => {
-                resolve();
-              }, 2000);
-            }),
-            {
-              pending: "Đang xử lí....",
-              success: "Gửi thành công",
-            },
-            {
-              autoClose: 2000,
-            }
-          );
-        },
-        (error) => {
-          console.log(error.text);
-        }
-      );
   };
 
+  const handleStarClick = (starIndex) => {
+    setSelectedStars(starIndex + 1);
+    console.log(selectedStars);
+  };
+
+  const renderStar = (starIndex) => {
+    return (
+      <span
+        key={starIndex}
+        className={starIndex < selectedStars ? "star selected" : "star"}
+        onClick={() => handleStarClick(starIndex)}
+      >
+        &#9733;
+      </span>
+    );
+  };
   return (
     <div id="send">
       <StyledContactForm style={{ marginRight: "400px" }}>
@@ -124,6 +127,26 @@ export const SendEmail = () => {
               placeholder="Vui lòng nhập thông tin phản hồi"
               onChange={(e) => setnoidung(e.target.value)}
             />
+
+            <div>
+              <label
+                className="title_lb"
+                style={{
+                  fontWeight: "bolder",
+                  fontSize: "18px",
+                  paddingBottom: "10px",
+                }}
+              >
+                Đánh giá:
+              </label>
+              <br />
+              <div className="star-rating">
+                {[...Array(totalStars)].map((n, i) => renderStar(i))}{" "}
+                <p className="selected-stars">
+                  {selectedStars} trên {totalStars} sao được chọn
+                </p>
+              </div>
+            </div>
             <button className="btn" type="submit">
               <span>Gửi</span>
             </button>

@@ -6,6 +6,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import PuffLoader from "react-spinners/PuffLoader";
+// import "./button.scss";
 const Register = () => {
   const [fname, setFname] = useState("");
   const [lname, setLname] = useState("");
@@ -22,48 +23,43 @@ const Register = () => {
     /^(?=.*[a-z])(?=.*[0-9])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
   const handleSubmit = (e) => {
     e.preventDefault();
+    setIsLoading(true);
     setUserType("");
     //Kiểm tra dữ liệu nhập của người dùng
     if (fname == "" || lname == "" || email == "" || password == "") {
       toast.warning("Vui lòng nhập đầy đủ thông tin đăng ký!");
+      setIsLoading(false);
       return;
     } else if (!checkPassword.test(password) || password.length == "") {
       toast.warning("Mật khẩu không hợp lệ!");
+      setIsLoading(false);
       return;
     } else if (!checkMail.test(email) || email.length == "") {
       toast.warning("Email không hợp lệ!");
+      setIsLoading(false);
       return;
     } else if (password != confirmPassword) {
       toast.warning("Mật khẩu và nhập lại mật khẩu không trùng khớp...");
+      setIsLoading(false);
       return;
     }
     //Xử lý đăng ký
-    toast("Đang xử lý...");
+    // toast("Đang xử lý...");
     fetch("https://api-vuon-thong-minh.onrender.com/users/register", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-        "Access-Control-Allow-Origin": "*",
-      },
-      body: JSON.stringify({
-        fname,
-        email,
-        lname,
-        password,
-        userType,
-      }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.error == "User Exists") {
-          toast.warning("Email already registered");
-        } else if (data.status == "ok") {
-          createData();
-        } else {
-          toast.error("Đăng ký không thành công");
-        }
-      });
+      fname: fname,
+      email: email,
+      lname: lname,
+      password: password,
+      userType: userType,
+    }).then((data) => {
+      if (data.data.error == "User Exists") {
+        toast.warning("Email already registered");
+      } else if (data.data.status == "ok") {
+        createData();
+      } else {
+        toast.error("Đăng ký không thành công");
+      }
+    });
   };
   const createData = async () => {
     await axios
@@ -75,6 +71,7 @@ const Register = () => {
         ultrasonic: 0,
         connect: "disconnect",
         reset: "0",
+        idtelegram: "",
         control: [
           {
             name: "Control 1",
@@ -120,7 +117,7 @@ const Register = () => {
         ],
       })
       .then((data) => {
-        console.log(data);
+        setIsLoading(false);
         toast.success("Đăng ký thành công");
         setTimeout((window.location.href = "/home"), 2000);
       });
@@ -136,7 +133,7 @@ const Register = () => {
               <span></span>
             </div>
           </div>
-          <ToastContainer />
+          <ToastContainer pauseOnHover={false} draggable={false} />
           <div class="login">
             <div class="container">
               <Link to={"/"}>
@@ -202,10 +199,10 @@ const Register = () => {
                     </Link>
                   </div>
 
-                  <button type="submit" disabled={isLoading}>
+                  <button type="submit" disabled={isLoading} className="btn-dn">
                     {isLoading ? (
                       <div className="flex justify-center items-center">
-                        <PuffLoader color="#4cd137" size={30} />
+                        <PuffLoader color="#eaeae8" size={40} />
                       </div>
                     ) : (
                       "Đăng ký"

@@ -7,8 +7,9 @@ import {
   Typography,
 } from "@mui/material";
 import ImportantDevicesIcon from "@mui/icons-material/ImportantDevices";
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
+import "./Css/DeviceTotal.css";
 
 export const DeviceTotal = (props) => {
   const [totalDevice, setTotalDevice] = useState("");
@@ -17,8 +18,10 @@ export const DeviceTotal = (props) => {
       await axios
         .get("https://api-vuon-thong-minh.onrender.com/datas/getalldata")
         .then((result) => {
-          const numOfDevice = result.data.data.filter(obj => obj.connect !== undefined).length;
-          setTotalDevice(numOfDevice)
+          const numOfDevice = result.data.data.filter(
+            (obj) => obj.connect !== undefined
+          ).length;
+          setTotalDevice(numOfDevice);
         })
         .catch((e) => {
           console.log(e);
@@ -30,40 +33,41 @@ export const DeviceTotal = (props) => {
     return () => clearInterval(intervalId);
   }, []);
 
-  return (  
-  <div style={{width:"135%"}}>
-    <Card {...props}>
-      <CardContent>
-        <Grid container spacing={3} sx={{ justifyContent: "space-between" }}>
-          <Grid item>
-            <Typography color="textSecondary" gutterBottom variant="overline">
-              Tổng thiết bị
-            </Typography>
-            <Typography color="textPrimary" variant="h4">
-              {totalDevice}
-            </Typography>
+  return (
+    <div style={{ width: "135%" }} className="deviceToTotal">
+      <Card {...props}>
+        <CardContent>
+          <Grid container spacing={3} sx={{ justifyContent: "space-between" }}>
+            <Grid item>
+              <Typography color="textSecondary" gutterBottom variant="overline">
+                Tổng thiết bị
+              </Typography>
+              <Typography color="textPrimary" variant="h4">
+                {totalDevice}
+              </Typography>
+            </Grid>
+            <Grid item>
+              <Avatar
+                sx={{
+                  backgroundColor: "#4834d4",
+                  height: 56,
+                  width: 56,
+                }}
+              >
+                <ImportantDevicesIcon />
+              </Avatar>
+            </Grid>
           </Grid>
-          <Grid item>
-            <Avatar
-              sx={{
-                backgroundColor: "#4834d4",
-                height: 56,
-                width: 56,
-              }}
-            >
-              <ImportantDevicesIcon />
-            </Avatar>
-          </Grid>
-        </Grid>
-        <Box
-          sx={{
-            alignItems: "center",
-            display: "flex",
-            pt: 2,
-          }}
-        ></Box>
-      </CardContent>
-    </Card>
-  </div>
-)};
+          <Box
+            sx={{
+              alignItems: "center",
+              display: "flex",
+              pt: 2,
+            }}
+          ></Box>
+        </CardContent>
+      </Card>
+    </div>
+  );
+};
 export default DeviceTotal;

@@ -12,7 +12,7 @@ const AdminHome = () => {
     <div className="homeAdmin">
       <div className="homeContainerAdmin">
         <HeaDer />
-        <div className="Total">
+        <div className="TotalUS">
           <div className="userTotal">
             <UserTotal />
           </div>

@@ -1,0 +1,20 @@
+.btn-dn{
+    cursor: pointer;
+    width: 100%;
+    padding: 5px 20px;
+    text-align: center;
+    outline: none;
+    color: #fff;
+    background-color: #35de47;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 9px #d9d9d9;
+  }
+  .btn-dn:hover{
+    background-color: #3e8e41;
+  }
+  .btn-dn:active{
+    background-color: #3e8e41;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+  }

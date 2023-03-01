@@ -5,6 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 import icon from "../images/IOT.png";
 import PuffLoader from "react-spinners/PuffLoader";
 import "./login.css";
+import "./button.scss";
 import Header from "../LandingPage/Header/Headers";
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -48,18 +49,21 @@ const Login = () => {
           }
         });
       const loginRequest = async () => {
-        await fetch("https://api-vuon-thong-minh.onrender.com/users/user-data", {
-          method: "POST",
-          crossDomain: true,
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-            "Access-Control-Allow-Origin": "*",
-          },
-          body: JSON.stringify({
-            token: window.localStorage.getItem("token"),
-          }),
-        })
+        await fetch(
+          "https://api-vuon-thong-minh.onrender.com/users/user-data",
+          {
+            method: "POST",
+            crossDomain: true,
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+              "Access-Control-Allow-Origin": "*",
+            },
+            body: JSON.stringify({
+              token: window.localStorage.getItem("token"),
+            }),
+          }
+        )
           .then((res) => res.json())
           .then((data) => {
             //console.log(data);
@@ -159,10 +163,11 @@ const Login = () => {
                   onClick={handleSubmit}
                   disabled={isLoading}
                   id="submit"
+                  className="btn-dn"
                 >
                   {isLoading ? (
                     <div className="flex justify-center items-center">
-                      <PuffLoader color="#4cd137" size={30} />
+                      <PuffLoader color="#eaeae8" size={40} />
                     </div>
                   ) : (
                     "Đăng nhập"

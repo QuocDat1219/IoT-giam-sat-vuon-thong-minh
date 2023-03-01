@@ -1,23 +1,36 @@
 import "./Navb.scss";
-import NotificationsActiveIcon from "@mui/icons-material/NotificationsActive";
 import axios from "axios";
 import React, { useEffect, useState } from "react"; //react hooks
 import { FaUsb } from "react-icons/fa";
 import AppHeaderDropdown from "../header/AppHeaderDropdown";
-import Form from "react-bootstrap/Form";
 import { toast } from "react-toastify";
 import PuffLoader from "react-spinners/PuffLoader";
 import "./btnRs.scss";
 import RotateLeftIcon from "@mui/icons-material/RotateLeft";
 const Navb = () => {
   const [conn, setConn] = useState("");
-  const userEmail = window.localStorage.getItem("Emaildetails");
+
   const [showModel, setshowModel] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const userEmail = window.localStorage.getItem("Emaildetails");
   let urls =
     "https://api-vuon-thong-minh.onrender.com/datas/datadetail/" + userEmail;
 
   useEffect(() => {
+    axios
+      .post("https://api-vuon-thong-minh.onrender.com/users/user-data", {
+        token: window.localStorage.getItem("token"),
+      })
+      .then((data) => {
+        //console.log(data.data.data);
+        if (data.data.data === "token expired") {
+          window.localStorage.clear();
+          window.localStorage.setItem("loggedIn", "false");
+          window.localStorage.getItem("loggedIn");
+          window.location.href = "/login";
+        }
+      });
+
     const fetchData = async () => {
       await axios
         .get(urls)
@@ -25,11 +38,11 @@ const Navb = () => {
           setConn(data.data.data.connect);
         })
         .catch((e) => {
-          console.log(e);
+          toast("Lỗi gọi API");
         });
     };
     fetchData();
-    const timeoutf = setTimeout(fetchData, 5000);
+    const timeoutf = setTimeout(fetchData, 2000);
     return () => clearTimeout(timeoutf);
   }, []);
 
@@ -41,10 +54,10 @@ const Navb = () => {
           connect: "disconnect",
         })
         .then(function (response) {
-          console.log(response);
+          //console.log(response);
         })
         .catch(function (error) {
-          console.log(error);
+          toast("Lỗi gọi API");
         });
     };
     updatedata();
@@ -61,7 +74,6 @@ const Navb = () => {
         email: userEmail,
       })
       .then(function (response) {
-        console.log(response);
         if (response.data.acknowledged == true) {
           toast.success("Reset thành công");
           setIsLoading(false);
@@ -146,14 +158,14 @@ const Navb = () => {
                   <br></br>
                   <div className="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
                     <button
-                      className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                      className="btn_rst"
                       type="button"
                       onClick={() => setshowModel(false)}
                     >
                       Thoát
                     </button>
                     <button
-                      className="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                      className="btn_rs_dn"
                       type="submit"
                       onClick={handleResetBtn}
                     >

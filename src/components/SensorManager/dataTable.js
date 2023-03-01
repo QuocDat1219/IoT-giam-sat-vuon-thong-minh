@@ -38,7 +38,6 @@ const List = () => {
       await axios
         .get(urls)
         .then((result) => {
-          // console.log(result.data.data.sensor);
           setdtTable(result.data.data.sensor);
         })
         .catch((err) => {
@@ -51,17 +50,14 @@ const List = () => {
   }, []);
 
   const handelSaveClick = (item) => {
-    console.log(item);
     dataItem = item;
     setShowModal(true);
-    console.log(dataItem); //lần đầu = ""
     setWorkTime("");
     setEndTimeOut("");
     setLimit("");
   };
   //sự kiện chọn select
   const handleChange = (event) => {
-    console.log(event.target.value);
     setSelected(event.target.value);
   };
   //sự kiện submit
@@ -87,11 +83,8 @@ const List = () => {
           }
         })
         .catch(function (error) {
-          console.log(error);
           toast.warning("Thay đổi không thành công");
         });
-      console.log(gioBatDau);
-      console.log(gioKetThuc);
     } else {
       toast.warning("Thời gian bắt đầu phải lớn hơn thời gian kết thúc");
     }
@@ -118,7 +111,7 @@ const List = () => {
                   </TableHead>
                   <TableBody>
                     {dtTable.map((item, index) => (
-                      <TableRow TableRowkey={index}>
+                      <TableRow key={index}>
                         <TableCell className="tableCell">{index + 1}</TableCell>
                         <TableCell className="tableCell">{item.name}</TableCell>
                         <TableCell className="tableCell">
@@ -163,23 +156,23 @@ const List = () => {
                       <h3 className="text-2xl font-semibold">
                         Cài đặt thiết bị: <strong>{dataItem.name}</strong>
                       </h3>
-                      <button
+                      {/* <button
                         style={{ color: "red" }}
                         className="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
                         onClick={() => setShowModal(false)}
                       >
                         X
-                      </button>
+                      </button> */}
                     </div>
                     <Form
                       style={{ width: "500px", padding: "20px" }}
                       onSubmit={handleEditSensor}
                     >
                       <Form.Group className="mb-3" controlId="formBasicAction">
-                        <Form.Label>
+                        <Form.Label className="labelTitle">
                           Trạng thái thiết bị: <Form.Label> </Form.Label>
                         </Form.Label>
-                        <Form.Text className="text-muted">
+                        <Form.Text className="labelTitle">
                           {dataItem.status == "1" ? (
                             <strong style={{ color: "#2ecc71" }}>
                               Đang hoạt động
@@ -196,7 +189,7 @@ const List = () => {
                         className="mb-3"
                         controlId="formBasicTimeWork"
                       >
-                        <Form.Label>
+                        <Form.Label className="labelTitle">
                           Thời gian hoạt động:{" "}
                           <strong>{dataItem.timeword}</strong>
                         </Form.Label>
@@ -210,7 +203,7 @@ const List = () => {
                       </Form.Group>
 
                       <Form.Group className="mb-3" controlId="formBasicTimeEnd">
-                        <Form.Label>
+                        <Form.Label className="labelTitle">
                           Thời gian hoạt dừng:{" "}
                           <strong>{dataItem.timeout}</strong>
                         </Form.Label>
@@ -227,7 +220,14 @@ const List = () => {
                         className="mb-3"
                         controlId="formBasicNotification"
                       >
-                        <Form.Label>Thông báo:</Form.Label>
+                        <Form.Label className="labelTitle">
+                          Thông báo:{" "}
+                          <Form.Label
+                            style={{ fontSize: "16px", fontWeight: "bold" }}
+                          >
+                            {dataItem.nofi}
+                          </Form.Label>
+                        </Form.Label>
                         <Form.Select
                           id="disabledSelect"
                           value={selected}
@@ -242,7 +242,14 @@ const List = () => {
                       </Form.Group>
 
                       <Form.Group className="mb-3" controlId="formBasicLimit">
-                        <Form.Label>Ngưỡng thông số cảm biến:</Form.Label>
+                        <Form.Label className="labelTitle">
+                          Ngưỡng thông số cảm biến:
+                          <Form.Label
+                            style={{ fontSize: "16px", fontWeight: "bold" }}
+                          >
+                            {dataItem.limit}
+                          </Form.Label>
+                        </Form.Label>
                         <Form.Control
                           required
                           type="number"
@@ -253,9 +260,13 @@ const List = () => {
                       </Form.Group>
                       <div className="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
                         <button
-                          className="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                          type="submit"
+                          className="btn_us_thoat"
+                          type="button"
+                          onClick={() => setShowModal(false)}
                         >
+                          Đóng
+                        </button>
+                        <button className="btn_cn" type="submit">
                           Cập nhật
                         </button>
                       </div>
