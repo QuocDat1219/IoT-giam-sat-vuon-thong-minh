@@ -10,9 +10,30 @@ import LandingPage from "../components/LandingPage/LandingPage";
 import BangDuLieu from "../components/BangData/DataTable";
 import ControlDevice from "../components/ControlDevice/ControlDevice";
 import Notfound from "../components/404/NotFound";
+import axios from "axios"
+import React, { useContext, useEffect, useState, useReducer } from "react";
 const Routers = () => {
+  const [tokencheck, setTokenCheck] = useState(false);
   const isLoggedIn = window.localStorage.getItem("loggedIn");
   const isAdminIn = window.localStorage.getItem("isadmin");
+
+  useEffect(() => {
+    axios.post('https://api-vuon-thong-minh.onrender.com/users/user-data', {
+      token: window.localStorage.getItem("token"),
+    })
+      .then((data) => {
+       console.log(data.data.data);
+       console.log(tokencheck);
+       if(data.data.data == "token expired"){
+        window.localStorage.clear();
+        window.localStorage.setItem("loggedIn", "false");
+        window.localStorage.getItem("loggedIn");
+ 
+       }
+      })
+  },[])
+  
+
 
   return (
     <Routes>
@@ -29,7 +50,7 @@ const Routers = () => {
         exact
         path="/home"
         element={
-          isLoggedIn == "true" && isAdminIn == "false" ? <Home /> : <Login />
+          isLoggedIn == "true" && isAdminIn == "false" && tokencheck == false? <Home /> : <Login />
         }
       />
       <Route
