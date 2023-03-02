@@ -6,7 +6,7 @@ import React, { useState, useEffect } from "react";
 import RingLoader from "react-spinners/RingLoader";
 
 const ChartWT = () => {
-  const [chartArrayUltra, setChartArrayUltra] = useState([]);
+  const [chartArrayUltra, setChartArrayUltra] = useState();
   const [chartArrayThoiGian, setChartArrayThoiGian] = useState([]);
 
 
@@ -37,7 +37,7 @@ const ChartWT = () => {
     const intervalId = setInterval(fetchData, 5000);
     return () => clearInterval(intervalId);
   }, []);
-  return chartArrayUltra.length != 0 ? (
+  return chartArrayUltra ? (
     <CCol xs={10}>
       <CCard className="mb-5">
         <CCardHeader>Biểu đồ lượng nước trong bồn </CCardHeader>

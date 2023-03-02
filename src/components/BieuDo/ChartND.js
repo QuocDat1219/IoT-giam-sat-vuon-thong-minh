@@ -5,7 +5,7 @@ import { CChartLine } from "@coreui/react-chartjs";
 import axios from "axios";
 import RingLoader from "react-spinners/RingLoader";
 const ChartND = () => {
-  const [chartArrayNhietdo, setChartArrayNhietdo] = useState([]);
+  const [chartArrayNhietdo, setChartArrayNhietdo] = useState();
   const [chartArrayDoAm, setChartArrayDoAm] = useState([]);
   const [chartArrayThoiGian, setChartArrayThoiGian] = useState([]);
   const userEmail = window.localStorage.getItem("Emaildetails");
@@ -35,7 +35,7 @@ const ChartND = () => {
     return () => clearInterval(intervalId);
   }, []);
 
-  return chartArrayNhietdo.length != 0 ?(
+  return chartArrayNhietdo ?(
     <CCol xs={6}>
       <CCard className="mb-4">
         <CCardHeader>Biểu đồ nhiệt độ</CCardHeader>
