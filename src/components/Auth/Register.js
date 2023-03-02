@@ -91,7 +91,15 @@ const Register = () => {
         ],
         sensor: [
           {
-            name: "DHT",
+            name: "Nhiệt độ",
+            status: "0",
+            timeword: "6:00",
+            timeout: "15:00",
+            nofi: "Email",
+            limit: 0,
+          },
+          {
+            name: "Độ ẩm",
             status: "0",
             timeword: "6:00",
             timeout: "15:00",
