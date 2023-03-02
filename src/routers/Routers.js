@@ -22,8 +22,7 @@ const Routers = () => {
       token: window.localStorage.getItem("token"),
     })
       .then((data) => {
-       console.log(data.data.data);
-       console.log(tokencheck);
+  
        if(data.data.data == "token expired"){
         window.localStorage.clear();
         window.localStorage.setItem("loggedIn", "false");
