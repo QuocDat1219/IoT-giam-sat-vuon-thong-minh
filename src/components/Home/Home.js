@@ -39,6 +39,21 @@ const Home = () => {
     return () => clearInterval(intervalId);
   }, []);
 
+  useEffect(() => {
+    axios.post('https://api-vuon-thong-minh.onrender.com/users/user-data', {
+      token: window.localStorage.getItem("token"),
+    })
+      .then((data) => {
+ 
+       if(data.data.data == "token expired"){
+        window.localStorage.clear();
+        window.localStorage.setItem("loggedIn", "false");
+        window.localStorage.getItem("loggedIn");
+ 
+       }
+      })
+  },[])
+
   return (
     <>
       <div className="home">
