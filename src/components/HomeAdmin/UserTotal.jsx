@@ -11,6 +11,7 @@ import PeopleIcon from "@mui/icons-material/PeopleOutlined";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import "./Css/UserTotal.css";
+import RingLoader from "react-spinners/RingLoader"
 export const UserTotal = (props) => {
   const [totalUser, setTotalUser] = useState("");
   useEffect(() => {
@@ -33,7 +34,7 @@ export const UserTotal = (props) => {
     return () => clearInterval(intervalId);
   }, []);
 
-  return (
+  return totalUser != "" ? (
     <div style={{ width: "150%" }} className="total-US">
       <Card {...props}>
         <CardContent>
@@ -44,6 +45,41 @@ export const UserTotal = (props) => {
               </Typography>
               <Typography color="textPrimary" variant="h4">
                 {totalUser}
+              </Typography>
+            </Grid>
+            <Grid item>
+              <Avatar
+                sx={{
+                  backgroundColor: "#f9ca24",
+                  height: 56,
+                  width: 56,
+                }}
+              >
+                <PeopleIcon />
+              </Avatar>
+            </Grid>
+          </Grid>
+          <Box
+            sx={{
+              alignItems: "center",
+              display: "flex",
+              pt: 2,
+            }}
+          ></Box>
+        </CardContent>
+      </Card>
+    </div>
+  ): (
+    <div style={{ width: "150%" }} className="total-US">
+      <Card {...props}>
+        <CardContent>
+          <Grid container spacing={3} sx={{ justifyContent: "space-between" }}>
+            <Grid item>
+              <Typography color="textSecondary" gutterBottom variant="overline">
+                tài khoản
+              </Typography>
+              <Typography color="textPrimary" variant="h4">
+              <RingLoader size="42px"/>
               </Typography>
             </Grid>
             <Grid item>

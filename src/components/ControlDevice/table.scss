@@ -36,3 +36,46 @@
 .tableCell{
   font-weight: bold !important; 
 }
+.btn_thoat{
+  cursor: pointer;
+    width: 25%;
+    padding: 15px 20px;
+    text-align: center;
+    margin-right: 20px;
+    outline: none;
+    color: #fff;
+    font-size: 15px;
+    background-color: #fc0606;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 9px #d9d9d9;
+}
+.btn_thoat:hover{
+  background-color: #8a3030;
+}
+.btn_thoat:active{
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+.btn_cn{
+  cursor: pointer;
+    width: 25%;
+    padding: 15px 20px;
+    text-align: center;
+    outline: none;
+    color: #fff;
+    background-color: #35de47;
+    border: none;
+    font-size: 15px;
+    border-radius: 15px;
+    box-shadow: 0 9px #d9d9d9;
+}
+.btn_cn:hover{
+  background-color: #3e8e41;
+}
+.btn_cn:active{
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}

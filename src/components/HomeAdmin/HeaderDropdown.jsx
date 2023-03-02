@@ -1,7 +1,7 @@
 import React from "react";
 import Form from "react-bootstrap/Form";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import KeyIcon from '@mui/icons-material/Key';
+import KeyIcon from "@mui/icons-material/Key";
 import { useEffect, useState } from "react";
 import {
   CAvatar,
@@ -48,20 +48,19 @@ const HeaderDropdown = () => {
   let urls =
     "https://api-vuon-thong-minh.onrender.com/datas/datadetail/" + userEmail;
   useEffect(() => {
-
-    axios.post('https://api-vuon-thong-minh.onrender.com/users/user-data', {
-      token: window.localStorage.getItem("token"),
-    })
+    axios
+      .post("https://api-vuon-thong-minh.onrender.com/users/user-data", {
+        token: window.localStorage.getItem("token"),
+      })
       .then((data) => {
         // console.log(data.data.data);
         setData(data.data.data);
-      })
+      });
 
-    axios.get(urls)
-      .then((data) => {
-        // console.log(data.data.data.idtelegram);
-        setDataIDtelegram(data.data.data.idtelegram);
-      })
+    axios.get(urls).then((data) => {
+      // console.log(data.data.data.idtelegram);
+      setDataIDtelegram(data.data.data.idtelegram);
+    });
   }, []);
 
   const handleChangePassword = async (e) => {
@@ -69,31 +68,39 @@ const HeaderDropdown = () => {
 
     if (newPassword === "" || oldPassword === "" || newPasswordPL === "") {
       toast("Vui lòng nhập đầy đủ thông tin!");
-
     } else if (!checkPassword.test(newPassword) || newPassword.length === "") {
       toast.error("Mật khẩu phải có chữ hoa, số và kí tự đặc biệt!");
-
-    }
-    else if (newPassword != newPasswordPL) {
+    } else if (newPassword != newPasswordPL) {
       toast.error("Nhập lại mật khẩu không trùng khớp");
-
     } else {
       // toast("Đang xử lý...");
       await axios
         .post("https://api-vuon-thong-minh.onrender.com/users/changepassword", {
           tokenold: window.localStorage.getItem("token"),
           newpassword: newPassword,
-          oldpassword: oldPassword
+          oldpassword: oldPassword,
         })
         .then(function (response) {
           // console.log(response);
           if (response.data.error === "Passwords don't match") {
             toast.error("Mật khẩu cũ không đúng");
+          } else if (response.data.status === "verified") {
+            toast.promise(
+              new Promise((resolve, reject) => {
+                setTimeout(() => {
+                  resolve();
+                }, 2000);
+              }),
+              {
+                pending: "Đang xử lí....",
+                success: "Đổi mật khẩu thành công",
+              },
+              {
+                autoClose: 2000,
+              }
+            );
+            setshowModalChangePAss(false);
           }
-            else if (response.data.status === "verified") {
-              toast.success("Đổi mật khẩu thành công");
-              setshowModalChangePAss(false);
-            }
         })
         .catch(function (error) {
           console.log(error);
@@ -105,8 +112,7 @@ const HeaderDropdown = () => {
     e.preventDefault();
     if (fnamees === data.fname && lnamees === data.lname) {
       toast.warning("Thông tin không thay đổi");
-    }
-    else if (fnamees === "" || lnamees === "") {
+    } else if (fnamees === "" || lnamees === "") {
       toast.warning("Vui lòng nhập đủ thông tin");
     } else {
       toast("Đang xử lý...");
@@ -117,14 +123,13 @@ const HeaderDropdown = () => {
           fname: fnamees,
         })
         .then(function (data) {
-          setData(data.data.data)
+          setData(data.data.data);
           setshowModelAccountInfo(false);
         })
         .catch(function (error) {
           console.log(error);
           toast.error("Lỗi");
         });
-
     }
   };
   return (
@@ -164,34 +169,45 @@ const HeaderDropdown = () => {
                     Chỉnh sửa thông tin
                   </h3>
                 </div>
-                <Form style={{ width: "500px", padding: "20px" }}
-                onSubmit={handleClickSave}>
+                <Form
+                  style={{ width: "500px", padding: "20px" }}
+                  onSubmit={handleClickSave}
+                >
                   <Form.Group className="mb-3" controlId="formBasicAction">
                     <Form.Label style={{ fontSize: "20px" }}>
                       Email: <Form.Label className="titleUser"></Form.Label>
                     </Form.Label>
-                    <Form.Control required type="Email"
-                      placeholder={data.email} disabled></Form.Control>
+                    <Form.Control
+                      required
+                      type="Email"
+                      placeholder={data.email}
+                      disabled
+                    ></Form.Control>
                   </Form.Group>
                   <Form.Group className="mb-3" controlId="formBasicAction">
                     <Form.Label style={{ fontSize: "20px" }}>
-                      First Name: <Form.Label
-                        className="titleUser">
-                      </Form.Label>
+                      First Name:{" "}
+                      <Form.Label className="titleUser"></Form.Label>
                     </Form.Label>
-                    <Form.Control required type="text"
+                    <Form.Control
+                      required
+                      type="text"
                       value={fnamees}
                       placeholder={data.fname}
-                      onChange={(e) => setFNames(e.target.value)}></Form.Control>
+                      onChange={(e) => setFNames(e.target.value)}
+                    ></Form.Control>
                   </Form.Group>
                   <Form.Group className="mb-3" controlId="formBasicAction">
                     <Form.Label style={{ fontSize: "20px" }}>
                       Last Name: <Form.Label className="titleUser"></Form.Label>
                     </Form.Label>
-                    <Form.Control required type="text"
+                    <Form.Control
+                      required
+                      type="text"
                       value={lnamees}
                       placeholder={data.lname}
-                      onChange={(e) => setLNames(e.target.value)}></Form.Control>
+                      onChange={(e) => setLNames(e.target.value)}
+                    ></Form.Control>
                   </Form.Group>
                   <div className="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
                     <button
@@ -214,9 +230,7 @@ const HeaderDropdown = () => {
           </div>
           <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
         </div>
-      ) :
-        null
-      }
+      ) : null}
       {showModalChangePAss ? (
         <div>
           <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
@@ -227,36 +241,50 @@ const HeaderDropdown = () => {
                     Chỉnh sửa thông tin
                   </h3>
                 </div>
-                <Form style={{ width: "500px", padding: "20px" }}
-                  onSubmit={handleChangePassword}>
+                <Form
+                  style={{ width: "500px", padding: "20px" }}
+                  onSubmit={handleChangePassword}
+                >
                   <Form.Group className="mb-3" controlId="formBasicAction">
                     <Form.Label style={{ fontSize: "20px" }}>
                       Email: <Form.Label></Form.Label>
                     </Form.Label>
-                    <Form.Control required type="text"
-                      value={data.email} disabled>
-                    </Form.Control>
+                    <Form.Control
+                      required
+                      type="text"
+                      value={data.email}
+                      disabled
+                    ></Form.Control>
                   </Form.Group>
                   <Form.Group className="mb-3" controlId="formBasicAction">
                     <Form.Label style={{ fontSize: "20px" }}>
                       Mật khẩu cũ: <Form.Label> </Form.Label>
                     </Form.Label>
-                    <Form.Control required type="text"
-                      onChange={(e) => setOldPassword(e.target.value)}></Form.Control>
+                    <Form.Control
+                      required
+                      type="text"
+                      onChange={(e) => setOldPassword(e.target.value)}
+                    ></Form.Control>
                   </Form.Group>
                   <Form.Group className="mb-3" controlId="formBasicAction">
                     <Form.Label style={{ fontSize: "20px" }}>
                       Mật khẩu mới: <Form.Label> </Form.Label>
                     </Form.Label>
-                    <Form.Control required type="text"
-                      onChange={(e) => setNewPassword(e.target.value)}></Form.Control>
+                    <Form.Control
+                      required
+                      type="text"
+                      onChange={(e) => setNewPassword(e.target.value)}
+                    ></Form.Control>
                   </Form.Group>
                   <Form.Group className="mb-3" controlId="formBasicAction">
                     <Form.Label style={{ fontSize: "20px" }}>
                       Nhập lại mật khẩu: <Form.Label> </Form.Label>
                     </Form.Label>
-                    <Form.Control required type="text"
-                      onChange={(e) => setNewPasswordPL(e.target.value)}></Form.Control>
+                    <Form.Control
+                      required
+                      type="text"
+                      onChange={(e) => setNewPasswordPL(e.target.value)}
+                    ></Form.Control>
                   </Form.Group>
                   <div className="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
                     <button
@@ -279,8 +307,7 @@ const HeaderDropdown = () => {
           </div>
           <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
         </div>
-      ) : null
-      }
+      ) : null}
     </>
   );
 };

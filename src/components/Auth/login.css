@@ -132,9 +132,6 @@
     border-radius: 10px;
   }
   .login .container .login-form form button[type=submit] {
-    background: -webkit-linear-gradient(110deg, #349e30 0%, #39f30b 100%);
-    background: -o-linear-gradient(110deg, #349e30 0%, #39f30b 100%);
-    background: linear-gradient(-20deg, #349e30 0%, #39f30b 100%);
     border: none;
     margin-top: 25px;
     margin-bottom: 20px;
@@ -142,13 +139,12 @@
     height: 58px;
     text-transform: uppercase;
     color: white;
-    border-radius: 10px;
     position: relative;
     z-index: 2;
     font-weight: bold;
     font-size: 20px;
   }
-  .login .container .login-form form button[type=submit]:hover::after {
+  /* .login .container .login-form form button[type=submit]:hover::after {
     opacity: 1;
   }
   .login .container .login-form form button[type=submit]::after {
@@ -168,7 +164,7 @@
     background: -webkit-linear-gradient(bottom, #2c838d 0%, #10b9f7 100%);
     background: -o-linear-gradient(bottom, #2c838d 0%, #10b9f7 100%);
     background: linear-gradient(to top, #2c838d 0%, #10b9f7 100%);
-  }
+  } */
   /* .login .container .remember-form {
     position: relative;
     margin-top: -30px;
