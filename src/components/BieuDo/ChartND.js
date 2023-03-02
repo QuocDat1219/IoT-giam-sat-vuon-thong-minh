@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { CCard, CCardBody, CCol, CCardHeader, CRow } from "@coreui/react";
 import { CChartLine } from "@coreui/react-chartjs";
 import axios from "axios";
+import RingLoader from "react-spinners/RingLoader";
 const ChartND = () => {
   const [chartArrayNhietdo, setChartArrayNhietdo] = useState([]);
   const [chartArrayDoAm, setChartArrayDoAm] = useState([]);
@@ -34,7 +35,7 @@ const ChartND = () => {
     return () => clearInterval(intervalId);
   }, []);
 
-  return (
+  return chartArrayNhietdo.length != 0 ?(
     <CCol xs={6}>
       <CCard className="mb-4">
         <CCardHeader>Biểu đồ nhiệt độ</CCardHeader>
@@ -65,6 +66,10 @@ const ChartND = () => {
         </CCardBody>
       </CCard>
     </CCol>
+  ): (
+    <div className="ND flex justify-center items-center">
+      <RingLoader color="rgba(151, 187, 205, 1)" size={100} />
+    </div>
   );
 };
 export default ChartND;

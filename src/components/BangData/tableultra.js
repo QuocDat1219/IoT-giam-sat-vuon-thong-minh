@@ -6,10 +6,9 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-
+import RingLoader from "react-spinners/RingLoader";
 const tableultra = (props) => {
-
-  return props.data.length != 0 ?(
+  return props.data.length != 0 ? (
     <TableContainer component={Paper} className="table container mx-auto">
       <h2>Lưu lượng nước bình chứa</h2>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -39,9 +38,9 @@ const tableultra = (props) => {
         </TableBody>
       </Table>
     </TableContainer>
-  ): (
-    <div>
-        <h1>loading...</h1>
+  ) : (
+    <div className="ND flex justify-center items-center">
+      <RingLoader color="#4cd137" size={100} />
     </div>
   );
 };

@@ -7,7 +7,8 @@ import axios from "axios";
 import Tablendda from "./tablendda";
 import TableMH from "./tablemh";
 import TableUltra from "./tableultra";
-
+import "./select.scss";
+import Form from "react-bootstrap/Form";
 let num = 1;
 const BangDuLieu = () => {
   const [dataDHTLog, setDataDHTLog] = useState([]);
@@ -56,13 +57,29 @@ const BangDuLieu = () => {
       <Sidebar>
         <div className="homeContainer">
           <Navb />
-          <div style={{ paddingTop: "30px" }}>
+          {/* <div style={{ paddingTop: "30px" }}>
             <select value={selectedTable} onChange={handleTableChange}>
               <option value="tablendda">Bảng nhiệt độ và độ ẩm</option>
               <option value="tablemh">Bảng độ ẩm đất</option>
               <option value="tableultra">Bảng lượng nước</option>
             </select>
-          </div>
+          </div> */}
+          <Form.Group
+            className="mb-3 w-1/4 max-w-1/4 "
+            controlId="formBasicNotification"
+          >
+            <label style={{float: "left",fontSize: "24px",padding: "10px 10px 10px 10px"}}>Chọn bảng: </label>
+            <Form.Select
+              value={selectedTable}
+              onChange={handleTableChange}
+              className="sl"
+  
+            >
+              <option value="tablendda">Bảng nhiệt độ và độ ẩm</option>
+              <option value="tablemh">Bảng độ ẩm đất</option>
+              <option value="tableultra">Bảng lượng nước</option>
+            </Form.Select>
+          </Form.Group>
 
           <div style={{ paddingTop: "30px" }}>{currentTable}</div>
 
@@ -74,4 +91,5 @@ const BangDuLieu = () => {
     </div>
   );
 };
+
 export default BangDuLieu;

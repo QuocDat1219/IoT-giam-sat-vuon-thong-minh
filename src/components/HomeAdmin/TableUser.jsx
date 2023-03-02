@@ -12,10 +12,11 @@ import { Button, Select } from "@mui/material";
 import axios from "axios";
 import "react-toastify/dist/ReactToastify.css";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
-import KeyIcon from '@mui/icons-material/Key';
+import KeyIcon from "@mui/icons-material/Key";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import RingLoader from "react-spinners/RingLoader";
 let useData = null;
 const TableUser = () => {
   const [showModel, setshowModel] = useState(false);
@@ -41,7 +42,7 @@ const TableUser = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setUserType("");
-    console.log(emailadd);
+  
     //Kiểm tra dữ liệu nhập của người dùng
     if (fname == "" || lname == "" || emailadd == "" || password == "") {
       toast.warning("Vui lòng nhập đầy đủ thông tin đăng ký!");
@@ -140,10 +141,11 @@ const TableUser = () => {
       await axios
         .get("https://api-vuon-thong-minh.onrender.com/users/getalluser")
         .then((result) => {
+          
           const newdata = JSON.stringify(result.data.data);
           // setEmail(result.data.data.data.data.email);
           setEmail(JSON.parse(newdata));
-          console.log(JSON.parse(newdata));
+        
         })
         .catch((err) => {
           throw new Error(err);
@@ -169,7 +171,7 @@ const TableUser = () => {
         email: useData.email,
       })
       .then(function (response) {
-        console.log(response.data.status);
+       
         if (response.data.status === "ok") {
           setShowDeleted(false);
           toast.success("Xóa người dùng thành công");
@@ -183,48 +185,50 @@ const TableUser = () => {
   };
 
   const handelUpdateUserClient = async () => {
-    await axios .post("https://api-vuon-thong-minh.onrender.com/users/edituseradmin", {
-          email: useData.email,
-          lname: lname,
-          fname: fname,
-        })
-        .then((response) => {
-          if(response.data.status === "Success") {
-            toast("Cập nhật thành công");
-            setFname("");
-            setLname("");
-            setshowModel(false);
-          }else{
-            toast("Cập nhật khôg thành công");
-          }
-          console.log(response);
-        })
-        .catch((error) => {
-          toast.error("Cập nhật không thành công");
-        });
-  }
+    await axios
+      .post("https://api-vuon-thong-minh.onrender.com/users/edituseradmin", {
+        email: useData.email,
+        lname: lname,
+        fname: fname,
+      })
+      .then((response) => {
+        if (response.data.status === "Success") {
+          toast("Cập nhật thành công");
+          setFname("");
+          setLname("");
+          setshowModel(false);
+        } else {
+          toast("Cập nhật khôg thành công");
+        }
+        console.log(response);
+      })
+      .catch((error) => {
+        toast.error("Cập nhật không thành công");
+      });
+  };
 
   const handleClickShowChangePass = (item) => {
     useData = item;
     setChangePassword(true);
-  }
+  };
 
   const handleResetPassword = async () => {
-    await axios .post("https://api-vuon-thong-minh.onrender.com/users/resetpassword",{
-      email: useData.email,
-    })
-    .then(response => {
-      if (response.data.status === "Success") {
+    await axios
+      .post("https://api-vuon-thong-minh.onrender.com/users/resetpassword", {
+        email: useData.email,
+      })
+      .then((response) => {
+        if (response.data.status === "Success") {
           toast("Đặt lại mật khẩu thành công");
           setChangePassword(false);
-      }else{
+        } else {
+          toast("Đặt lại mật khẩu không thành công");
+        }
+      })
+      .catch((err) => {
         toast("Đặt lại mật khẩu không thành công");
-      }
-    })
-    .catch(err => {
-      toast("Đặt lại mật khẩu không thành công");
-    })
-  }
+      });
+  };
   return (
     <div>
       <ToastContainer pauseOnHover={false} draggable={false} autoClose={2500} />
@@ -240,7 +244,7 @@ const TableUser = () => {
       </div>
 
       <div>
-        {dtTable ? (
+        {email.length != 0 ? (
           <TableContainer component={Paper} className="table container mx-auto">
             <Table sx={{ minWidth: 650 }} aria-label="simple table">
               <TableHead>
@@ -264,9 +268,9 @@ const TableUser = () => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {email.map((item, index) => (
+                {email.map((item, index) => ( item.userType == "" ? (
                   <TableRow key={index}>
-                    <TableCell className="tableCell">{index}</TableCell>
+                    <TableCell className="tableCell">{index + 1}</TableCell>
                     <TableCell
                       className="tableCell"
                       style={{ textAlign: "center" }}
@@ -305,14 +309,16 @@ const TableUser = () => {
                         <KeyIcon />
                       </Button>
                     </TableCell>
-                  </TableRow>
+                  </TableRow>) : ("")
                 ))}
                 {/* ))} */}
               </TableBody>
             </Table>
           </TableContainer>
         ) : (
-          "loading"
+          <div className="ND flex justify-center items-center">
+            <RingLoader color="#4cd137" size={100} />
+          </div>
         )}
       </div>
       {showDeleted ? (
@@ -458,8 +464,7 @@ const TableUser = () => {
                     Chỉnh sửa thông tin
                   </h3>
                 </div>
-                <Form style={{ width: "500px", padding: "20px" }}
-                >
+                <Form style={{ width: "500px", padding: "20px" }}>
                   <Form.Group className="mb-3" controlId="formBasicAction">
                     <Form.Label style={{ fontSize: "20px" }}>
                       Email:{" "}
@@ -467,7 +472,12 @@ const TableUser = () => {
                         {useData.email}
                       </Form.Label>
                     </Form.Label>
-                    <Form.Control required type="text" disabled value={useData.email}></Form.Control>
+                    <Form.Control
+                      required
+                      type="text"
+                      disabled
+                      value={useData.email}
+                    ></Form.Control>
                   </Form.Group>
                   <Form.Group className="mb-3" controlId="formBasicAction">
                     <Form.Label style={{ fontSize: "20px" }}>
@@ -476,9 +486,12 @@ const TableUser = () => {
                         {useData.fname}
                       </Form.Label>
                     </Form.Label>
-                    <Form.Control required type="text" 
-                    value={fname}
-                    onChange={(e) => setFname(e.target.value)}></Form.Control>
+                    <Form.Control
+                      required
+                      type="text"
+                      value={fname}
+                      onChange={(e) => setFname(e.target.value)}
+                    ></Form.Control>
                   </Form.Group>
                   <Form.Group className="mb-3" controlId="formBasicAction">
                     <Form.Label style={{ fontSize: "20px" }}>
@@ -487,9 +500,12 @@ const TableUser = () => {
                         {useData.lname}
                       </Form.Label>
                     </Form.Label>
-                    <Form.Control required type="text"
-                    value={lname}
-                    onChange={(e) => setLname(e.target.value)}></Form.Control>
+                    <Form.Control
+                      required
+                      type="text"
+                      value={lname}
+                      onChange={(e) => setLname(e.target.value)}
+                    ></Form.Control>
                   </Form.Group>
                   <div className="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
                     <button
@@ -503,8 +519,7 @@ const TableUser = () => {
                       className="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                       onClick={handelUpdateUserClient}
                       type="button"
-                      >
-
+                    >
                       Cập nhật
                     </button>
                   </div>
@@ -525,27 +540,37 @@ const TableUser = () => {
                     Đặt lại mật khẩu
                   </h3>
                 </div>
-                <Form.Group className="mb-3" controlId="formBasicAction" >
-                    <Form.Label style={{ fontSize: "20px", width:"600px", padding:"10px" }}>
-                      Đặt lại mật khẩu mới cho tài khoản: <Form.Label className="labelUser">{useData.email}</Form.Label>
-                    ?</Form.Label>
-                  </Form.Group>
+                <Form.Group className="mb-3" controlId="formBasicAction">
+                  <Form.Label
+                    style={{
+                      fontSize: "20px",
+                      width: "600px",
+                      padding: "10px",
+                    }}
+                  >
+                    Đặt lại mật khẩu mới cho tài khoản:{" "}
+                    <Form.Label className="labelUser">
+                      {useData.email}
+                    </Form.Label>
+                    ?
+                  </Form.Label>
+                </Form.Group>
                 <div className="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
-                    <button
-                      className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                      type="button"
-                      onClick={() => setChangePassword(false)}
-                    >
-                      Thoát
-                    </button>
-                    <button
-                      className="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                      type="submit"
-                      onClick={handleResetPassword}
-                    >
-                      Đặt lại
-                    </button>
-                  </div>
+                  <button
+                    className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                    type="button"
+                    onClick={() => setChangePassword(false)}
+                  >
+                    Thoát
+                  </button>
+                  <button
+                    className="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                    type="submit"
+                    onClick={handleResetPassword}
+                  >
+                    Đặt lại
+                  </button>
+                </div>
               </div>
             </div>
           </div>
