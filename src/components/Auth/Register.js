@@ -21,7 +21,7 @@ const Register = () => {
     /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
   var checkPassword =
     /^(?=.*[a-z])(?=.*[0-9])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
     setUserType("");
@@ -45,7 +45,7 @@ const Register = () => {
     }
     //Xử lý đăng ký
     // toast("Đang xử lý...");
-    fetch("https://api-vuon-thong-minh.onrender.com/users/register", {
+    await axios.post("https://api-vuon-thong-minh.onrender.com/users/register", {
       fname: fname,
       email: email,
       lname: lname,
