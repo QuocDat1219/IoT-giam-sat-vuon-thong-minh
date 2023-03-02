@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { Link } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import icon from "../images/IOT.png";
 import PuffLoader from "react-spinners/PuffLoader";
+import axios from "axios"
 import "./login.css";
 import "./button.scss";
 import Header from "../LandingPage/Header/Headers";
@@ -11,6 +12,22 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    axios.post('https://api-vuon-thong-minh.onrender.com/users/user-data', {
+      token: window.localStorage.getItem("token"),
+    })
+      .then((data) => {
+  
+       if(data.data.data == "token expired"){
+        window.localStorage.clear();
+        window.localStorage.setItem("loggedIn", "false");
+        window.localStorage.getItem("loggedIn");
+ 
+       }
+      })
+  },[])
+  
 
   function handleSubmit(e) {
     e.preventDefault();
