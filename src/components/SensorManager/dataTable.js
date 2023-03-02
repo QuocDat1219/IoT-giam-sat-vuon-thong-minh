@@ -17,6 +17,7 @@ import Navb from "../navbar/Navb";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import Footer from "../LandingPage/UI/Footer";
 import moment from "moment";
+import RingLoader from "react-spinners/RingLoader";
 let dataItem = null;
 const List = () => {
   const [showModal, setShowModal] = useState(false);
@@ -95,7 +96,7 @@ const List = () => {
         <div className="homeContainer">
           <Navb />
           <div>
-            {dtTable ? (
+            {dtTable.length != 0 ? (
               <TableContainer
                 component={Paper}
                 className="table container mx-auto"
@@ -143,7 +144,9 @@ const List = () => {
                 </Table>
               </TableContainer>
             ) : (
-              "loading"
+              <div className="ND flex justify-center items-center">
+              <RingLoader color="#4cd137" size={100} />
+            </div>
             )}
           </div>
 

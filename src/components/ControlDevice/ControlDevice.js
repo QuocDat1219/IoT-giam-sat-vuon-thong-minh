@@ -17,6 +17,8 @@ import Footer from "../LandingPage/UI/Footer";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import { SetMealSharp } from "@mui/icons-material";
 import Form from "react-bootstrap/Form";
+import RingLoader from "react-spinners/RingLoader";
+
 let dataDevice = null;
 const ControlDevice = () => {
   const [showModel, setshowModel] = useState(false);
@@ -94,23 +96,25 @@ const ControlDevice = () => {
       <Sidebar>
         <div className="homeContainer">
           <Navb />
-          <div>
-            <TableContainer
-              component={Paper}
-              className="table container mx-auto"
-            >
-              <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                <TableHead>
-                  <TableRow>
-                    <TableCell className="tableCell">Stt</TableCell>
-                    <TableCell className="tableCell">Thiết bị</TableCell>
-                    <TableCell className="tableCell">Trạng thái</TableCell>
-                    <TableCell className="tableCell">Hành động</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {dieukhien
-                    ? dieukhien.map((data, key) => (
+
+          {dieukhien.length != 0 ? (
+            <div>
+              <TableContainer
+                component={Paper}
+                className="table container mx-auto"
+              >
+                <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                  <TableHead>
+                    <TableRow>
+                      <TableCell className="tableCell">Stt</TableCell>
+                      <TableCell className="tableCell">Thiết bị</TableCell>
+                      <TableCell className="tableCell">Trạng thái</TableCell>
+                      <TableCell className="tableCell">Hành động</TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {dieukhien
+                      ? dieukhien.map((data, key) => (
                         <TableRow key={key}>
                           <TableCell className="tablleBody">
                             <div className="cellWrapper">{key}</div>
@@ -150,11 +154,17 @@ const ControlDevice = () => {
                           </TableCell>
                         </TableRow>
                       ))
-                    : ""}
-                </TableBody>
-              </Table>
-            </TableContainer>
-          </div>
+                      : ""}
+                  </TableBody>
+                </Table>
+              </TableContainer>
+            </div>
+          ) : (
+            <div className="ND flex justify-center items-center">
+              <RingLoader color="blue" size={100} />
+            </div>
+          )}
+
 
           {showModel ? (
             <div>
@@ -207,8 +217,8 @@ const ControlDevice = () => {
             <Footer />
           </div>
         </div>
-      </Sidebar>
-    </div>
+      </Sidebar >
+    </div >
   );
 };
 export default ControlDevice;

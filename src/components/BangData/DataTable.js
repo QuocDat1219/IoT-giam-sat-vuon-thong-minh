@@ -68,11 +68,12 @@ const BangDuLieu = () => {
             className="mb-3 w-1/4 max-w-1/4 "
             controlId="formBasicNotification"
           >
-            <Form.Label className="labelTitle"></Form.Label>
+            <label style={{float: "left",fontSize: "24px",padding: "10px 10px 10px 10px"}}>Chọn bảng: </label>
             <Form.Select
               value={selectedTable}
               onChange={handleTableChange}
               className="sl"
+  
             >
               <option value="tablendda">Bảng nhiệt độ và độ ẩm</option>
               <option value="tablemh">Bảng độ ẩm đất</option>

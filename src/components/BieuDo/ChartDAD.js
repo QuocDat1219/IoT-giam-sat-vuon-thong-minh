@@ -1,6 +1,6 @@
 import './ChartDAD.scss'
 import React, { useEffect, useState } from "react"; //react hooks
-import {AreaChart, Area,LineChart,Line,XAxis,YAxis,CartesianGrid,Tooltip,Legend,ResponsiveContainer} from "recharts";
+import { AreaChart, Area, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
 import { CCard, CCardBody, CCol, CCardHeader, CRow } from '@coreui/react'
 import {
   CChartBar,
@@ -11,9 +11,9 @@ import {
   CChartRadar,
 } from '@coreui/react-chartjs'
 import axios from "axios";
-
+import RingLoader from "react-spinners/RingLoader";
 const ChartDAD = () => {
-  const [chartArrayDoAmDat,setChartArrayDoAmDat] = useState();
+  const [chartArrayDoAmDat, setChartArrayDoAmDat] = useState();
   const [chartArrayThoiGian, setChartArrayThoiGian] = useState([]);
   const userEmail = window.localStorage.getItem("Emaildetails");
 
@@ -28,43 +28,47 @@ const ChartDAD = () => {
         .then(async (result) => {
           await setChartArrayDoAmDat(
             result.data.data.mhlog
-            .map((item) => item.mh).slice(-7)
+              .map((item) => item.mh).slice(-7)
           );
           await setChartArrayThoiGian(
             result.data.data.mhlog
-            .map((item) => item.createAt).slice(-7)
+              .map((item) => item.createAt).slice(-7)
           );
         })
-        .catch((err) => {});
+        .catch((err) => { });
     };
     fetchData();
     const intervalId = setInterval(fetchData, 5000);
     return () => clearInterval(intervalId);
   }, []);
-  return (
+  return chartArrayDoAmDat ? (
     <CCol xs={6}>
-    <CCard className="mb-4">
-      <CCardHeader>Biểu đồ Độ ẩm đất</CCardHeader>
-      <CCardBody>
-        <CChartLine
-          data={{
-            labels: chartArrayThoiGian,
-            datasets: [
-              {
-                label: 'Độ ẩm đất',
-                backgroundColor: 'rgba(220, 220, 220, 0.2)',
-                borderColor: 'RGBA( 139, 0, 0, 1 )',
-                pointBackgroundColor: 'RGBA( 139, 0, 0, 1 )',
-                pointBorderColor: '#fff',
-                data: chartArrayDoAmDat,
-              },
-            ],
-          }}
-        />
-      </CCardBody>
-    </CCard>
-  </CCol> 
+      <CCard className="mb-4">
+        <CCardHeader>Biểu đồ Độ ẩm đất</CCardHeader>
+        <CCardBody>
+          <CChartLine
+            data={{
+              labels: chartArrayThoiGian,
+              datasets: [
+                {
+                  label: 'Độ ẩm đất',
+                  backgroundColor: 'rgba(220, 220, 220, 0.2)',
+                  borderColor: 'RGBA( 139, 0, 0, 1 )',
+                  pointBackgroundColor: 'RGBA( 139, 0, 0, 1 )',
+                  pointBorderColor: '#fff',
+                  data: chartArrayDoAmDat,
+                },
+              ],
+            }}
+          />
+        </CCardBody>
+      </CCard>
+    </CCol>
 
+  ) : (
+    <div className="ND flex justify-center items-center">
+      <RingLoader color="RGBA( 139, 0, 0, 1 )" size={100} />
+    </div>
   );
 };
 export default ChartDAD;

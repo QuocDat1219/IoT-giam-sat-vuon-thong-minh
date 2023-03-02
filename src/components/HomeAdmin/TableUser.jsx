@@ -42,7 +42,7 @@ const TableUser = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setUserType("");
-    console.log(emailadd);
+  
     //Kiểm tra dữ liệu nhập của người dùng
     if (fname == "" || lname == "" || emailadd == "" || password == "") {
       toast.warning("Vui lòng nhập đầy đủ thông tin đăng ký!");
@@ -141,10 +141,11 @@ const TableUser = () => {
       await axios
         .get("https://api-vuon-thong-minh.onrender.com/users/getalluser")
         .then((result) => {
+          
           const newdata = JSON.stringify(result.data.data);
           // setEmail(result.data.data.data.data.email);
           setEmail(JSON.parse(newdata));
-          console.log(JSON.parse(newdata));
+        
         })
         .catch((err) => {
           throw new Error(err);
@@ -170,7 +171,7 @@ const TableUser = () => {
         email: useData.email,
       })
       .then(function (response) {
-        console.log(response.data.status);
+       
         if (response.data.status === "ok") {
           setShowDeleted(false);
           toast.success("Xóa người dùng thành công");
@@ -243,7 +244,7 @@ const TableUser = () => {
       </div>
 
       <div>
-        {dtTable != null ? (
+        {email.length != 0 ? (
           <TableContainer component={Paper} className="table container mx-auto">
             <Table sx={{ minWidth: 650 }} aria-label="simple table">
               <TableHead>
@@ -267,9 +268,9 @@ const TableUser = () => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {email.map((item, index) => (
+                {email.map((item, index) => ( item.userType == "" ? (
                   <TableRow key={index}>
-                    <TableCell className="tableCell">{index}</TableCell>
+                    <TableCell className="tableCell">{index + 1}</TableCell>
                     <TableCell
                       className="tableCell"
                       style={{ textAlign: "center" }}
@@ -308,7 +309,7 @@ const TableUser = () => {
                         <KeyIcon />
                       </Button>
                     </TableCell>
-                  </TableRow>
+                  </TableRow>) : ("")
                 ))}
                 {/* ))} */}
               </TableBody>
