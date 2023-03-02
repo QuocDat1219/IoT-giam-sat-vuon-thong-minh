@@ -83,7 +83,7 @@ export const DeviceC = (props) => {
                 Thiết bị đang kết nối
               </Typography>
               <Typography color="textPrimary" variant="h4">
-              <RingLoader size="42px"/>
+              <RingLoader size="42px" color="#32ff7e"/>
               </Typography>
             </Grid>
             <Grid item>

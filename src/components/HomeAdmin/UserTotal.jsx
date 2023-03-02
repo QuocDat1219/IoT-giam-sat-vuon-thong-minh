@@ -11,7 +11,7 @@ import PeopleIcon from "@mui/icons-material/PeopleOutlined";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import "./Css/UserTotal.css";
-import RingLoader from "react-spinners/RingLoader"
+import RingLoader from "react-spinners/RingLoader";
 export const UserTotal = (props) => {
   const [totalUser, setTotalUser] = useState("");
   useEffect(() => {
@@ -69,7 +69,7 @@ export const UserTotal = (props) => {
         </CardContent>
       </Card>
     </div>
-  ): (
+  ) : (
     <div style={{ width: "150%" }} className="total-US">
       <Card {...props}>
         <CardContent>
@@ -79,7 +79,7 @@ export const UserTotal = (props) => {
                 tài khoản
               </Typography>
               <Typography color="textPrimary" variant="h4">
-              <RingLoader size="42px"/>
+                <RingLoader size="42px" color="#f9ca24" />
               </Typography>
             </Grid>
             <Grid item>

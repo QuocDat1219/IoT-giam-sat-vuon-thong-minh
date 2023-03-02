@@ -10,7 +10,7 @@ import ImportantDevicesIcon from "@mui/icons-material/ImportantDevices";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import "./Css/DeviceTotal.css";
-import RingLoader from "react-spinners/RingLoader"
+import RingLoader from "react-spinners/RingLoader";
 
 export const DeviceTotal = (props) => {
   const [totalDevice, setTotalDevice] = useState("");
@@ -69,7 +69,7 @@ export const DeviceTotal = (props) => {
         </CardContent>
       </Card>
     </div>
-  ): (
+  ) : (
     <div style={{ width: "135%" }} className="deviceToTotal">
       <Card {...props}>
         <CardContent>
@@ -79,7 +79,7 @@ export const DeviceTotal = (props) => {
                 Tổng thiết bị
               </Typography>
               <Typography color="textPrimary" variant="h4">
-              <RingLoader size="42px"/>
+                <RingLoader size="42px" color="#4834d4" />
               </Typography>
             </Grid>
             <Grid item>

@@ -6,12 +6,11 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-
+import RingLoader from "react-spinners/RingLoader";
 const tablendda = (props) => {
-  
   return props.data.length != 0 ? (
     <TableContainer>
-    <Table sx={{ minWidth: 650 }} aria-label="simple table">
+      <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow>
             <TableCell className="tableCell" align="center">
@@ -44,10 +43,9 @@ const tablendda = (props) => {
         </TableBody>
       </Table>
     </TableContainer>
-  
-  ): (
-    <div>
-        <h1>loading...</h1>
+  ) : (
+    <div className="ND flex justify-center items-center">
+      <RingLoader color="#4cd137" size={100} />
     </div>
   );
 };

@@ -41,8 +41,8 @@ const ControlDevice = () => {
       })
       .then((result) => {
         if (status == "1") {
-          toast("Đã bật");
-        } else toast("Đã tắt");
+          toast.success("Đã bật");
+        } else toast.success("Đã tắt");
       })
       .catch((err) => {
         toast(err.message);
@@ -71,49 +71,52 @@ const ControlDevice = () => {
   }, []);
 
   const handelUpdateDeviceName = async (e) => {
-     e.preventDefault();
-     await axios
-       .post("https://api-vuon-thong-minh.onrender.com/datas/updatecontrol", {
-         name: dataDevice.name,
-         namenew: deviceName,
-         email: userEmail,
-       })
-       
-       .then(function(res) {
-         if (res.data.status == "update success") {
-           toast.success("Thay đổi thành công");
-           setshowModel(false);
-         }
-       }).catch(function(error){
-           toast.warning("Thay đổi không thành công");
-       });
-     };
+    e.preventDefault();
+    await axios
+      .post("https://api-vuon-thong-minh.onrender.com/datas/updatecontrol", {
+        name: dataDevice.name,
+        namenew: deviceName,
+        email: userEmail,
+      })
+
+      .then(function (res) {
+        if (res.data.status == "update success") {
+          toast.success("Thay đổi thành công");
+          setshowModel(false);
+        }
+      })
+      .catch(function (error) {
+        toast.warning("Thay đổi không thành công");
+      });
+  };
   return (
     <div className="home">
       <Sidebar>
         <div className="homeContainer">
           <Navb />
-            <div>
-              <TableContainer component={Paper} className="table container mx-auto">
-                <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                  <TableHead>
-                    <TableRow>
-                      <TableCell className="tableCell">Stt</TableCell>
-                      <TableCell className="tableCell">Thiết bị</TableCell>
-                      <TableCell className="tableCell">Trạng thái</TableCell>
-                      <TableCell className="tableCell">Hành động</TableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {
-                      dieukhien ? (dieukhien.map((data, key) => (
+          <div>
+            <TableContainer
+              component={Paper}
+              className="table container mx-auto"
+            >
+              <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                <TableHead>
+                  <TableRow>
+                    <TableCell className="tableCell">Stt</TableCell>
+                    <TableCell className="tableCell">Thiết bị</TableCell>
+                    <TableCell className="tableCell">Trạng thái</TableCell>
+                    <TableCell className="tableCell">Hành động</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {dieukhien
+                    ? dieukhien.map((data, key) => (
                         <TableRow key={key}>
                           <TableCell className="tablleBody">
                             <div className="cellWrapper">{key}</div>
                           </TableCell>
                           <TableCell className="tablleBody">
                             <div className="cellWrapper">
-                              
                               {/* {data.data.name ? data.data.name : "Loading..."} */}
                               {data.name}
                               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -127,7 +130,9 @@ const ControlDevice = () => {
                             </div>
                           </TableCell>
                           <TableCell className="tablleBody">
-                            <span className={`status ${data ? data.status : ""}`}>
+                            <span
+                              className={`status ${data ? data.status : ""}`}
+                            >
                               {data.status === 1 ? "Tắt" : "Bật"}
                             </span>
                           </TableCell>
@@ -144,12 +149,12 @@ const ControlDevice = () => {
                             </Button>
                           </TableCell>
                         </TableRow>
-                      ))) : ""
-                    }
-                  </TableBody>
-                </Table>
-              </TableContainer>
-            </div>
+                      ))
+                    : ""}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </div>
 
           {showModel ? (
             <div>
@@ -161,14 +166,18 @@ const ControlDevice = () => {
                         Chỉnh sửa thông tin
                       </h3>
                     </div>
-                    <Form style={{ width: "500px", padding: "20px" }}
-                    onSubmit={handelUpdateDeviceName}
+                    <Form
+                      style={{ width: "500px", padding: "20px" }}
+                      onSubmit={handelUpdateDeviceName}
                     >
                       <Form.Group className="mb-3" controlId="formBasicAction">
                         <Form.Label style={{ fontSize: "20px" }}>
-                          Tên thiết bị: <Form.Label>{dataDevice.name}</Form.Label>
+                          Tên thiết bị:{" "}
+                          <Form.Label>{dataDevice.name}</Form.Label>
                         </Form.Label>
-                        <Form.Control required type="text"
+                        <Form.Control
+                          required
+                          type="text"
                           placeholder={dataDevice.name}
                           onChange={(e) => setDeviceName(e.target.value)}
                         ></Form.Control>
@@ -181,10 +190,7 @@ const ControlDevice = () => {
                         >
                           Thoát
                         </button>
-                        <button
-                          className="btn_cn"
-                          type="submit"
-                        >
+                        <button className="btn_cn" type="submit">
                           Cập nhật
                         </button>
                       </div>
@@ -194,7 +200,9 @@ const ControlDevice = () => {
               </div>
               <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
             </div>
-          ) : ""}
+          ) : (
+            ""
+          )}
           <div style={{ paddingTop: "15px" }}>
             <Footer />
           </div>
