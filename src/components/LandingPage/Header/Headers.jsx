@@ -27,7 +27,8 @@ const nav__links = [
 
 const Header = () => {
   const headerRef = useRef(null);
-
+  const isLoggedIn = window.localStorage.getItem("loggedIn");
+  console.log(isLoggedIn);
   const headerFunc = () => {
     if (
       document.body.scrollTop > 80 ||
@@ -87,7 +88,8 @@ const Header = () => {
             <Link to={"/login"}>
               <div class="wrapper">
                 <a class="cta" href="#" style={{marginTop:"10px"}}>
-                  <span>Đăng Nhập</span>&nbsp;&nbsp;
+                {isLoggedIn == "true" ? (<div><span>Điều khiển</span>&nbsp;&nbsp;</div>)   : ( <div><span>Đăng Nhập</span>&nbsp;&nbsp;</div>)}
+                  
                   <span>
                     <svg
                       style={{marginTop:"25px"}}

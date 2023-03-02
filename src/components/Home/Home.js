@@ -48,7 +48,6 @@ const Home = () => {
        if(data.data.data == "token expired"){
         window.localStorage.clear();
         window.localStorage.setItem("loggedIn", "false");
-        window.localStorage.getItem("loggedIn");
  
        }
       })
