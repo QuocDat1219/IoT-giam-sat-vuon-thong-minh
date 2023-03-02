@@ -127,7 +127,7 @@ const Register = () => {
       .then((data) => {
         setIsLoading(false);
         toast.success("Đăng ký thành công");
-        setTimeout((window.location.href = "/home"), 2000);
+        setTimeout((window.location.href = "/login"), 2000);
       });
   };
   return (
