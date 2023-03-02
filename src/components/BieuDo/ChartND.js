@@ -14,22 +14,17 @@ const ChartND = () => {
   useEffect(() => {
     const fetchData = async () => {
       await axios
-        .get(
-          urls
-        )
+        .get(urls)
         .then(async (result) => {
           await setChartArrayNhietdo(
-            result.data.data.dhtlog
-            .map((item) => item.nhietdo).slice(-7)
+            result.data.data.dhtlog.map((item) => item.nhietdo).slice(-7)
           );
           console.log(chartArrayNhietdo);
           await setChartArrayDoAm(
-            result.data.data.dhtlog
-           .map((item) => item.doam).slice(-7)
+            result.data.data.dhtlog.map((item) => item.doam).slice(-7)
           );
           await setChartArrayThoiGian(
-            result.data.data.dhtlog
-            .map((item) => item.createAt).slice(-7)
+            result.data.data.dhtlog.map((item) => item.createAt).slice(-7)
           );
         })
         .catch((err) => {});
@@ -46,7 +41,7 @@ const ChartND = () => {
         <CCardBody>
           <CChartLine
             data={{
-              labels:chartArrayThoiGian ,
+              labels: chartArrayThoiGian,
               datasets: [
                 {
                   label: "Nhiệt độ",
