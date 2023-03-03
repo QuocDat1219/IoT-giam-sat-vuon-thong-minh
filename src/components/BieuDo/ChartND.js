@@ -38,7 +38,7 @@ const ChartND = () => {
   return chartArrayNhietdo ?(
     <CCol xs={6}>
       <CCard className="mb-4">
-        <CCardHeader>Biểu đồ nhiệt độ</CCardHeader>
+        <CCardHeader style={{fontSize:"16px"}}>Biểu đồ nhiệt độ</CCardHeader>
         <CCardBody>
           <CChartLine
             data={{

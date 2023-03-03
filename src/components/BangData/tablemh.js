@@ -26,10 +26,10 @@ const tablemh = (props) => {
           {props.data
             .map((item, index) => (
               <TableRow key={index}>
-                <TableCell className="tableCell" align="center">
-                  {item.mh}
+                <TableCell align="center">
+                  {item.mh}%
                 </TableCell>
-                <TableCell className="tableCell" align="center">
+                <TableCell align="center">
                   {item.createAt}
                 </TableCell>
               </TableRow>

@@ -28,13 +28,13 @@ const tablendda = (props) => {
           {props.data
             .map((item, index) => (
               <TableRow key={index}>
-                <TableCell className="tableCell" align="center">
-                  {item.nhietdo}
+                <TableCell align="center">
+                  {item.nhietdo}℃
                 </TableCell>
-                <TableCell className="tableCell" align="center">
-                  {item.doam}
+                <TableCell align="center">
+                  {item.doam}%
                 </TableCell>
-                <TableCell className="tableCell" align="center">
+                <TableCell align="center">
                   {item.createAt}
                 </TableCell>
               </TableRow>

@@ -26,11 +26,11 @@ const tableultra = (props) => {
           {props.data
             .map((item, index) => (
               <TableRow key={index}>
-                <TableCell className="tableCell" align="center">
-                  {item.ultra}
+                <TableCell align="center">
+                  {item.ultra}%
                 </TableCell>
-                <TableCell className="tableCell" align="center">
-                  {item.createAt}
+                <TableCell align="center">
+                  {item.createAt} 
                 </TableCell>
               </TableRow>
             ))

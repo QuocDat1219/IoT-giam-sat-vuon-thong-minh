@@ -44,7 +44,7 @@ const ChartDAD = () => {
   return chartArrayDoAmDat ? (
     <CCol xs={6}>
       <CCard className="mb-4">
-        <CCardHeader>Biểu đồ Độ ẩm đất</CCardHeader>
+        <CCardHeader style={{fontSize:"16px"}}>Biểu đồ độ ẩm đất</CCardHeader>
         <CCardBody>
           <CChartLine
             data={{

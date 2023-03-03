@@ -40,7 +40,7 @@ const ChartWT = () => {
   return chartArrayUltra ? (
     <CCol xs={10}>
       <CCard className="mb-5">
-        <CCardHeader>Biểu đồ lượng nước trong bồn </CCardHeader>
+        <CCardHeader style={{fontSize:"16px"}}>Biểu đồ lượng nước trong bồn </CCardHeader>
         <CCardBody>
           <CChartBar
             data={{

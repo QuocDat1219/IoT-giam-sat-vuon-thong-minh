@@ -23,7 +23,6 @@ const TableUser = () => {
   const [showThem, setshowThem] = useState(false);
   const [changepassword, setChangePassword] = useState(false);
   const [showDeleted, setShowDeleted] = useState(false);
-  const [dtTable, setdtTable] = useState([]);
   const [email, setEmail] = useState([]);
 
   const [fname, setFname] = useState("");
@@ -133,6 +132,7 @@ const TableUser = () => {
       })
       .then((data) => {
         toast.success("Thêm người dùng thành công");
+        setshowThem(false);
       });
   };
 
@@ -157,12 +157,19 @@ const TableUser = () => {
   }, []);
   const handleClickShowModal = (item) => {
     useData = item;
+    setFname("");
+    setLname("");
     setshowModel(true);
   };
   const handleClickShowDelete = (item) => {
     useData = item;
     setShowDeleted(true);
   };
+  const handleShowCreateUser = () => {
+    setFname("");
+    setLname("");
+    setshowThem(true)
+  }
   //delete user
   const handleDeleteUser = async () => {
     // toast("Dang xu li....");
@@ -237,7 +244,7 @@ const TableUser = () => {
           style={{ fontSize: "15px", marginBottom: "20px" }}
           type="submit"
           className="btn_them"
-          onClick={() => setshowThem(true)}
+          onClick={() => handleShowCreateUser()}
         >
           Thêm
         </button>
@@ -257,12 +264,12 @@ const TableUser = () => {
                     User
                   </TableCell>
                   <TableCell
-                    className="title-e"
+                    className="tableCell"
                     style={{ textAlign: "center" }}
                   >
                     Email
                   </TableCell>
-                  <TableCell className="" style={{ textAlign: "center" }}>
+                  <TableCell className="tableCell" style={{ textAlign: "center" }}>
                     Hành động
                   </TableCell>
                 </TableRow>
@@ -270,16 +277,14 @@ const TableUser = () => {
               <TableBody>
                 {email.map((item, index) => ( item.userType == "" ? (
                   <TableRow key={index}>
-                    <TableCell className="tableCell">{index + 1}</TableCell>
+                    <TableCell >{index + 1}</TableCell>
                     <TableCell
-                      className="tableCell"
                       style={{ textAlign: "center" }}
                     >
                       {item.fname + " " + item.lname}
                     </TableCell>
 
                     <TableCell
-                      className="tableCell"
                       style={{ textAlign: "center" }}
                     >
                       {item.email}
