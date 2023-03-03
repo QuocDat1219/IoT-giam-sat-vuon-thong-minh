@@ -36,12 +36,12 @@ const Navb = () => {
       await axios
         .get(urls)
         .then((data) => {
-          if(data.data.data.connect == "connect"){
+          if (data.data.data.connect == "connect") {
             setConn("Connection");
-          }else{
+          } else {
             setConn("Disconnect");
           }
-         
+
         })
         .catch((e) => {
           // toast("Lỗi gọi API");
@@ -56,14 +56,15 @@ const Navb = () => {
         })
         .then(function (response) {
           //console.log(response);
+          return;
         })
         .catch(function (error) {
           //toast("Lỗi gọi API");
         });
     };
     fetchData();
-    const intervalId1 = setInterval(fetchData, 4000);
-    const intervalId = setTimeout(updatedata, 20000);
+    const intervalId1 = setTimeout(fetchData, 4000);
+    const intervalId = setTimeout(updatedata, 600000);
     clearTimeout(intervalId1);
     clearTimeout(intervalId);
   }, []);
@@ -94,19 +95,19 @@ const Navb = () => {
             style={{ display: "flex", paddingLeft: "9px", textAlign: "left" }}
           >
             <FaUsb style={{ fontSize: "30px", paddingTop: "12px" }} />
-            
-              <strong
-                style={{
-                  fontSize: "16px",
-                  paddingLeft: "5px",
-                  paddingTop: "12px",
-                }}
-                className={conn == "Connection" ? 'connected' : 'disconnected'}
-              >
-                {" "}
-                {conn}{" "}
-              </strong>
-          
+
+            <strong
+              style={{
+                fontSize: "16px",
+                paddingLeft: "5px",
+                paddingTop: "12px",
+              }}
+              className={conn == "Connection" ? 'connected' : 'disconnected'}
+            >
+              {" "}
+              {conn}{" "}
+            </strong>
+
           </div>
           <div className="btnRS" style={{ marginLeft: "30px" }}>
             <button
@@ -116,7 +117,7 @@ const Navb = () => {
               onClick={() => setshowModel(true)}
             >
               <RotateLeftIcon />
-                Cài đặt lại thiết bị
+              Cài đặt lại thiết bị
             </button>
           </div>
         </div>
