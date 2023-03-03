@@ -76,17 +76,17 @@ const Register = () => {
           {
             name: "Control 1",
             status: 0,
-            digital: "D4",
+            digital: "2",
           },
           {
             name: "Control 2",
             status: 0,
-            digital: "D7",
+            digital: "13",
           },
           {
             name: "Control 3",
             status: 0,
-            digital: "D8",
+            digital: "15",
           },
         ],
         sensor: [

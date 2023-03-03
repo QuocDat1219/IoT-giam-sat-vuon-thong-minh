@@ -31,22 +31,23 @@ const Navb = () => {
         }
       });
 
+
     const fetchData = async () => {
       await axios
         .get(urls)
         .then((data) => {
-          setConn(data.data.data.connect);
+          if(data.data.data.connect == "connect"){
+            setConn("Connection");
+          }else{
+            setConn("Disconnect");
+          }
+         
         })
         .catch((e) => {
-          toast("Lỗi gọi API");
+          // toast("Lỗi gọi API");
         });
     };
-    fetchData();
-    const timeoutf = setTimeout(fetchData, 2000);
-    return () => clearTimeout(timeoutf);
-  }, []);
 
-  useEffect(() => {
     const updatedata = async () => {
       await axios
         .post("https://api-vuon-thong-minh.onrender.com/datas/updatedht", {
@@ -57,12 +58,15 @@ const Navb = () => {
           //console.log(response);
         })
         .catch(function (error) {
-          toast("Lỗi gọi API");
+          //toast("Lỗi gọi API");
         });
     };
+    fetchData();
     updatedata();
-    const intervalId = setTimeout(updatedata, 10000);
-    return () => clearTimeout(intervalId);
+    const intervalId1 = setInterval(fetchData, 4000);
+    const intervalId = setTimeout(updatedata, 20000);
+    clearTimeout(intervalId1);
+    clearTimeout(intervalId);
   }, []);
 
   //Handle reset device in web
@@ -91,31 +95,19 @@ const Navb = () => {
             style={{ display: "flex", paddingLeft: "9px", textAlign: "left" }}
           >
             <FaUsb style={{ fontSize: "30px", paddingTop: "12px" }} />
-            {conn == "connect" ? (
+            
               <strong
                 style={{
                   fontSize: "16px",
-                  color: "green",
                   paddingLeft: "5px",
                   paddingTop: "12px",
                 }}
+                className={conn == "Connection" ? 'connected' : 'disconnected'}
               >
                 {" "}
-                Connected{" "}
+                {conn}{" "}
               </strong>
-            ) : (
-              <strong
-                style={{
-                  fontSize: "16px",
-                  color: "red",
-                  paddingLeft: "5px",
-                  paddingTop: "12px",
-                }}
-              >
-                {" "}
-                Disconnect{" "}
-              </strong>
-            )}
+          
           </div>
           <div className="btnRS" style={{ marginLeft: "30px" }}>
             <button
@@ -125,7 +117,7 @@ const Navb = () => {
               onClick={() => setshowModel(true)}
             >
               <RotateLeftIcon />
-              Reset
+                Cài đặt lại thiết bị
             </button>
           </div>
         </div>
