@@ -18,6 +18,7 @@ import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import { SetMealSharp } from "@mui/icons-material";
 import Form from "react-bootstrap/Form";
 import RingLoader from "react-spinners/RingLoader";
+import unidecode from 'unidecode';
 
 let dataDevice = null;
 const ControlDevice = () => {
@@ -77,10 +78,9 @@ const ControlDevice = () => {
     await axios
       .post("https://api-vuon-thong-minh.onrender.com/datas/updatecontrol", {
         name: dataDevice.name,
-        namenew: deviceName,
+        namenew: unidecode(deviceName),
         email: userEmail,
       })
-
       .then(function (res) {
         if (res.data.status == "update success") {
           toast.success("Thay đổi thành công");
