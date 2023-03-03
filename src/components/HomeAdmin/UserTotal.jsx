@@ -41,7 +41,7 @@ export const UserTotal = (props) => {
           <Grid container spacing={3} sx={{ justifyContent: "space-between" }}>
             <Grid item>
               <Typography color="textSecondary" gutterBottom variant="overline">
-                tài khoản
+              <p style={{ fontWeight: "bolder" }}>tài khoản</p>
               </Typography>
               <Typography color="textPrimary" variant="h4">
                 {totalUser}

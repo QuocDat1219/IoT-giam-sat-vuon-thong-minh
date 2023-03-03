@@ -45,7 +45,7 @@ export const DeviceC = (props) => {
           <Grid container spacing={3} sx={{ justifyContent: "space-between" }}>
             <Grid item>
               <Typography color="textSecondary" gutterBottom variant="overline">
-                Thiết bị đang kết nối
+              <p style={{ fontWeight: "bolder" }}> Thiết bị đang kết nối</p>
               </Typography>
               <Typography color="textPrimary" variant="h4">
                 {checkConnect}

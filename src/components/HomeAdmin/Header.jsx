@@ -13,6 +13,8 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import "./Css/Header.css";
+// import "./Css/Header.css";
 import FilePresentIcon from "@mui/icons-material/FilePresent";
 const HeaDer = () => {
   const [showModel, setshowModel] = useState(false);
@@ -54,7 +56,11 @@ const HeaDer = () => {
   return (
     <div className="nb">
       <div className="wrapper">
-        <div className="connect"></div>
+        <div className="connect">
+          <div className="waviy">
+            <p className="tilte-ad">Chào Mừng: Admin</p>
+          </div>
+        </div>
         <div className="items">
           <div className="item">
             <button onClick={() => setshowModel(true)}>

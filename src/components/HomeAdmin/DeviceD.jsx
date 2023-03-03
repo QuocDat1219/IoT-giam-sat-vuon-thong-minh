@@ -10,12 +10,11 @@ import UsbOffIcon from "@mui/icons-material/UsbOff";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import "./Css/DeviceD.css";
-import RingLoader from "react-spinners/RingLoader"
+import RingLoader from "react-spinners/RingLoader";
 
 export const DeviceD = (props) => {
   const [checkdisconnect, setDisconnect] = useState("");
 
-  
   useEffect(() => {
     const fetchData = async () => {
       await axios
@@ -40,14 +39,14 @@ export const DeviceD = (props) => {
     return () => clearInterval(intervalId);
   }, []);
 
-  return checkdisconnect != "" ?(
+  return checkdisconnect != "" ? (
     <div style={{ width: "100%" }} className="DeviceD">
       <Card {...props}>
         <CardContent>
           <Grid container spacing={3} sx={{ justifyContent: "space-between" }}>
             <Grid item>
               <Typography color="textSecondary" gutterBottom variant="overline">
-                Thiết bị ngắt kết nối
+                <p style={{ fontWeight: "bolder" }}>Thiết bị ngắt kết nối</p>
               </Typography>
               <Typography color="textPrimary" variant="h4">
                 {checkdisconnect}
@@ -75,7 +74,7 @@ export const DeviceD = (props) => {
         </CardContent>
       </Card>
     </div>
-  ):(
+  ) : (
     <div style={{ width: "100%" }} className="DeviceD">
       <Card {...props}>
         <CardContent>
@@ -85,7 +84,7 @@ export const DeviceD = (props) => {
                 Thiết bị ngắt kết nối
               </Typography>
               <Typography color="textPrimary" variant="h4">
-              <RingLoader size="42px" color="#e55039"/>
+                <RingLoader size="42px" color="#e55039" />
               </Typography>
             </Grid>
             <Grid item>
