@@ -3,6 +3,7 @@
     font-size: 2em;
     unicode-bidi: bidi-override;
     text-align: center;
+    margin-left: 100px;
   }
   
   .star {

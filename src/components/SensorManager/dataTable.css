@@ -51,3 +51,27 @@
 .labelTitle{
   font-size: 15px;
 }
+.active{
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.btn_but{
+  cursor: pointer;
+  width: 25%;
+  padding: 10px 20px;
+  text-align: center;
+  outline: none;
+  color: #fff;
+  background-color: #35de47;
+  border: none;
+  font-size: 15px;
+  border-radius: 15px;
+  box-shadow: 0 9px #d9d9d9;
+}
+.btn_but:hover{
+  background-color: #3e8e41;
+}
+.btn_but:active{
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}

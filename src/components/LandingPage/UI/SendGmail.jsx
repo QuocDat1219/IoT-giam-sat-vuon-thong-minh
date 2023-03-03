@@ -28,19 +28,19 @@ export const SendEmail = () => {
       toast.warning("Email không hợp lệ");
       return;
     }
-   await axios.post("https://api-vuon-thong-minh.onrender.com/feedback/newfeedback",{
-      name:name,
-      email:email,
-      note:noidung,
-      gate:selectedStars
-    }).then((data) =>{
-      console.log(data.data.status);
-      if(data.data.status){
-        toast.success("Gửi thành công - Cảm ơn bạn đã gửi đánh giá")
-      }else
-        toast.error("Lỗi")
-     
-    })
+    await axios
+      .post("https://api-vuon-thong-minh.onrender.com/feedback/newfeedback", {
+        name: name,
+        email: email,
+        note: noidung,
+        gate: selectedStars,
+      })
+      .then((data) => {
+        console.log(data.data.status);
+        if (data.data.status) {
+          toast.success("Gửi thành công - Cảm ơn bạn đã gửi đánh giá");
+        } else toast.error("Lỗi");
+      });
     // toast("Đang xử lý...");
   };
 

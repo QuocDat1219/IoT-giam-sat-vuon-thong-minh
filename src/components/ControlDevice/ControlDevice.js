@@ -18,7 +18,7 @@ import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import { SetMealSharp } from "@mui/icons-material";
 import Form from "react-bootstrap/Form";
 import RingLoader from "react-spinners/RingLoader";
-import unidecode from 'unidecode';
+import unidecode from "unidecode";
 
 let dataDevice = null;
 const ControlDevice = () => {
@@ -115,45 +115,45 @@ const ControlDevice = () => {
                   <TableBody>
                     {dieukhien
                       ? dieukhien.map((data, key) => (
-                        <TableRow key={key}>
-                          <TableCell className="tablleBody">
-                            <div className="cellWrapper">{key}</div>
-                          </TableCell>
-                          <TableCell className="tablleBody">
-                            <div className="cellWrapper">
-                              {/* {data.data.name ? data.data.name : "Loading..."} */}
-                              {data.name}
-                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                              <button
-                                ariant="contained"
-                                color="primary"
-                                onClick={() => handleClickShowModel(data)}
+                          <TableRow key={key}>
+                            <TableCell className="tablleBody">
+                              <div className="cellWrapper">{key}</div>
+                            </TableCell>
+                            <TableCell className="tablleBody">
+                              <div className="cellWrapper">
+                                {/* {data.data.name ? data.data.name : "Loading..."} */}
+                                {data.name}
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <button
+                                  ariant="contained"
+                                  color="primary"
+                                  onClick={() => handleClickShowModel(data)}
+                                >
+                                  <ModeEditIcon />
+                                </button>
+                              </div>
+                            </TableCell>
+                            <TableCell className="tablleBody">
+                              <span
+                                className={`status ${data ? data.status : ""}`}
                               >
-                                <ModeEditIcon />
-                              </button>
-                            </div>
-                          </TableCell>
-                          <TableCell className="tablleBody">
-                            <span
-                              className={`status ${data ? data.status : ""}`}
-                            >
-                              {data.status === 1 ? "Tắt" : "Bật"}
-                            </span>
-                          </TableCell>
-                          <TableCell>
-                            <Button
-                              className={
-                                data.status === 1 ? "status on" : "status off"
-                              }
-                              onClick={() => {
-                                updateOn(key, data.status, data.name);
-                              }}
-                            >
-                              {data.status === 1 ? "Bật" : "Tắt"}
-                            </Button>
-                          </TableCell>
-                        </TableRow>
-                      ))
+                                {data.status === 1 ? "Tắt" : "Bật"}
+                              </span>
+                            </TableCell>
+                            <TableCell>
+                              <Button
+                                className={
+                                  data.status === 1 ? "status on" : "status off"
+                                }
+                                onClick={() => {
+                                  updateOn(key, data.status, data.name);
+                                }}
+                              >
+                                {data.status === 1 ? "Bật" : "Tắt"}
+                              </Button>
+                            </TableCell>
+                          </TableRow>
+                        ))
                       : ""}
                   </TableBody>
                 </Table>
@@ -164,7 +164,6 @@ const ControlDevice = () => {
               <RingLoader color="blue" size={100} />
             </div>
           )}
-
 
           {showModel ? (
             <div>
@@ -217,8 +216,8 @@ const ControlDevice = () => {
             <Footer />
           </div>
         </div>
-      </Sidebar >
-    </div >
+      </Sidebar>
+    </div>
   );
 };
 export default ControlDevice;

@@ -41,7 +41,7 @@ const TableUser = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setUserType("");
-  
+
     //Kiểm tra dữ liệu nhập của người dùng
     if (fname == "" || lname == "" || emailadd == "" || password == "") {
       toast.warning("Vui lòng nhập đầy đủ thông tin đăng ký!");
@@ -141,11 +141,9 @@ const TableUser = () => {
       await axios
         .get("https://api-vuon-thong-minh.onrender.com/users/getalluser")
         .then((result) => {
-          
           const newdata = JSON.stringify(result.data.data);
           // setEmail(result.data.data.data.data.email);
           setEmail(JSON.parse(newdata));
-        
         })
         .catch((err) => {
           throw new Error(err);
@@ -168,8 +166,8 @@ const TableUser = () => {
   const handleShowCreateUser = () => {
     setFname("");
     setLname("");
-    setshowThem(true)
-  }
+    setshowThem(true);
+  };
   //delete user
   const handleDeleteUser = async () => {
     // toast("Dang xu li....");
@@ -178,7 +176,6 @@ const TableUser = () => {
         email: useData.email,
       })
       .then(function (response) {
-       
         if (response.data.status === "ok") {
           setShowDeleted(false);
           toast.success("Xóa người dùng thành công");
@@ -192,6 +189,11 @@ const TableUser = () => {
   };
 
   const handelUpdateUserClient = async () => {
+    if (fname == "" || lname == "") {
+      toast.warning("Vui lòng nhập đầy đủ thông tin đăng ký!");
+      return;
+    } else {
+    }
     await axios
       .post("https://api-vuon-thong-minh.onrender.com/users/edituseradmin", {
         email: useData.email,
@@ -200,12 +202,12 @@ const TableUser = () => {
       })
       .then((response) => {
         if (response.data.status === "Success") {
-          toast("Cập nhật thành công");
+          toast.success("Cập nhật thành công");
           setFname("");
           setLname("");
           setshowModel(false);
         } else {
-          toast("Cập nhật khôg thành công");
+          toast.error("Cập nhật không thành công");
         }
         console.log(response);
       })
@@ -226,14 +228,14 @@ const TableUser = () => {
       })
       .then((response) => {
         if (response.data.status === "Success") {
-          toast("Đặt lại mật khẩu thành công");
+          toast.success("Đặt lại mật khẩu thành công");
           setChangePassword(false);
         } else {
-          toast("Đặt lại mật khẩu không thành công");
+          toast.error("Đặt lại mật khẩu không thành công");
         }
       })
       .catch((err) => {
-        toast("Đặt lại mật khẩu không thành công");
+        toast.error("Đặt lại mật khẩu không thành công");
       });
   };
   return (
@@ -269,53 +271,60 @@ const TableUser = () => {
                   >
                     Email
                   </TableCell>
-                  <TableCell className="tableCell" style={{ textAlign: "center" }}>
+                  <TableCell
+                    className="tableCell"
+                    style={{ textAlign: "center" }}
+                  >
                     Hành động
                   </TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
-                {email.map((item, index) => ( item.userType == "" ? (
-                  <TableRow key={index}>
-                    <TableCell >{index + 1}</TableCell>
-                    <TableCell
-                      style={{ textAlign: "center" }}
-                    >
-                      {item.fname + " " + item.lname}
-                    </TableCell>
+                {email.map((item, index) =>
+                  item.userType == "" ? (
+                    <TableRow key={index}>
+                      <TableCell>{index + 1}</TableCell>
+                      <TableCell style={{ textAlign: "center" }}>
+                        {item.fname + " " + item.lname}
+                      </TableCell>
 
-                    <TableCell
-                      style={{ textAlign: "center" }}
-                    >
-                      {item.email}
-                    </TableCell>
+                      <TableCell style={{ textAlign: "center" }}>
+                        {item.email}
+                      </TableCell>
 
-                    <TableCell
-                      className="table_btn"
-                      style={{ textAlign: "center" }}
-                    >
-                      <Button
-                        ariant="contained"
-                        color="primary"
-                        onClick={() => handleClickShowModal(item)}
+                      <TableCell
+                        className="table_btn"
+                        style={{ textAlign: "center" }}
                       >
-                        <ModeEditIcon />
-                      </Button>
-                      <Button
-                        type="submit"
-                        onClick={() => handleClickShowDelete(item)}
-                      >
-                        <DeleteForeverIcon />
-                      </Button>
-                      <Button
-                        type="submit"
-                        onClick={() => handleClickShowChangePass(item)}
-                      >
-                        <KeyIcon />
-                      </Button>
-                    </TableCell>
-                  </TableRow>) : ("")
-                ))}
+                        <Button
+                          ariant="contained"
+                          color="primary"
+                          onClick={() => handleClickShowModal(item)}
+                        >
+                          <ModeEditIcon />
+                        </Button>
+                        <Button
+                          ariant="contained"
+                          color="primary"
+                          type="submit"
+                          onClick={() => handleClickShowDelete(item)}
+                        >
+                          <DeleteForeverIcon />
+                        </Button>
+                        <Button
+                          ariant="contained"
+                          color="primary"
+                          type="submit"
+                          onClick={() => handleClickShowChangePass(item)}
+                        >
+                          <KeyIcon />
+                        </Button>
+                      </TableCell>
+                    </TableRow>
+                  ) : (
+                    ""
+                  )
+                )}
                 {/* ))} */}
               </TableBody>
             </Table>
@@ -344,14 +353,14 @@ const TableUser = () => {
                   <br></br>
                   <div className="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
                     <button
-                      className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                      className="btn_thoat"
                       type="button"
                       onClick={() => setShowDeleted(false)}
                     >
                       Thoát
                     </button>
                     <button
-                      className="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                      className="btn_cn"
                       type="submit"
                       onClick={() => handleDeleteUser()}
                     >
@@ -420,7 +429,7 @@ const TableUser = () => {
                     </Form.Label>
                     <Form.Control
                       required
-                      type="text"
+                      type="password"
                       onChange={(e) => setpassword(e.target.value)}
                     ></Form.Control>
                   </Form.Group>
@@ -432,22 +441,19 @@ const TableUser = () => {
                     </Form.Label>
                     <Form.Control
                       required
-                      type="text"
+                      type="password"
                       onChange={(e) => setConfirmPassword(e.target.value)}
                     ></Form.Control>
                   </Form.Group>
                   <div className="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
                     <button
-                      className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                      className="btn_thoat"
                       type="button"
                       onClick={() => setshowThem(false)}
                     >
                       Thoát
                     </button>
-                    <button
-                      className="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                      type="submit"
-                    >
+                    <button className="btn_cn" type="submit">
                       Cập nhật
                     </button>
                   </div>
@@ -514,14 +520,14 @@ const TableUser = () => {
                   </Form.Group>
                   <div className="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
                     <button
-                      className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                      className="btn_thoat"
                       type="button"
                       onClick={() => setshowModel(false)}
                     >
                       Thoát
                     </button>
                     <button
-                      className="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                      className="btn_cn"
                       onClick={handelUpdateUserClient}
                       type="button"
                     >
@@ -550,26 +556,28 @@ const TableUser = () => {
                     style={{
                       fontSize: "20px",
                       width: "600px",
-                      padding: "10px",
+                      padding: "20px",
                     }}
                   >
-                    Đặt lại mật khẩu mới cho tài khoản:{" "}
-                    <Form.Label className="labelUser">
-                      {useData.email}
-                    </Form.Label>
-                    ?
+                    <p style={{ justifyContent: "center", marginTop: "20px" }}>
+                      Đặt lại mật khẩu mới cho tài khoản:{" "}
+                      <Form.Label className="labelUser">
+                        {useData.email}
+                      </Form.Label>
+                      ?{" "}
+                    </p>
                   </Form.Label>
                 </Form.Group>
                 <div className="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
                   <button
-                    className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                    className="btn_thoat"
                     type="button"
                     onClick={() => setChangePassword(false)}
                   >
                     Thoát
                   </button>
                   <button
-                    className="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                    className="btn_cn"
                     type="submit"
                     onClick={handleResetPassword}
                   >
