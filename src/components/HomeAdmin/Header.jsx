@@ -112,7 +112,9 @@ const HeaDer = () => {
                       {dataFb
                         .map((item, index) => (
                           <TableRow key={index}>
-                            <TableCell className="tableCell">{index +1}</TableCell>
+                            <TableCell className="tableCell">
+                              {index + 1}
+                            </TableCell>
                             <TableCell
                               className="tableCell"
                               style={{ textAlign: "center" }}
@@ -148,27 +150,16 @@ const HeaDer = () => {
                     </TableBody>
                     <div style={{ padding: "10px 10px" }}>
                       {showButton ? (
-                        <button
-                        onClick={() => fullFeedback()}
-                      >
-                        ...
-                      </button>
-                        
+                        <button onClick={() => fullFeedback()}>...</button>
                       ) : (
-                        <button
-                        onClick={() => Feedback5row()}
-                      >
-                        Thu gọn
-                      </button>
-                        
+                        <button onClick={() => Feedback5row()}>Thu gọn</button>
                       )}
-                      
                     </div>
                   </Table>
                 </TableContainer>
                 <div className="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
                   <button
-                    className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                    className="btn_thoat"
                     type="button"
                     onClick={() => setshowModel(false)}
                   >

@@ -129,14 +129,13 @@ const List = () => {
                             </strong>
                           )}
                         </TableCell>
-                        <TableCell className="tableCell">
-                          <Button
-                            variant="contained"
-                            color="primary"
+                        <TableCell>
+                          <button
+                            className="btn_but"
                             onClick={() => handelSaveClick(item)}
                           >
-                            <ModeEditIcon />
-                          </Button>
+                            <ModeEditIcon fontSize="small" />
+                          </button>
                         </TableCell>
                       </TableRow>
                     ))}
@@ -145,8 +144,8 @@ const List = () => {
               </TableContainer>
             ) : (
               <div className="ND flex justify-center items-center">
-              <RingLoader color="#4cd137" size={100} />
-            </div>
+                <RingLoader color="#4cd137" size={100} />
+              </div>
             )}
           </div>
 
