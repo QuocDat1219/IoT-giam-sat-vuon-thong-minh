@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, Routes, Route } from "react-router-dom";
+import { useNavigate, Routes, Route, Link } from "react-router-dom";
 import PushPinIcon from "@mui/icons-material/PushPin";
 import {
   Children,
@@ -31,9 +31,11 @@ export default function Sidebar({ children }) {
   return (
     <React.Fragment>
       <SidebarContainer displaySidebar={displaySidebar}>
-        <SidebarWrapper>
+        <SidebarWrapper>'
+          
           <SidebarLogoWrapper displaySidebar={displaySidebar}>
             {
+              <Link to="/home" >
               <SidebarLogo href="#">
                 <span className="app-brand-logo demo">
                   <img
@@ -44,6 +46,7 @@ export default function Sidebar({ children }) {
                   />
                 </span>
               </SidebarLogo>
+              </Link>
             }
             <SidebarToggler
               style={{ fontSize: "15px", color: "black" }}
