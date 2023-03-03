@@ -62,7 +62,6 @@ const Navb = () => {
         });
     };
     fetchData();
-    updatedata();
     const intervalId1 = setInterval(fetchData, 4000);
     const intervalId = setTimeout(updatedata, 20000);
     clearTimeout(intervalId1);
